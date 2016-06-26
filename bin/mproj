@@ -1,0 +1,122 @@
+#!/usr/bin/env node
+
+var proj = require('../');
+var cmd = require('../lib/cmd_common.js');
+
+// if executing as a script, init and run
+if (process.argv[1].indexOf('mproj') > -1) {
+  try {
+    console.log(init(process.argv.slice(2))());
+  } catch(e) {
+    console.error(e.message);
+    process.exit(1);
+  }
+}
+
+// you can also require this file as a node module (e.g. for testing)
+module.exports = init;
+
+// @params string or array
+function init(params) {
+  var opts = cmd.get_shared_options().parse(params);
+  var files = opts._.length > 0 ? opts._ : null;
+  var commentChar = opts.t || '#';
+  var P, translateLine;
+
+  if ('l' in opts) {
+    return function() {return cmd.get_info(opts.l);};
+  }
+
+  if (opts.proj4) {
+    try {
+      P = proj.pj_init(opts.proj4);
+      translateLine = get_proj_function(P, opts);
+    } catch(e) {
+      if (e.name == 'PJError') {
+        throw new Error('projection initialization failure\ncause: ' + e.message);
+      } else {
+        throw e;
+      }
+    }
+    if (P.is_latlong) {
+      throw new Error('+proj=latlong unsuitable for use with mproj program');
+    }
+    return project;
+  }
+
+  throw new Error('usage: mproj [ -eEfIlrstwW [args] ] [ +opts[=arg] ] [ files ]');
+
+  function project(input) {
+    var linesOut = [],
+        linesIn, line, i;
+    if (!input) {
+      linesIn = cmd.read_lines(files);
+    } else {
+      linesIn = input.trim().split('\n');
+    }
+    for (i=0; i<linesIn.length; i++) {
+      line = linesIn[i];
+      if (line[0] == commentChar) continue;
+      line = translateLine(line, i);
+      if (line) {
+        linesOut.push(line);
+      }
+    }
+    return linesOut.join('\n');
+  }
+}
+
+function get_proj_function(P, opts) {
+  var decimals = opts.w || opts.W ? parseInt(opts.w || opts.W) : 3;
+  var fmtLat = proj.internal.get_rtodms(decimals, !!opts.W, 'N', 'S');
+  var fmtLon = proj.internal.get_rtodms(decimals, !!opts.W, 'E', 'W');
+  var fmtNum = cmd.get_dfmt(opts.f);
+  var inverse = !!opts.I;
+  var errorLine = opts.e || '*\t*';
+
+  if (inverse && !P.inv) {
+    throw new Error('inverse projection not available');
+  }
+  return function(line) {
+    var input = line.trim().split(/[\s]+/);
+    var err = false;
+    var p, output, oline;
+    if (input.length < 2) return null;
+    if (opts.r) {
+      input = [input[1], input[0]];
+    }
+    if (inverse) {
+      p = proj.pj_inv({
+        x: +input[0],
+        y: +input[1]
+      }, P);
+      if (p.lam == Infinity) {
+        err = true;
+      } else {
+        output = [fmtLon(p.lam), fmtLat(p.phi)];
+      }
+    } else {
+      p = proj.pj_fwd({
+        lam: proj.internal.dmstor(input[0]),
+        phi: proj.internal.dmstor(input[1])
+      }, P);
+      if (p.x == Infinity) {
+        err = true;
+      } else {
+        output = [fmtNum(p.x), fmtNum(p.y)];
+      }
+    }
+    if (err) {
+      output = errorLine;
+    } else {
+      if (opts.s) {
+        output = [output[1], output[0]];
+      }
+      oline = output.join('\t');
+    }
+    if (opts.E) {
+      oline = line + '\t' + oline;
+    }
+    return oline;
+  };
+}

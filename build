@@ -1,0 +1,64 @@
+#!/usr/bin/env node
+
+var opts = require('./lib/parse_args.js')()
+  .option('f', {
+    type: 'flag'
+  })
+  .parse(process.argv.slice(2));
+
+var fs = require('fs');
+var _ = require('underscore');
+var path = require('path');
+var deps;
+
+if (opts._.length > 0) {
+  deps = getRequestedDeps(opts._[0].split(','));
+} else {
+  deps = getAllDeps();
+}
+
+require("catty")({follow: !!opts.f})
+  .addLibrary("src")
+  .addLibrary("node_modules/geographiclib/src")
+  .addDeps(deps)
+  .cat("src/proj.js", "dist/mproj.js");
+
+function getRequestedDeps(projs) {
+  var index = {};
+  var deps = [];
+  var missing = [];
+  getAllDeps().forEach(function(name) {
+    findProjNames(name, index);
+  });
+  projs.forEach(function(proj) {
+    if (proj in index) {
+      deps.push(index[proj]);
+    } else {
+      missing.push(proj);
+    }
+  });
+  if (missing.length > 0) {
+    console.error("Missing:", missing.join(','));
+    process.exit(1);
+  }
+  return _.uniq(deps).join(',');
+}
+
+function getAllDeps() {
+  var deps = fs.readdirSync('src/projections').map(function(f) {
+    var match = /(.*)\.js$/.exec(f);
+    return match ? match[1] : null;
+  });
+  return _.compact(deps);
+}
+
+function findProjNames(fileName, index) {
+  var argsRx = /pj_add\(([^(]+)/g;
+  var trimRx = /['"\s]/g;
+  var js = fs.readFileSync(path.join('src/projections', fileName + '.js'), 'utf8');
+  var args, m;
+  while (m = argsRx.exec(js)) {
+    args = m[1].split(',');
+    index[args[1].replace(trimRx, '')] = fileName;
+  }
+}

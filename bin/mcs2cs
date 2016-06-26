@@ -1,0 +1,124 @@
+#!/usr/bin/env node
+
+var proj = require('../');
+var cmd = require('../lib/cmd_common.js');
+
+// if executing as a script, init and run
+if (process.argv[1].indexOf('mcs2cs') > -1) {
+  try {
+    console.log(init(process.argv.slice(2))());
+  } catch(e) {
+    console.error(e.message);
+    process.exit(1);
+  }
+}
+
+// you can also require this file as a node module (e.g. for testing)
+module.exports = init;
+
+// @params string or array
+function init(params) {
+  var opts = cmd.get_shared_options().parse(params);
+  var files = opts._.length > 0 ? opts._ : null;
+  var commentChar = opts.t || '#';
+  var P1, P2, translateLine, projs;
+
+  if ('l' in opts) {
+    return function() {return cmd.get_info(opts.l);};
+  }
+
+  if (opts.proj4) {
+    projs = opts.proj4.split(/[\s]+\+to[\s]+/);
+    try {
+      P1 = proj.pj_init(projs[0]);
+      if (!projs[1]) {
+        // If there is no second coordinate system defined, a geographic
+        // coordinate system based on the datum and ellipsoid of the source
+        // coordinate system is assumed.
+        P2 = proj.internal.pj_latlong_from_proj(P1);
+      } else {
+        P2 = proj.pj_init(projs[1]);
+      }
+      if (opts.I) {
+        translateLine = get_proj_function(P2, P1, opts);
+      } else {
+        translateLine = get_proj_function(P1, P2, opts);
+      }
+    } catch(e) {
+      if (e.name == 'PJError') {
+        throw new Error('projection initialization failure\ncause: ' + e.message);
+      } else {
+        throw e;
+      }
+    }
+    return project;
+  }
+
+  throw new Error('usage: mcs2cs [ -eEfIlrstwW [args] ] [ +opts[=arg] ] [ files ]');
+
+  function project(input) {
+    var linesOut = [],
+        linesIn, line, i;
+    if (!input) {
+      linesIn = cmd.read_lines(files);
+    } else {
+      linesIn = input.trim().split('\n');
+    }
+    for (i=0; i<linesIn.length; i++) {
+      line = linesIn[i];
+      if (line[0] == commentChar) continue;
+      line = translateLine(line, i);
+      if (line) {
+        linesOut.push(line);
+      }
+    }
+    return linesOut.join('\n');
+  }
+}
+
+function get_proj_function(P1, P2, opts) {
+  var decimals = opts.w || opts.W ? parseInt(opts.w || opts.W) : 3;
+  var fmtLat = proj.internal.get_dtodms(decimals, !!opts.W, 'N', 'S');
+  var fmtLon = proj.internal.get_dtodms(decimals, !!opts.W, 'E', 'W');
+  var fmtNum = cmd.get_dfmt(opts.f);
+  var errorLine = opts.e || '*\t*';
+
+  return function(line, i) {
+    var input = line.trim().split(/[\s]+/);
+    var coords = [];
+    var output, oline;
+    if (input.length < 2) return null;
+    if (opts.r) {
+      input = [input[1], input[0]];
+    }
+    if (P1.is_latlong) {
+      coords[0] = proj.internal.dmstod(input[0]);
+      coords[1] = proj.internal.dmstod(input[1]);
+    } else {
+      coords[0] = +input[0];
+      coords[1] = +input[1];
+    }
+    coords[2] = input.length > 2 ? +input[2] : 0;
+    try {
+      proj.pj_transform_point(P1, P2, coords);
+      if (P2.is_latlong) {
+        output = [fmtLon(coords[0]), fmtLat(coords[1])];
+      } else {
+        output = [fmtNum(coords[0]), fmtNum(coords[1])];
+      }
+      if (opts.s) {
+        output = [output[1], output[0]];
+      }
+      oline = output.join('\t');
+    } catch(e) {
+      // TODO: match cs2cs output more closely; inhibit msg if loaded as module
+      console.error('line ' + (i + 1) + ' error: ' + e.message);
+      oline = errorLine;
+    }
+    oline += ' ' + fmtNum(coords[2]);
+    if (opts.E) {
+      oline = line + '\t' + oline;
+    }
+    return oline;
+  };
+}
