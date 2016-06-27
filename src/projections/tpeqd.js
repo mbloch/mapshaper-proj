@@ -51,8 +51,8 @@ function pj_tpeqd(P) {
     z2 *= z2;
     xy.x = r2z0 * (t = z1 - z2);
     t = z02 - t;
-    xy.y = r2z0 * asqrt (4. * z02 * z2 - t * t);
-    if ((ccs * sp - cp * (cs * sin(dl1) - sc * sin(dl2))) < 0.)
+    xy.y = r2z0 * asqrt (4 * z02 * z2 - t * t);
+    if ((ccs * sp - cp * (cs * sin(dl1) - sc * sin(dl2))) < 0)
       xy.y = -xy.y;
   }
 
@@ -64,7 +64,7 @@ function pj_tpeqd(P) {
     d = cz1 - cz2;
     lp.lam = - atan2(d, (s * thz0));
     lp.phi = aacos(hypot(thz0 * s, d) * rhshz0);
-    if ( xy.y < 0. )
+    if ( xy.y < 0 )
       lp.phi = - lp.phi;
     /* lam--phi now in system relative to P1--P2 base equator */
     sp = sin(lp.phi);

@@ -29,7 +29,7 @@ function pj_wag2(P) {
 function pj_wag3(P) {
   var TWOTHIRD = 0.6666666666666666666667,
       ts = pj_param(P.params, "rlat_ts"),
-      C_x = cos(ts) / cos(2.*ts/3.);
+      C_x = cos(ts) / cos(2*ts/3);
 
   P.es = 0;
   P.fwd = s_fwd;
@@ -51,7 +51,7 @@ function pj_wag7(P) {
   P.fwd = function(lp, xy) {
     var theta, ct, D;
     theta = asin (xy.y = 0.90630778703664996 * sin(lp.phi));
-    xy.x  = 2.66723 * (ct = cos (theta)) * sin (lp.lam /= 3.);
+    xy.x  = 2.66723 * (ct = cos (theta)) * sin (lp.lam /= 3);
     xy.y *= 1.24104 * (D = 1/(sqrt (0.5 * (1 + ct * cos(lp.lam)))));
     xy.x *= D;
   };

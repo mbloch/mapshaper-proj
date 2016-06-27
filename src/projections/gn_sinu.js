@@ -26,16 +26,16 @@ function pj_sinu(P) {
   function e_fwd(lp, xy) {
     var s, c;
     xy.y = pj_mlfn(lp.phi, s = sin(lp.phi), c = cos(lp.phi), en);
-    xy.x = lp.lam * c / sqrt(1. - P.es * s * s);
+    xy.x = lp.lam * c / sqrt(1 - P.es * s * s);
   }
 
   function e_inv(xy, lp) {
     var s = fabs(lp.phi = pj_inv_mlfn(xy.y, P.es, en));
     if (s < M_HALFPI) {
         s = sin(lp.phi);
-        lp.lam = xy.x * sqrt(1. - P.es * s * s) / cos(lp.phi);
+        lp.lam = xy.x * sqrt(1 - P.es * s * s) / cos(lp.phi);
     } else if ((s - EPS10) < M_HALFPI) {
-        lp.lam = 0.;
+        lp.lam = 0;
     } else {
         i_error();
     }
@@ -54,7 +54,7 @@ function pj_sinu_init(P, m, n) {
   var MAX_ITER = 8,
       LOOP_TOL = 1e-7,
       C_x, C_y;
-  C_x = (C_y = sqrt((m + 1.) / n))/(m + 1.);
+  C_x = (C_y = sqrt((m + 1) / n))/(m + 1);
   P.es = 0;
   P.fwd = s_fwd;
   P.inv = s_inv;
@@ -62,7 +62,7 @@ function pj_sinu_init(P, m, n) {
   function s_fwd(lp, xy) {
     var k, V, i;
     if (!m)
-      lp.phi = n != 1. ? aasin(n * sin(lp.phi)): lp.phi;
+      lp.phi = n != 1 ? aasin(n * sin(lp.phi)): lp.phi;
     else {
         k = n * sin(lp.phi);
         for (i = MAX_ITER; i ; --i) {
@@ -81,7 +81,7 @@ function pj_sinu_init(P, m, n) {
   function s_inv(xy, lp) {
     xy.y /= C_y;
     lp.phi = m ? aasin((m * xy.y + sin(xy.y)) / n) :
-        ( n != 1. ? aasin(sin(xy.y) / n) : xy.y );
+        ( n != 1 ? aasin(sin(xy.y) / n) : xy.y );
     lp.lam = xy.x / (C_x * (m + cos(xy.y)));
   }
 }

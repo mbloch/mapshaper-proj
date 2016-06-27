@@ -45,7 +45,7 @@ function pj_eck2(P) {
   function s_inv(xy, lp) {
     lp.lam = xy.x / (FXC * (lp.phi = 2 - fabs(xy.y) / FYC));
     lp.phi = (4 - lp.phi * lp.phi) * C13;
-    if (fabs(lp.phi) >= 1.) {
+    if (fabs(lp.phi) >= 1) {
       if (fabs(lp.phi) > ONEEPS) i_error();
       else
         lp.phi = lp.phi < 0 ? -M_HALFPI : M_HALFPI;
@@ -134,7 +134,7 @@ function pj_eck4(P) {
       c = cos(lp.phi);
       s = sin(lp.phi);
       lp.phi -= V = (lp.phi + s * (c + 2) - p) /
-          (1. + c * (c + 2) - s * s);
+          (1 + c * (c + 2) - s * s);
       if (fabs(V) < EPS)
         break;
     }

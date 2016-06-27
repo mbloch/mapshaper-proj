@@ -31,7 +31,7 @@ function pj_loxim(P) {
     } else {
       lp.lam = M_FORTPI + 0.5 * lp.phi;
       if (fabs(lp.lam) < EPS || fabs(fabs(lp.lam) - M_HALFPI) < EPS)
-        lp.lam = 0.;
+        lp.lam = 0;
       else
         lp.lam = xy.x * log(tan(lp.lam) / tanphi1) / xy.y;
     }

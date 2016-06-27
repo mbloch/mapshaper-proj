@@ -44,7 +44,7 @@ function pj_ocea(P) {
     xy.y = sin(lp.lam);
     t = cos(lp.lam);
     xy.x = atan((tan(lp.phi) * cosphi + sinphi * xy.y) / t);
-    if (t < 0.)
+    if (t < 0)
         xy.x += M_PI;
     xy.x *= rtk;
     xy.y = rok * (sinphi * sin(lp.phi) - cosphi * cos(lp.phi) * xy.y);
@@ -54,7 +54,7 @@ function pj_ocea(P) {
     var t, s;
     xy.y /= rok;
     xy.x /= rtk;
-    t = sqrt(1. - xy.y * xy.y);
+    t = sqrt(1 - xy.y * xy.y);
     lp.phi = asin(xy.y * sinphi + t * cosphi * (s = sin(xy.x)));
     lp.lam = atan2(t * sinphi * s - xy.y * cosphi,
         t * cos(xy.x));

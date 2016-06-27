@@ -5,7 +5,7 @@ var pj_err_list = [
   "no colon in init= string",     /*  -3 */
   "projection not named",       /*  -4 */
   "unknown projection id",      /*  -5 */
-  "effective eccentricity = 1.",      /*  -6 */
+  "effective eccentricity = 1",      /*  -6 */
   "unknown unit conversion id",     /*  -7 */
   "invalid boolean param argument",   /*  -8 */
   "unknown elliptical parameter name",          /*  -9 */
@@ -18,7 +18,7 @@ var pj_err_list = [
   "improperly formed DMS value",      /* -16 */
   "non-convergent inverse meridional dist", /* -17 */
   "non-convergent inverse phi2",      /* -18 */
-  "acos/asin: |arg| >1.+1e-14",     /* -19 */
+  "acos/asin: |arg| >1+1e-14",     /* -19 */
   "tolerance condition error",      /* -20 */
   "conic lat_1 = -lat_2",       /* -21 */
   "lat_1 >= 90",          /* -22 */

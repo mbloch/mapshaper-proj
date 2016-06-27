@@ -25,7 +25,7 @@ function pj_bonne(P) {
   function e_fwd(lp, xy) {
     var rh, E, c;
     rh = am1 + m1 - pj_mlfn(lp.phi, E = sin(lp.phi), c = cos(lp.phi), en);
-    E = c * lp.lam / (rh * sqrt(1. - P.es * E * E));
+    E = c * lp.lam / (rh * sqrt(1 - P.es * E * E));
     xy.x = rh * sin(E);
     xy.y = am1 - rh * cos(E);
   }
@@ -36,9 +36,9 @@ function pj_bonne(P) {
     lp.phi = pj_inv_mlfn(am1 + m1 - rh, P.es, en);
     if ((s = fabs(lp.phi)) < M_HALFPI) {
       s = sin(lp.phi);
-      lp.lam = rh * atan2(xy.x, xy.y) * sqrt(1. - P.es * s * s) / cos(lp.phi);
+      lp.lam = rh * atan2(xy.x, xy.y) * sqrt(1 - P.es * s * s) / cos(lp.phi);
     } else if (fabs(s - M_HALFPI) <= EPS10)
-      lp.lam = 0.;
+      lp.lam = 0;
     else i_error();
   }
 
@@ -49,7 +49,7 @@ function pj_bonne(P) {
       xy.x = rh * sin(E = lp.lam * cos(lp.phi) / rh);
       xy.y = cphi1 - rh * cos(E);
     } else
-      xy.x = xy.y = 0.;
+      xy.x = xy.y = 0;
   }
 
   function s_inv(xy, lp) {
@@ -57,7 +57,7 @@ function pj_bonne(P) {
     lp.phi = cphi1 + phi1 - rh;
     if (fabs(lp.phi) > M_HALFPI) i_error();
     if (fabs(fabs(lp.phi) - M_HALFPI) <= EPS10)
-      lp.lam = 0.;
+      lp.lam = 0;
     else
       lp.lam = rh * atan2(xy.x, xy.y) / cos(lp.phi);
   }

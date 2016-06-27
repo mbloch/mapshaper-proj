@@ -13,7 +13,7 @@ function pj_eqdc(P) {
   n = sinphi = sin(phi1);
   cosphi = cos(phi1);
   secant = fabs(phi1 - phi2) >= EPS10;
-  if ((ellips = (P.es > 0.)) ) {
+  if ((ellips = (P.es > 0)) ) {
     m1 = pj_msfn(sinphi, cosphi, P.es);
     ml1 = pj_mlfn(phi1, sinphi, cosphi, en);
     if (secant) { /* secant cone */
@@ -44,7 +44,7 @@ function pj_eqdc(P) {
 
   function e_inv(xy, lp) {
     if ((rho = hypot(xy.x, xy.y = rho0 - xy.y)) != 0.0 ) {
-      if (n < 0.) {
+      if (n < 0) {
         rho = -rho;
         xy.x = -xy.x;
         xy.y = -xy.y;
@@ -54,8 +54,8 @@ function pj_eqdc(P) {
         lp.phi = pj_inv_mlfn(lp.phi, P.es, en);
       lp.lam = atan2(xy.x, xy.y) / n;
     } else {
-      lp.lam = 0.;
-      lp.phi = n > 0. ? M_HALFPI : -M_HALFPI;
+      lp.lam = 0;
+      lp.phi = n > 0 ? M_HALFPI : -M_HALFPI;
     }
   }
 }

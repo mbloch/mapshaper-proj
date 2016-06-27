@@ -32,7 +32,7 @@ function pj_stere_init(P, phits) {
   var sinX1, cosX1, akm1, mode;
 
   if (fabs((t = fabs (P.phi0)) - M_HALFPI) < EPS10)
-      mode = P.phi0 < 0. ? S_POLE : N_POLE;
+      mode = P.phi0 < 0 ? S_POLE : N_POLE;
   else
       mode = t > EPS10 ? OBLIQ: EQUIT;
   phits = fabs (phits);
@@ -42,21 +42,21 @@ function pj_stere_init(P, phits) {
       case N_POLE:
       case S_POLE:
         if (fabs (phits - M_HALFPI) < EPS10)
-            akm1 = 2. * P.k0 /
+            akm1 = 2 * P.k0 /
                sqrt(pow(1 + P.e, 1 + P.e) * pow(1 - P.e, 1 - P.e));
         else {
             akm1 = cos (phits) /
                pj_tsfn (phits, t = sin(phits), P.e);
             t *= P.e;
-            akm1 /= sqrt(1. - t * t);
+            akm1 /= sqrt(1 - t * t);
         }
         break;
       case EQUIT:
       case OBLIQ:
         t = sin (P.phi0);
-        X = 2. * atan (ssfn(P.phi0, t, P.e)) - M_HALFPI;
+        X = 2 * atan (ssfn(P.phi0, t, P.e)) - M_HALFPI;
         t *= P.e;
-        akm1 = 2 * P.k0 * cos(P.phi0) / sqrt(1. - t * t);
+        akm1 = 2 * P.k0 * cos(P.phi0) / sqrt(1 - t * t);
         sinX1 = sin(X);
         cosX1 = cos(X);
         break;
@@ -126,9 +126,9 @@ function pj_stere_init(P, phits) {
     case EQUIT:
     case OBLIQ:
       if (mode == EQUIT) {
-        xy.y = 1. + cosphi * coslam;
+        xy.y = 1 + cosphi * coslam;
       } else {
-        xy.y = 1. + sinph0 * sinphi + cosph0 * cosphi * coslam;
+        xy.y = 1 + sinph0 * sinphi + cosph0 * cosphi * coslam;
       }
       if (xy.y <= EPS10) f_error();
       xy.x = (xy.y = akm1 / xy.y) * cosphi * sinlam;
@@ -171,7 +171,7 @@ function pj_stere_init(P, phits) {
       case N_POLE:
         xy.y = -xy.y;
       case S_POLE:
-        phi_l = M_HALFPI - 2. * atan (tp = - rho / akm1);
+        phi_l = M_HALFPI - 2 * atan (tp = - rho / akm1);
         halfpi = -M_HALFPI;
         halfe = -0.5 * P.e;
         break;
@@ -179,11 +179,11 @@ function pj_stere_init(P, phits) {
 
     for (i = 0; i < NITER; i++, phi_l = lp.phi) {
       sinphi = P.e * sin(phi_l);
-      lp.phi = 2. * atan (tp * pow ((1.+sinphi)/(1.-sinphi), halfe)) - halfpi;
+      lp.phi = 2 * atan (tp * pow ((1+sinphi)/(1-sinphi), halfe)) - halfpi;
       if (fabs(phi_l - lp.phi) < CONV) {
         if (mode == S_POLE)
           lp.phi = -lp.phi;
-        lp.lam = (xy.x == 0. && xy.y == 0.) ? 0. : atan2 (xy.x, xy.y);
+        lp.lam = (xy.x == 0 && xy.y == 0) ? 0 : atan2 (xy.x, xy.y);
         return;
       }
     }
@@ -192,17 +192,17 @@ function pj_stere_init(P, phits) {
 
   function s_inv(xy, lp) {
     var c, rh, sinc, cosc;
-    sinc = sin(c = 2. * atan ((rh = hypot(xy.x, xy.y)) / akm1));
+    sinc = sin(c = 2 * atan ((rh = hypot(xy.x, xy.y)) / akm1));
     cosc = cos(c);
-    lp.lam = 0.;
+    lp.lam = 0;
 
     switch (mode) {
       case EQUIT:
         if (fabs (rh) <= EPS10)
-            lp.phi = 0.;
+            lp.phi = 0;
         else
             lp.phi = asin (xy.y * sinc / rh);
-        if (cosc != 0. || xy.x != 0.)
+        if (cosc != 0 || xy.x != 0)
             lp.lam = atan2 (xy.x * sinc, cosc * rh);
         break;
       case OBLIQ:
@@ -210,7 +210,7 @@ function pj_stere_init(P, phits) {
             lp.phi = P.phi0;
         else
             lp.phi = asin (cosc * sinph0 + xy.y * sinc * cosph0 / rh);
-        if ((c = cosc - sinph0 * sin (lp.phi)) != 0. || xy.x != 0.)
+        if ((c = cosc - sinph0 * sin (lp.phi)) != 0 || xy.x != 0)
             lp.lam = atan2 (xy.x * sinc * cosph0, c * rh);
         break;
       case N_POLE:
@@ -220,7 +220,7 @@ function pj_stere_init(P, phits) {
             lp.phi = P.phi0;
         else
             lp.phi = asin (mode == S_POLE ? - cosc : cosc);
-        lp.lam = (xy.x == 0. && xy.y == 0.) ? 0. : atan2 (xy.x, xy.y);
+        lp.lam = (xy.x == 0 && xy.y == 0) ? 0 : atan2 (xy.x, xy.y);
         break;
     }
   }
@@ -228,6 +228,6 @@ function pj_stere_init(P, phits) {
   function ssfn(phit, sinphi, eccen) {
     sinphi *= eccen;
     return tan(0.5 * (M_HALFPI + phit)) *
-       pow ((1. - sinphi) / (1. + sinphi), 0.5 * eccen);
+       pow ((1 - sinphi) / (1 + sinphi), 0.5 * eccen);
   }
 }

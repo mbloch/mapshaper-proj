@@ -52,7 +52,7 @@ function pj_ortho(P) {
         if ((sinc - 1) > EPS10) i_error();
         sinc = 1;
     }
-    cosc = sqrt(1. - sinc * sinc); /* in this range OK */
+    cosc = sqrt(1 - sinc * sinc); /* in this range OK */
     if (fabs(rh) <= EPS10) {
         lp.phi = P.phi0;
         lp.lam = 0.0;
@@ -77,13 +77,13 @@ function pj_ortho(P) {
             xy.x *= sinc * Q.cosph0;
           }
           if (fabs(lp.phi) >= 1)
-              lp.phi = lp.phi < 0. ? -M_HALFPI : M_HALFPI;
+              lp.phi = lp.phi < 0 ? -M_HALFPI : M_HALFPI;
           else
               lp.phi = asin(lp.phi);
           break;
         }
-        lp.lam = (xy.y == 0. && (Q.mode == OBLIQ || Q.mode == EQUIT))
-             ? (xy.x == 0. ? 0. : xy.x < 0. ? -M_HALFPI : M_HALFPI)
+        lp.lam = (xy.y == 0 && (Q.mode == OBLIQ || Q.mode == EQUIT))
+             ? (xy.x == 0 ? 0 : xy.x < 0 ? -M_HALFPI : M_HALFPI)
                            : atan2(xy.x, xy.y);
     }
   }

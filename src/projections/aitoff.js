@@ -23,7 +23,7 @@ function pj_aitoff(P) {
   function s_fwd(lp, xy) {
     var c, d;
     if((d = acos(cos(lp.phi) * cos(c = 0.5 * lp.lam)))) {/* basic Aitoff */
-      xy.x = 2. * d * cos(lp.phi) * sin(c) * (xy.y = 1 / sin(d));
+      xy.x = 2 * d * cos(lp.phi) * sin(c) * (xy.y = 1 / sin(d));
       xy.y *= d * sin(lp.phi);
     } else
       xy.x = xy.y = 0;

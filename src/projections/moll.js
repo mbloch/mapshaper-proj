@@ -52,7 +52,7 @@ function pj_moll_init(P) {
         break;
     }
     if (!i)
-      lp.phi = (lp.phi < 0.) ? -M_HALFPI : M_HALFPI;
+      lp.phi = (lp.phi < 0) ? -M_HALFPI : M_HALFPI;
     else
       lp.phi *= 0.5;
     xy.x = Q.C_x * lp.lam * cos(lp.phi);

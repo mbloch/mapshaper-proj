@@ -13,13 +13,13 @@ function pj_aeqd(P) {
   var sinph0, cosph0, M1, N1, Mp, He, G, mode, en, g;
   P.phi0 = pj_param(P.params, "rlat_0");
   if (fabs(fabs(P.phi0) - M_HALFPI) < EPS10) {
-    mode = P.phi0 < 0. ? S_POLE : N_POLE;
-    sinph0 = P.phi0 < 0. ? -1. : 1.;
-    cosph0 = 0.;
+    mode = P.phi0 < 0 ? S_POLE : N_POLE;
+    sinph0 = P.phi0 < 0 ? -1 : 1;
+    cosph0 = 0;
   } else if (fabs(P.phi0) < EPS10) {
     mode = EQUIT;
-    sinph0 = 0.;
-    cosph0 = 1.;
+    sinph0 = 0;
+    cosph0 = 1;
   } else {
     mode = OBLIQ;
     sinph0 = sin(P.phi0);
@@ -38,16 +38,16 @@ function pj_aeqd(P) {
     } else {
       switch (mode) {
         case N_POLE:
-          Mp = pj_mlfn(M_HALFPI, 1., 0., en);
+          Mp = pj_mlfn(M_HALFPI, 1, 0, en);
           break;
         case S_POLE:
-          Mp = pj_mlfn(-M_HALFPI, -1., 0., en);
+          Mp = pj_mlfn(-M_HALFPI, -1, 0, en);
           break;
         case EQUIT:
         case OBLIQ:
           P.inv = e_inv;
           P.fwd = e_fwd;
-          N1 = 1. / sqrt(1. - P.es * sinph0 * sinph0);
+          N1 = 1 / sqrt(1 - P.es * sinph0 * sinph0);
           G = sinph0 * (He = P.e / sqrt(P.one_es));
           He *= cosph0;
           break;
@@ -77,7 +77,7 @@ function pj_aeqd(P) {
       case EQUIT:
       case OBLIQ:
         if (fabs(lp.lam) < EPS10 && fabs(lp.phi - P.phi0) < EPS10) {
-            xy.x = xy.y = 0.;
+            xy.x = xy.y = 0;
             break;
         }
         phi1 = P.phi0 / DEG_TO_RAD; lam1 = P.lam0 / DEG_TO_RAD;
@@ -96,7 +96,7 @@ function pj_aeqd(P) {
     var vars;
     if ((c = hypot(xy.x, xy.y)) < EPS10) {
       lp.phi = P.phi0;
-      lp.lam = 0.;
+      lp.lam = 0;
       return (lp);
     }
     if (mode == OBLIQ || mode == EQUIT) {
@@ -130,9 +130,9 @@ function pj_aeqd(P) {
         } else {
           xy.y = sinph0 * sinphi + cosph0 * cosphi * coslam;
         }
-        if (fabs(fabs(xy.y) - 1.) < TOL)
-            if (xy.y < 0.) f_error();
-            else xy.x = xy.y = 0.;
+        if (fabs(fabs(xy.y) - 1) < TOL)
+            if (xy.y < 0) f_error();
+            else xy.x = xy.y = 0;
         else {
           xy.y = acos(xy.y);
           xy.y /= sin(xy.y);
@@ -160,7 +160,7 @@ function pj_aeqd(P) {
         c_rh = M_PI;
     } else if (c_rh < EPS10) {
       lp.phi = P.phi0;
-      lp.lam = 0.;
+      lp.lam = 0;
       return;
     }
     if (mode == OBLIQ || mode == EQUIT) {
@@ -175,7 +175,7 @@ function pj_aeqd(P) {
         y = (cosc - sinph0 * sin(lp.phi)) * c_rh;
         x *= sinc * cosph0;
       }
-      lp.lam = y == 0. ? 0. : atan2(x, y);
+      lp.lam = y == 0 ? 0 : atan2(x, y);
     } else if (mode == N_POLE) {
       lp.phi = M_HALFPI - c_rh;
       lp.lam = atan2(x, -y);
@@ -189,7 +189,7 @@ function pj_aeqd(P) {
     var cosphi, sinphi, t;
     cosphi = cos(lp.phi);
     sinphi = sin(lp.phi);
-    t = 1. / sqrt(1. - P.es * sinphi * sinphi);
+    t = 1 / sqrt(1 - P.es * sinphi * sinphi);
     xy.x = lp.lam * cosphi * t;
     xy.y = pj_mlfn(lp.phi, sinphi, cosphi, en) - M1 +
         0.5 * lp.lam * lp.lam * cosphi * sinphi * t;
@@ -202,7 +202,7 @@ function pj_aeqd(P) {
     for (i = 0; i < 3; ++i) {
       t = P.e * sin(lp.phi);
       lp.phi = pj_inv_mlfn(M1 + xy.y -
-        x2 * tan(lp.phi) * (t = sqrt(1. - t * t)), P.es, en);
+        x2 * tan(lp.phi) * (t = sqrt(1 - t * t)), P.es, en);
     }
     lp.lam = xy.x * t / cos(lp.phi);
   }

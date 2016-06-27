@@ -28,8 +28,8 @@ function pj_chamb(P) {
   beta_0 = lc(c[0].v.r, c[2].v.r, c[1].v.r);
   beta_1 = lc(c[0].v.r, c[1].v.r, c[2].v.r);
   beta_2 = M_PI - beta_0;
-  y0 = 2. * (c[0].p.y = c[1].p.y = c[2].v.r * sin(beta_0));
-  c[2].p.y = 0.;
+  y0 = 2 * (c[0].p.y = c[1].p.y = c[2].v.r * sin(beta_0));
+  c[2].p.y = 0;
   c[0].p.x = -(c[1].p.x = 0.5 * c[0].v.r);
   x0 = c[2].p.x = c[0].p.x + c[2].v.r * cos(beta_0);
 
@@ -57,7 +57,7 @@ function pj_chamb(P) {
       for (i = 0; i < 3; ++i) {
         j = i == 2 ? 0 : i + 1;
         a = lc(c[i].v.r, v[i].r, v[j].r);
-        if (v[i].Az < 0.)
+        if (v[i].Az < 0)
           a = -a;
         if (! i) { /* coord comp unique to each arc */
           x += v[i].r * cos(a);
@@ -83,17 +83,17 @@ function pj_chamb(P) {
     var v = {};
     var cdl, dp, dl;
     cdl = cos(dlam);
-    if (fabs(dphi) > 1. || fabs(dlam) > 1.)
+    if (fabs(dphi) > 1 || fabs(dlam) > 1)
       v.r = aacos(cs1 * s2 + c1 * c2 * cdl);
     else { /* more accurate for smaller distances */
       dp = sin(0.5 * dphi);
       dl = sin(0.5 * dlam);
-      v.r = 2. * aasin(sqrt(dp * dp + c1 * c2 * dl * dl));
+      v.r = 2 * aasin(sqrt(dp * dp + c1 * c2 * dl * dl));
     }
     if (fabs(v.r) > TOL)
       v.Az = atan2(c2 * sin(dlam), c1 * s2 - s1 * c2 * cdl);
     else
-      v.r = v.Az = 0.;
+      v.r = v.Az = 0;
     return v;
   }
 

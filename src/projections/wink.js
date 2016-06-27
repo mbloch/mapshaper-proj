@@ -40,7 +40,7 @@ function pj_wink2(P) {
         break;
     }
     if (!i)
-      phi = (phi < 0.) ? -M_HALFPI : M_HALFPI;
+      phi = (phi < 0) ? -M_HALFPI : M_HALFPI;
     else
       phi *= 0.5;
     xy.x = 0.5 * lp.lam * (cos(phi) + cosphi1);

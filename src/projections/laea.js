@@ -21,25 +21,25 @@ function pj_laea(P) {
       mode = OBLIQ;
   if (P.es) {
       P.e = sqrt(P.es);
-      qp = pj_qsfn(1., P.e, P.one_es);
-      mmf = 0.5 / (1. - P.es);
+      qp = pj_qsfn(1, P.e, P.one_es);
+      mmf = 0.5 / (1 - P.es);
       apa = pj_authset(P.es);
       switch (mode) {
         case N_POLE:
         case S_POLE:
-          dd = 1.;
+          dd = 1;
           break;
         case EQUIT:
-          dd = 1. / (rq = sqrt(0.5 * qp));
-          xmf = 1.;
+          dd = 1 / (rq = sqrt(0.5 * qp));
+          xmf = 1;
           ymf = 0.5 * qp;
           break;
         case OBLIQ:
           rq = sqrt(0.5 * qp);
           sinphi = sin(P.phi0);
           sinb1 = pj_qsfn(sinphi, P.e, P.one_es) / qp;
-          cosb1 = sqrt(1. - sinb1 * sinb1);
-          dd = cos(P.phi0) / (sqrt(1. - P.es * sinphi * sinphi) *
+          cosb1 = sqrt(1 - sinb1 * sinb1);
+          dd = cos(P.phi0) / (sqrt(1 - P.es * sinphi * sinphi) *
              rq * cosb1);
           ymf = (xmf = rq) / dd;
           xmf *= dd;
@@ -65,15 +65,15 @@ function pj_laea(P) {
 
     if (mode == OBLIQ || mode == EQUIT) {
         sinb = q / qp;
-        cosb = sqrt(1. - sinb * sinb);
+        cosb = sqrt(1 - sinb * sinb);
     }
 
     switch (mode) {
       case OBLIQ:
-        b = 1. + sinb1 * sinb + cosb1 * cosb * coslam;
+        b = 1 + sinb1 * sinb + cosb1 * cosb * coslam;
         break;
       case EQUIT:
-        b = 1. + cosb * coslam;
+        b = 1 + cosb * coslam;
         break;
       case N_POLE:
         b = M_HALFPI + lp.phi;
@@ -90,22 +90,22 @@ function pj_laea(P) {
       case OBLIQ:
       case EQUIT:
         if (mode == OBLIQ) {
-          b = sqrt(2. / b);
+          b = sqrt(2 / b);
           xy.y = ymf * b * (cosb1 * sinb - sinb1 * cosb * coslam);
         } else {
-          b = sqrt(2. / (1. + cosb * coslam));
+          b = sqrt(2 / (1 + cosb * coslam));
           xy.y = b * sinb * ymf;
         }
         xy.x = xmf * b * cosb * sinlam;
         break;
       case N_POLE:
       case S_POLE:
-        if (q >= 0.) {
+        if (q >= 0) {
             b = sqrt(q);
             xy.x = b * sinlam;
             xy.y = coslam * (mode == S_POLE ? b : -b);
         } else
-            xy.x = xy.y = 0.;
+            xy.x = xy.y = 0;
         break;
     }
   }
@@ -120,11 +120,11 @@ function pj_laea(P) {
         xy.y *=  dd;
         rho = hypot(xy.x, xy.y);
         if (rho < EPS10) {
-            lp.lam = 0.;
+            lp.lam = 0;
             lp.phi = P.phi0;
             return lp;
         }
-        sCe = 2. * asin(0.5 * rho / rq);
+        sCe = 2 * asin(0.5 * rho / rq);
         cCe = cos(sCe);
         sCe = sin(sCe);
         xy.x *= sCe;
@@ -141,11 +141,11 @@ function pj_laea(P) {
       case S_POLE:
         q = (xy.x * xy.x + xy.y * xy.y);
         if (!q) {
-            lp.lam = 0.;
+            lp.lam = 0;
             lp.phi = P.phi0;
             return (lp);
         }
-        ab = 1. - q / qp;
+        ab = 1 - q / qp;
         if (mode == S_POLE)
             ab = - ab;
         break;
@@ -164,12 +164,12 @@ function pj_laea(P) {
       case EQUIT:
       case OBLIQ:
         if (mode == EQUIT) {
-          xy.y = 1. + cosphi * coslam;
+          xy.y = 1 + cosphi * coslam;
         } else {
-          xy.y = 1. + sinb1 * sinphi + cosb1 * cosphi * coslam;
+          xy.y = 1 + sinb1 * sinphi + cosb1 * cosphi * coslam;
         }
         if (xy.y <= EPS10) f_error();
-        xy.y = sqrt(2. / xy.y);
+        xy.y = sqrt(2 / xy.y);
         xy.x = xy.y * cosphi * sin(lp.lam);
         xy.y *= mode == EQUIT ? sinphi :
            cosb1 * sinphi - sinb1 * cosphi * coslam;
@@ -179,7 +179,7 @@ function pj_laea(P) {
       case S_POLE:
         if (fabs(lp.phi + P.phi0) < EPS10) f_error();
         xy.y = M_FORTPI - lp.phi * 0.5;
-        xy.y = 2. * (mode == S_POLE ? cos(xy.y) : sin(xy.y));
+        xy.y = 2 * (mode == S_POLE ? cos(xy.y) : sin(xy.y));
         xy.x = xy.y * sin(lp.lam);
         xy.y *= coslam;
         break;
@@ -190,15 +190,15 @@ function pj_laea(P) {
     var cosz=0.0, rh, sinz=0.0;
 
     rh = hypot(xy.x, xy.y);
-    if ((lp.phi = rh * 0.5 ) > 1.) i_error();
-    lp.phi = 2. * asin(lp.phi);
+    if ((lp.phi = rh * 0.5 ) > 1) i_error();
+    lp.phi = 2 * asin(lp.phi);
     if (mode == OBLIQ || mode == EQUIT) {
         sinz = sin(lp.phi);
         cosz = cos(lp.phi);
     }
     switch (mode) {
       case EQUIT:
-        lp.phi = fabs(rh) <= EPS10 ? 0. : asin(xy.y * sinz / rh);
+        lp.phi = fabs(rh) <= EPS10 ? 0 : asin(xy.y * sinz / rh);
         xy.x *= sinz;
         xy.y = cosz * rh;
         break;
@@ -216,7 +216,7 @@ function pj_laea(P) {
         lp.phi -= M_HALFPI;
         break;
     }
-    lp.lam = (xy.y == 0. && (mode == EQUIT || mode == OBLIQ)) ?
-        0. : atan2(xy.x, xy.y);
+    lp.lam = (xy.y == 0 && (mode == EQUIT || mode == OBLIQ)) ?
+        0 : atan2(xy.x, xy.y);
   }
 }

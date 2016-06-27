@@ -8,7 +8,7 @@ var NITER = 9,
   P.inv = s_inv;
 
   function s_fwd(lp, xy) {
-    xy.x = 0.5 * lp.lam * (1. + cos(lp.phi));
+    xy.x = 0.5 * lp.lam * (1 + cos(lp.phi));
     xy.y = 2.0 * (lp.phi - tan(0.5 *lp.phi));
   }
 
@@ -17,14 +17,14 @@ var NITER = 9,
     p = 0.5 * xy.y;
     for (i = NITER; i>0; --i) {
       c = cos(0.5 * lp.phi);
-      lp.phi -= V = (lp.phi - tan(lp.phi/2) - p)/(1. - 0.5/(c*c));
+      lp.phi -= V = (lp.phi - tan(lp.phi/2) - p)/(1 - 0.5/(c*c));
       if (fabs(V) < EPS)
         break;
     }
     if (!i) {
-      lp.phi = p < 0. ? -M_HALFPI : M_HALFPI;
-      lp.lam = 2. * xy.x;
+      lp.phi = p < 0 ? -M_HALFPI : M_HALFPI;
+      lp.lam = 2 * xy.x;
     } else
-      lp.lam = 2. * xy.x / (1. + cos(lp.phi));
+      lp.lam = 2 * xy.x / (1 + cos(lp.phi));
   }
 }

@@ -14,7 +14,7 @@ function pj_tcea(P) {
     var t;
     xy.y = xy.y / P.k0 + P.phi0;
     xy.x *= P.k0;
-    t = sqrt (1. - xy.x * xy.x);
+    t = sqrt (1 - xy.x * xy.x);
     lp.phi = asin (t * sin (xy.y));
     lp.lam = atan2 (xy.x, t * cos (xy.y));
   }

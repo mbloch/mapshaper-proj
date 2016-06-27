@@ -23,7 +23,7 @@ function pj_boggs(P) {
         if (fabs(th1) < EPS) break;
       }
       theta *= 0.5;
-      xy.x = FXC * lp.lam / (1. / cos(lp.phi) + FXC2 / cos(theta));
+      xy.x = FXC * lp.lam / (1 / cos(lp.phi) + FXC2 / cos(theta));
     }
     xy.y = FYC * (lp.phi + M_SQRT2 * sin(theta));
   }

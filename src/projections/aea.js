@@ -77,7 +77,7 @@ function pj_aea_init(P, phi1, phi2) {
           if ((lp.phi = phi1_(lp.phi, P.e, P.one_es)) == HUGE_VAL)
             i_error();
         } else
-          lp.phi = lp.phi < 0. ? -M_HALFPI : M_HALFPI;
+          lp.phi = lp.phi < 0 ? -M_HALFPI : M_HALFPI;
       } else if (fabs(lp.phi = (c - lp.phi * lp.phi) / n2) <= 1)
         lp.phi = asin(lp.phi);
       else
