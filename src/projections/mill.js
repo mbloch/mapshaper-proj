@@ -8,11 +8,11 @@ function pj_mill(P) {
 
   function s_fwd(lp, xy) {
     xy.x = lp.lam;
-    xy.y = log(tan(M_FORTPI + lp.phi * .4)) * 1.25;
+    xy.y = log(tan(M_FORTPI + lp.phi * 0.4)) * 1.25;
   }
 
   function s_inv(xy, lp) {
     lp.lam = xy.x;
-    lp.phi = 2.5 * (atan(exp(.8 * xy.y)) - M_FORTPI);
+    lp.phi = 2.5 * (atan(exp(0.8 * xy.y)) - M_FORTPI);
   }
 }

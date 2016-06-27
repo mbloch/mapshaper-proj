@@ -37,11 +37,11 @@ function pj_lcc(P) {
   } else {
     if (secant)
       n = log(cosphi / cos(phi2)) /
-          log(tan(M_FORTPI + .5 * phi2) /
-          tan(M_FORTPI + .5 * phi1));
-    c = cosphi * pow(tan(M_FORTPI + .5 * phi1), n) / n;
+          log(tan(M_FORTPI + 0.5 * phi2) /
+          tan(M_FORTPI + 0.5 * phi1));
+    c = cosphi * pow(tan(M_FORTPI + 0.5 * phi1), n) / n;
     rho0 = (fabs(fabs(P.phi0) - M_HALFPI) < EPS10) ? 0 :
-        c * pow(tan(M_FORTPI + .5 * P.phi0), -n);
+        c * pow(tan(M_FORTPI + 0.5 * P.phi0), -n);
   }
 
   function e_fwd(lp, xy) {
@@ -52,7 +52,7 @@ function pj_lcc(P) {
       rho = 0;
     } else {
       rho = c * (ellips ? pow(pj_tsfn(lp.phi, sin(lp.phi),
-            P.e), n) : pow(tan(M_FORTPI + .5 * lp.phi), -n));
+            P.e), n) : pow(tan(M_FORTPI + 0.5 * lp.phi), -n));
     }
     lam *= n;
     xy.x = P.k0 * (rho * sin(lam));

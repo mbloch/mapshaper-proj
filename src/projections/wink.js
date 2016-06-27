@@ -9,7 +9,7 @@ function pj_wink1(P) {
   P.es = 0;
 
   function s_fwd(lp, xy) {
-    xy.x = .5 * lp.lam * (cosphi1 + cos(lp.phi));
+    xy.x = 0.5 * lp.lam * (cosphi1 + cos(lp.phi));
     xy.y = lp.phi;
   }
 

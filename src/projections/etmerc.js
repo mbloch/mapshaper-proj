@@ -18,7 +18,7 @@ function pj_utm(P) {
     else if (zone >= 60)
       zone = 59;
   }
-  P.lam0 = (zone + .5) * M_PI / 30 - M_PI;
+  P.lam0 = (zone + 0.5) * M_PI / 30 - M_PI;
   P.k0 = 0.9996;
   P.phi0 = 0;
   pj_etmerc(P);

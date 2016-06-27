@@ -90,7 +90,7 @@ function pj_poly(P) {
       do {
         tp = tan(lp.phi);
         lp.phi -= (dphi = (xy.y * (lp.phi * tp + 1.) - lp.phi -
-          .5 * ( lp.phi * lp.phi + B) * tp) /
+          0.5 * ( lp.phi * lp.phi + B) * tp) /
           ((lp.phi - xy.y) / tp - 1.));
       } while (fabs(dphi) > CONV && --i);
       if (! i) i_error();

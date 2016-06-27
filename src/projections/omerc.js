@@ -72,7 +72,7 @@ function pj_omerc(P) {
         fabs(con - M_PI) <= TOL ||
         fabs(fabs(P.phi0) - M_HALFPI) <= TOL)
         e_error(-32);
-    P.lam0 = lamc - asin(.5 * (F - 1. / F) * tan(gamma0)) / B;
+    P.lam0 = lamc - asin(0.5 * (F - 1. / F) * tan(gamma0)) / B;
   } else {
     H = pow(pj_tsfn(phi1, sin(phi1), P.e), B);
     L = pow(pj_tsfn(phi2, sin(phi2), P.e), B);
@@ -84,7 +84,7 @@ function pj_omerc(P) {
         lam2 -= M_TWOPI;
     else if (con > M_PI)
         lam2 += M_TWOPI;
-    P.lam0 = adjlon(.5 * (lam1 + lam2) - atan(J * tan(.5 * B * (lam1 - lam2)) / p) / B);
+    P.lam0 = adjlon(0.5 * (lam1 + lam2) - atan(J * tan(0.5 * B * (lam1 - lam2)) / p) / B);
     gamma0 = atan(2. * sin(B * adjlon(lam1 - P.lam0)) / (F - 1. / F));
     gamma = alpha_c = asin(D * sin(gamma0));
   }
@@ -114,8 +114,8 @@ function pj_omerc(P) {
     if (fabs(fabs(lp.phi) - M_HALFPI) > EPS10) {
       W = E / pow(pj_tsfn(lp.phi, sin(lp.phi), P.e), B);
       temp = 1. / W;
-      S = .5 * (W - temp);
-      T = .5 * (W + temp);
+      S = 0.5 * (W - temp);
+      T = 0.5 * (W + temp);
       V = sin(B * lp.lam);
       U = (S * singam - V * cosgam) / T;
       if (fabs(fabs(U) - 1.0) < EPS10)
@@ -151,8 +151,8 @@ function pj_omerc(P) {
       u = xy.y * cosrot + xy.x * sinrot + u_0;
     }
     Qp = exp(- BrA * v);
-    Sp = .5 * (Qp - 1. / Qp);
-    Tp = .5 * (Qp + 1. / Qp);
+    Sp = 0.5 * (Qp - 1. / Qp);
+    Tp = 0.5 * (Qp + 1. / Qp);
     Vp = sin(BrA * u);
     Up = (Vp * cosgam + Sp * singam) / Tp;
     if (fabs(fabs(Up) - 1.) < EPS10) {

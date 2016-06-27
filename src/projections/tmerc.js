@@ -5,13 +5,13 @@ pj_add(pj_tmerc, 'tmerc', "Transverse Mercator", "\n\tCyl, Sph&Ell");
 function pj_tmerc(P) {
   var EPS10 = 1e-10,
       FC1 = 1,
-      FC2 = .5,
-      FC3 = .16666666666666666666,
-      FC4 = .08333333333333333333,
-      FC5 = .05,
-      FC6 = .03333333333333333333,
-      FC7 = .02380952380952380952,
-      FC8 = .01785714285714285714;
+      FC2 = 0.5,
+      FC3 = 0.16666666666666666666,
+      FC4 = 0.08333333333333333333,
+      FC5 = 0.05,
+      FC6 = 0.03333333333333333333,
+      FC7 = 0.02380952380952380952,
+      FC8 = 0.01785714285714285714;
   var esp, ml0, en;
 
   if (P.es) {
@@ -23,7 +23,7 @@ function pj_tmerc(P) {
     P.inv = e_inv;
   } else {
     esp = P.k0;
-    ml0 = .5 * esp;
+    ml0 = 0.5 * esp;
     P.fwd = s_fwd;
     P.inv = s_inv;
   }
@@ -121,7 +121,7 @@ function pj_tmerc(P) {
 
   function s_inv(xy, lp) {
     var h = exp(xy.x / esp);
-    var g = .5 * (h - 1 / h);
+    var g = 0.5 * (h - 1 / h);
     h = cos (P.phi0 + xy.y / esp);
     lp.phi = asin(sqrt((1 - h * h) / (1 + g * g)));
     if (xy.y < 0) lp.phi = -lp.phi;

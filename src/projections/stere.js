@@ -74,7 +74,7 @@ function pj_stere_init(P, phits) {
       case S_POLE:
       case N_POLE:
         akm1 = fabs(phits - M_HALFPI) >= EPS10 ?
-           cos(phits) / tan(M_FORTPI - .5 * phits) : 2 * P.k0;
+           cos(phits) / tan(M_FORTPI - 0.5 * phits) : 2 * P.k0;
         break;
     }
     P.fwd = s_fwd;
@@ -140,7 +140,7 @@ function pj_stere_init(P, phits) {
       phi = - phi;
     case S_POLE:
       if (fabs(phi - M_HALFPI) < TOL) f_error();
-      xy.x = sinlam * (xy.y = akm1 * tan (M_FORTPI + .5 * phi));
+      xy.x = sinlam * (xy.y = akm1 * tan (M_FORTPI + 0.5 * phi));
       xy.y *= coslam;
       break;
     }
@@ -162,18 +162,18 @@ function pj_stere_init(P, phits) {
                 else
             phi_l = asin (cosphi * sinX1 + (xy.y * sinphi * cosX1 / rho));
 
-        tp = tan (.5 * (M_HALFPI + phi_l));
+        tp = tan (0.5 * (M_HALFPI + phi_l));
         xy.x *= sinphi;
         xy.y = rho * cosX1 * cosphi - xy.y * sinX1* sinphi;
         halfpi = M_HALFPI;
-        halfe = .5 * P.e;
+        halfe = 0.5 * P.e;
         break;
       case N_POLE:
         xy.y = -xy.y;
       case S_POLE:
         phi_l = M_HALFPI - 2. * atan (tp = - rho / akm1);
         halfpi = -M_HALFPI;
-        halfe = -.5 * P.e;
+        halfe = -0.5 * P.e;
         break;
     }
 
@@ -227,7 +227,7 @@ function pj_stere_init(P, phits) {
 
   function ssfn(phit, sinphi, eccen) {
     sinphi *= eccen;
-    return tan(.5 * (M_HALFPI + phit)) *
-       pow ((1. - sinphi) / (1. + sinphi), .5 * eccen);
+    return tan(0.5 * (M_HALFPI + phit)) *
+       pow ((1. - sinphi) / (1. + sinphi), 0.5 * eccen);
   }
 }

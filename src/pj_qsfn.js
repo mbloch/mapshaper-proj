@@ -4,7 +4,7 @@ function pj_qsfn(sinphi, e, one_es) {
   if (e >= EPS) {
     con = e * sinphi;
     return (one_es * (sinphi / (1. - con * con) -
-       (.5 / e) * log ((1 - con) / (1 + con))));
+       (0.5 / e) * log ((1 - con) / (1 + con))));
   } else
     return (sinphi + sinphi);
 }

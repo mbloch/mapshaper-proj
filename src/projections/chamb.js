@@ -86,8 +86,8 @@ function pj_chamb(P) {
     if (fabs(dphi) > 1. || fabs(dlam) > 1.)
       v.r = aacos(cs1 * s2 + c1 * c2 * cdl);
     else { /* more accurate for smaller distances */
-      dp = sin(.5 * dphi);
-      dl = sin(.5 * dlam);
+      dp = sin(0.5 * dphi);
+      dl = sin(0.5 * dlam);
       v.r = 2. * aasin(sqrt(dp * dp + c1 * c2 * dl * dl));
     }
     if (fabs(v.r) > TOL)
@@ -99,6 +99,6 @@ function pj_chamb(P) {
 
   /* law of cosines */
   function lc(b, c, a) {
-    return aacos(.5 * (b * b + c * c - a * a) / (b * c));
+    return aacos(0.5 * (b * b + c * c - a * a) / (b * c));
   }
 }

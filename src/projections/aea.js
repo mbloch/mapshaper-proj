@@ -37,12 +37,12 @@ function pj_aea_init(P, phi1, phi2) {
       ml2 = pj_qsfn(sinphi, P.e, P.one_es);
       n = (m1 * m1 - m2 * m2) / (ml2 - ml1);
     }
-    ec = 1 - .5 * P.one_es * log((1 - P.e) / (1 + P.e)) / P.e;
+    ec = 1 - 0.5 * P.one_es * log((1 - P.e) / (1 + P.e)) / P.e;
     c = m1 * m1 + n * ml1;
     dd = 1 / n;
     rho0 = dd * sqrt(c - n * pj_qsfn(sin(P.phi0), P.e, P.one_es));
   } else {
-    if (secant) n = .5 * (n + sin(phi2));
+    if (secant) n = 0.5 * (n + sin(phi2));
     n2 = n + n;
     c = cosphi * cosphi + n2 * sinphi;
     dd = 1 / n;
@@ -95,7 +95,7 @@ function pj_aea_init(P, phi1, phi2) {
         EPSILON = 1e-7,
         TOL = 1e-10;
     var Phi, sinpi, cospi, con, com, dphi, i;
-    Phi = asin (.5 * qs);
+    Phi = asin (0.5 * qs);
     if (Te < EPSILON)
       return Phi;
     i = N_ITER;
@@ -104,8 +104,8 @@ function pj_aea_init(P, phi1, phi2) {
       cospi = cos(Phi);
       con = Te * sinpi;
       com = 1 - con * con;
-      dphi = .5 * com * com / cospi * (qs / Tone_es -
-         sinpi / com + .5 / Te * log ((1 - con) / (1 + con)));
+      dphi = 0.5 * com * com / cospi * (qs / Tone_es -
+         sinpi / com + 0.5 / Te * log ((1 - con) / (1 + con)));
       Phi += dphi;
     } while (fabs(dphi) > TOL && --i);
     return i ? Phi : HUGE_VAL;

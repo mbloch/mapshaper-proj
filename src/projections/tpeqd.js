@@ -24,16 +24,16 @@ function pj_tpeqd(P) {
   sc = sp1 * cp2;
   ccs = cp1 * cp2 * sin(dlam2);
   z02 = aacos(sp1 * sp2 + cp1 * cp2 * cos(dlam2));
-  hz0 = .5 * z02;
+  hz0 = 0.5 * z02;
   A12 = atan2(cp2 * sin(dlam2),
     cp1 * sp2 - sp1 * cp2 * cos(dlam2));
   ca = cos(pp = aasin(cp1 * sin(A12)));
   sa = sin(pp);
   lamp = adjlon(atan2(cp1 * cos(A12), sp1) - hz0);
-  dlam2 *= .5;
+  dlam2 *= 0.5;
   lamc = M_HALFPI - atan2(sin(A12) * sp1, cos(A12)) - dlam2;
   thz0 = tan (hz0);
-  rhshz0 = .5 / sin(hz0);
+  rhshz0 = 0.5 / sin(hz0);
   r2z0 = 0.5 / z02;
   z02 *= z02;
 

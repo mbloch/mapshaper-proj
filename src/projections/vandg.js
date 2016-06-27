@@ -5,9 +5,9 @@ pj_add(pj_vandg4, 'vandg4', 'van der Grinten IV', '\n\tMisc Sph, no inv.');
 
 function pj_vandg(P) {
   var TOL = 1.e-10,
-      THIRD = .33333333333333333333,
-      TWO_THRD = .66666666666666666666,
-      C2_27 = .07407407407407407407,
+      THIRD = 0.33333333333333333333,
+      TWO_THRD = 0.66666666666666666666,
+      C2_27 = 0.07407407407407407407,
       PI4_3 = 4.18879020478639098458,
       PISQ = 9.86960440108935861869,
       TPISQ = 19.73920880217871723738,
@@ -27,10 +27,10 @@ function pj_vandg(P) {
       xy.y = 0.;
     } else if (fabs(lp.lam) <= TOL || fabs(p2 - 1.) < TOL) {
       xy.x = 0.;
-      xy.y = M_PI * tan(.5 * asin(p2));
+      xy.y = M_PI * tan(0.5 * asin(p2));
       if (lp.phi < 0.) xy.y = -xy.y;
     } else {
-      al = .5 * fabs(M_PI / lp.lam - lp.lam / M_PI);
+      al = 0.5 * fabs(M_PI / lp.lam - lp.lam / M_PI);
       al2 = al * al;
       g = sqrt(1. - p2 * p2);
       g = g / (p2 + g - 1.);
@@ -57,7 +57,7 @@ function pj_vandg(P) {
       lp.phi = 0.;
       t = x2 * x2 + TPISQ * (x2 + HPISQ);
       lp.lam = fabs(xy.x) <= TOL ? 0. :
-         .5 * (x2 - PISQ + sqrt(t)) / xy.x;
+         0.5 * (x2 - PISQ + sqrt(t)) / xy.x;
       return (lp);
     }
     y2 = xy.y * xy.y;
@@ -76,7 +76,7 @@ function pj_vandg(P) {
       if (xy.y < 0.) lp.phi = -lp.phi;
       t = r2 + TPISQ * (x2 - y2 + HPISQ);
       lp.lam = fabs(xy.x) <= TOL ? 0. :
-         .5 * (r - PISQ + (t <= 0. ? 0. : sqrt(t))) / xy.x;
+         0.5 * (r - PISQ + (t <= 0. ? 0. : sqrt(t))) / xy.x;
     } else
         i_error();
   }

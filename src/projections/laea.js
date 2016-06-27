@@ -22,7 +22,7 @@ function pj_laea(P) {
   if (P.es) {
       P.e = sqrt(P.es);
       qp = pj_qsfn(1., P.e, P.one_es);
-      mmf = .5 / (1. - P.es);
+      mmf = 0.5 / (1. - P.es);
       apa = pj_authset(P.es);
       switch (mode) {
         case N_POLE:
@@ -30,12 +30,12 @@ function pj_laea(P) {
           dd = 1.;
           break;
         case EQUIT:
-          dd = 1. / (rq = sqrt(.5 * qp));
+          dd = 1. / (rq = sqrt(0.5 * qp));
           xmf = 1.;
-          ymf = .5 * qp;
+          ymf = 0.5 * qp;
           break;
         case OBLIQ:
-          rq = sqrt(.5 * qp);
+          rq = sqrt(0.5 * qp);
           sinphi = sin(P.phi0);
           sinb1 = pj_qsfn(sinphi, P.e, P.one_es) / qp;
           cosb1 = sqrt(1. - sinb1 * sinb1);
@@ -124,7 +124,7 @@ function pj_laea(P) {
             lp.phi = P.phi0;
             return lp;
         }
-        sCe = 2. * asin(.5 * rho / rq);
+        sCe = 2. * asin(0.5 * rho / rq);
         cCe = cos(sCe);
         sCe = sin(sCe);
         xy.x *= sCe;
@@ -178,7 +178,7 @@ function pj_laea(P) {
         coslam = -coslam;
       case S_POLE:
         if (fabs(lp.phi + P.phi0) < EPS10) f_error();
-        xy.y = M_FORTPI - lp.phi * .5;
+        xy.y = M_FORTPI - lp.phi * 0.5;
         xy.y = 2. * (mode == S_POLE ? cos(xy.y) : sin(xy.y));
         xy.x = xy.y * sin(lp.lam);
         xy.y *= coslam;
@@ -190,7 +190,7 @@ function pj_laea(P) {
     var cosz=0.0, rh, sinz=0.0;
 
     rh = hypot(xy.x, xy.y);
-    if ((lp.phi = rh * .5 ) > 1.) i_error();
+    if ((lp.phi = rh * 0.5 ) > 1.) i_error();
     lp.phi = 2. * asin(lp.phi);
     if (mode == OBLIQ || mode == EQUIT) {
         sinz = sin(lp.phi);

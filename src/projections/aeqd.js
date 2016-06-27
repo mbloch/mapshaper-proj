@@ -192,7 +192,7 @@ function pj_aeqd(P) {
     t = 1. / sqrt(1. - P.es * sinphi * sinphi);
     xy.x = lp.lam * cosphi * t;
     xy.y = pj_mlfn(lp.phi, sinphi, cosphi, en) - M1 +
-        .5 * lp.lam * lp.lam * cosphi * sinphi * t;
+        0.5 * lp.lam * lp.lam * cosphi * sinphi * t;
   }
 
   function e_guam_inv(xy, lp) {

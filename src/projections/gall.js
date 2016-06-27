@@ -12,7 +12,7 @@ function pj_gall(P) {
 
   function s_fwd(lp, xy) {
     xy.x = XF * lp.lam;
-    xy.y = YF * tan(.5 * lp.phi);
+    xy.y = YF * tan(0.5 * lp.phi);
   }
 
   function s_inv(xy, lp) {
