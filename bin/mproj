@@ -70,7 +70,8 @@ function get_proj_function(P, opts) {
   var decimals = opts.w || opts.W ? parseInt(opts.w || opts.W) : 3;
   var fmtLat = proj.internal.get_rtodms(decimals, !!opts.W, 'N', 'S');
   var fmtLon = proj.internal.get_rtodms(decimals, !!opts.W, 'E', 'W');
-  var fmtNum = cmd.get_dfmt(opts.f);
+  var defFmt = P2.is_latlong ? '%.3f' : '%.2f';
+  var fmtNum = cmd.get_dfmt(opts.f || defFmt);
   var inverse = !!opts.I;
   var errorLine = opts.e || '*\t*';
 

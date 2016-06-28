@@ -9,6 +9,11 @@ exports.aboutEqual = function(a, b, tolerance) {
   }
 };
 
+// for compatibility with proj4js tests
+exports.closeTo = function(a, b, tolerance, str) {
+  exports.aboutEqual(a, b, tolerance);
+};
+
 exports.compareXYZ = function(a, b, tol) {
   tol = tol || 1e-12;
   if (!(exports.isAboutEqual(a.x, b.x, tol) && exports.isAboutEqual(a.y, b.y, tol) &&
@@ -23,13 +28,13 @@ exports.isAboutEqual = function(a, b, tolerance) {
 };
 
 
-exports.test_cs2cs = function(str, tol) {
+exports.test_cs2cs = function(str) {
   var cs2cs = require("../bin/mcs2cs");
   var test = {
     values: function(astr, bstr) {
       it (str, function() {
         var c = cs2cs(str)(astr);
-        assert(c, bstr);
+        assert.equal(c, bstr);
       })
       return test;
     }
