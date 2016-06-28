@@ -9,19 +9,21 @@ var opts = require('./lib/parse_args.js')()
 var fs = require('fs');
 var _ = require('underscore');
 var path = require('path');
-var deps;
+var deps, ofile;
 
 if (opts._.length > 0) {
   deps = getRequestedDeps(opts._[0].split(','));
+  ofile = "mproj-custom.js";
 } else {
   deps = getAllDeps();
+  ofile = "mproj.js";
 }
 
 require("catty")({follow: !!opts.f})
   .addLibrary("src")
   .addLibrary("node_modules/geographiclib/src")
   .addDeps(deps)
-  .cat("src/proj.js", "dist/mproj.js");
+  .cat("src/proj.js", "dist/" + ofile);
 
 function getRequestedDeps(projs) {
   var index = {};
