@@ -115,7 +115,6 @@ function pj_etmerc(P) {
         xy.y  = Qn * Cn + Zb;  /* Northing */
         xy.x  = Qn * Ce;       /* Easting  */
     } else {
-      // TODO: error code
       xy.x = xy.y = HUGE_VAL;
     }
   }
@@ -144,7 +143,6 @@ function pj_etmerc(P) {
       lp.lam = Ce;
     }
     else {
-      // TODO: error code
       lp.phi = lp.lam = HUGE_VAL;
     }
   }

@@ -21,8 +21,8 @@ function pj_transform_point(srcdefn, dstdefn, p) {
   p[0] = xx[0];
   p[1] = yy[0];
   if (z) p[2] = zz[0];
-  if (ctx.last_errno) {
-    error(ctx.last_errno); // throw error
+  if (ctx.last_errno || p[0] == HUGE_VAL) {
+    error(ctx.last_errno); // throw error if translation fails
   }
 }
 
@@ -240,7 +240,7 @@ function pj_datum_transform(srcdefn, dstdefn, xx, yy, zz) {
   /*      We cannot do any meaningful datum transformation if either      */
   /*      the source or destination are of an unknown datum type          */
   /*      (ie. only a +ellps declaration, no +datum).  This is new        */
-  /*      behavior for PROJ 4.6.0.                                        */
+  /*      behavior for PROJ 4.6.0                                        */
   if (srcdefn.datum_type == PJD_UNKNOWN || dstdefn.datum_type == PJD_UNKNOWN) {
     return;
   }
