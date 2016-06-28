@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var opts = require('./lib/parse_args.js')()
+var opts = require('./src/cli/parse_args.js')()
   .option('f', {
     type: 'flag'
   })

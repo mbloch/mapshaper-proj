@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var proj = require('../');
-var cmd = require('../lib/cmd_common.js');
+var cmd = require('../src/cli/cli_lib.js');
 
 // if executing as a script, init and run
 if (process.argv[1].indexOf('mcs2cs') > -1) {

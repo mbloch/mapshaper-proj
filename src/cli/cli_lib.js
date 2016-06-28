@@ -1,6 +1,6 @@
-// these functions are shared by scripts in the bin/ directory
+// This Node module is used by scripts in the bin/ directory
 
-var proj = require('../');
+var proj = require('../../');
 var api = module.exports = {};
 
 api.get_shared_options = function() {
@@ -75,7 +75,7 @@ api.read_lines = function(files) {
 
 api.get_dfmt = function(fmt) {
   var m = /%\.(1?[0-9])f/.exec(fmt || '');
-  var decimals = m ? +m[1] : 2;
+  var decimals = m ? +m[1] : 3;
   return function(num) {
     var str = num.toFixed(decimals); // round
     // str = +String(str); // remove trailing zeros
