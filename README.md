@@ -1,8 +1,8 @@
 # mapshaper-proj
 
-This software is a JavaScript port of the Proj.4 map projection library, which is used by QGIS, GDAL and other popular geospatial software packages. It is intended to be used by [mapshaper](https://github.com/mbloch/mapshaper). Naturally, anyone is welcome to use it and help improve it.
+This software is a JavaScript port of the Proj.4 map projection library, which is used by QGIS, GDAL and other popular geospatial software packages. It is intended to be used by [mapshaper](https://github.com/mbloch/mapshaper). Naturally, anyone is welcome to use it and improve it.
 
-Why create another Proj.4 port, when there is already [proj4js](https://github.com/proj4js/proj4js)? Unlike proj4js, this port is a very literal translation to JavaScript. This software's output should be more consistent with Proj.4, which has become a de facto standard. Also, staying up-to-date with future changes to Proj.4 should be relatively simple.
+Why create another Proj.4 port, when there is already [proj4js](https://github.com/proj4js/proj4js)? Unlike proj4js, this port is a very literal translation to JavaScript, so staying up-to-date with future changes to Proj.4 should be relatively simple. This software's output should also be more consistent with Proj.4's output.
 
 
 #### Missing features
@@ -56,7 +56,7 @@ var xy = proj.pj_fwd({lam: <longitude in radians>, phi: <latitude in radians>}, 
 var lp = proj.pj_inv({x: <easting in meters>, y: <northing in meters>}, P);
 
 # transform arrays of coordinates from one coordinate reference system to another
-proj.pj_transform(<source defn>, <dest defn>, <x array>, <y array>[, <z array>]);
+proj.pj_transform(<source crs>, <dest crs>, <x array>, <y array>[, <z array>]);
 ```
 
 #### Error handling
@@ -65,8 +65,8 @@ The x and y coordinates of unprojectable points are set to `Infinity`. Other err
 
 ## Building
 
-mapshaper-proj uses the (old-fashioned) technique of concatenating source files and wrapping them in a function to create a single module with a shared scope. This method allows for global variables that are invisible outside of the program, making porting from the original C much simpler.
+mapshaper-proj uses the (old-fashioned) technique of concatenating source files and wrapping them in a function to create a  module with a shared scope. This method allows for global variables that are invisible outside of the program, making porting from the original C much simpler.
 
 Running `build` creates a build containing all supported projections in the `dist/` directory.
 
-Running `build merc,lcc,aea` creates a build containing only the listed projections. Customize the comma-separated list with the projections that you want. Run `mproj -l` to see a list of all supported projections.
+Running `build merc,lcc,aea` creates a build containing only the listed projections. You can customize the comma-separated list to include only the projections that you want. Run `mproj -l` to see a list of all supported projections.
