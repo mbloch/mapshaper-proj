@@ -70,7 +70,7 @@ function get_proj_function(P, opts) {
   var decimals = opts.w || opts.W ? parseInt(opts.w || opts.W) : 3;
   var fmtLat = proj.internal.get_rtodms(decimals, !!opts.W, 'N', 'S');
   var fmtLon = proj.internal.get_rtodms(decimals, !!opts.W, 'E', 'W');
-  var defFmt = P2.is_latlong ? '%.3f' : '%.2f';
+  var defFmt = P.is_latlong ? '%.3f' : '%.2f';
   var fmtNum = cmd.get_dfmt(opts.f || defFmt);
   var inverse = !!opts.I;
   var errorLine = opts.e || '*\t*';
@@ -108,7 +108,7 @@ function get_proj_function(P, opts) {
       }
     }
     if (err) {
-      output = errorLine;
+      oline = errorLine;
     } else {
       if (opts.s) {
         output = [output[1], output[0]];

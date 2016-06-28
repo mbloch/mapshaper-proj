@@ -21,7 +21,8 @@ function dmstod(str) {
     d = -d;
   }
   if (isNaN(d)) {
-    e_error(-16);
+    pj_ctx_set_errno(-16);
+    d = HUGE_VAL;
   }
   return d;
 }

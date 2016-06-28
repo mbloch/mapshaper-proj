@@ -2,9 +2,10 @@
 
 var proj = require('../');
 var cmd = require('../src/cli/cli_lib.js');
+var cli_mode = process.argv[1].indexOf('mcs2cs') > -1;
 
 // if executing as a script, init and run
-if (process.argv[1].indexOf('mcs2cs') > -1) {
+if (cli_mode) {
   try {
     console.log(init(process.argv.slice(2))());
   } catch(e) {
@@ -13,7 +14,7 @@ if (process.argv[1].indexOf('mcs2cs') > -1) {
   }
 }
 
-// you can also require this file as a node module (e.g. for testing)
+// this file can be used as a node module (e.g. for testing)
 module.exports = init;
 
 // @params string or array
@@ -76,6 +77,13 @@ function init(params) {
   }
 }
 
+function print_error(msg, line) {
+  if (cli_mode) {
+    // TODO: match cs2cs output more closely
+    console.error('line ' + line + ' error: ' + msg);
+  }
+}
+
 function get_proj_function(P1, P2, opts) {
   var decimals = opts.w || opts.W ? parseInt(opts.w || opts.W) : 3;
   var fmtLat = proj.internal.get_dtodms(decimals, !!opts.W, 'N', 'S');
@@ -112,8 +120,7 @@ function get_proj_function(P1, P2, opts) {
       }
       oline = output.join('\t');
     } catch(e) {
-      // TODO: match cs2cs output more closely; inhibit msg if loaded as module
-      console.error('line ' + (i + 1) + ' error: ' + e.message);
+      print_error(e.message, i + 1);
       oline = errorLine;
     }
     oline += ' ' + fmtNum(coords[2]);

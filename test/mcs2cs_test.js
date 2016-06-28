@@ -4,6 +4,20 @@ var assert = require('assert'),
     cs2cs = require('../bin/mcs2cs');
 
 describe('mcs2cs', function () {
+
+  it ('non-numeric input (fwd)', function() {
+    var expect = '*\t* 0.000';
+    var output = cs2cs('+proj=merc +datum=WGS84')('5dW S');
+    assert.equal(output, expect);
+  })
+
+  it ('non-numeric input (inv)', function() {
+    var expect = '*\t* 0.00';
+    var output = cs2cs('-I +proj=merc +datum=WGS84')('40000 S');
+    assert.equal(output, expect);
+  })
+
+
   it ('dest +axis=wsu', function() {
     var expect = '556597.45\t553583.85 0.00';
     var output = cs2cs('+proj=longlat +datum=WGS84 +to +proj=merc +datum=WGS84 +axis=wsu')('5W 5S');

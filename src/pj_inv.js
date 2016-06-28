@@ -31,7 +31,7 @@ function pj_inv(xy, P) {
       lp.lam = lp.phi = HUGE_VAL;
     }
   }
-  if (ctx.last_errno) {
+  if (ctx.last_errno || isNaN(lp.lam) || isNaN(lp.phi)) {
     lp.lam = lp.phi = HUGE_VAL;
   }
   return lp;
