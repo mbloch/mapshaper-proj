@@ -2,10 +2,10 @@
 //    proj4(fromProjection[, toProjection, coordinates])
 
 function proj4js(arg1, arg2, arg3) {
-  var oneArg = typeof arg !== 'string';
+  var oneArg = typeof arg2 !== 'string';
   var p, fromStr, toStr, P1, P2, transform;
   if (oneArg) {
-    fromStr = '+datum=WGS84 +proj=lonlat';
+    fromStr = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'; // '+datum=WGS84 +proj=lonlat';
     toStr = arg1;
     p = arg2;
   } else {
@@ -22,6 +22,23 @@ function proj4js(arg1, arg2, arg3) {
     return {forward: transform, inverse: get_proj4js_transform(P2, P1)};
   }
 }
+
+proj4js.WGS84 = '+proj=longlat +datum=WGS84'; // for compatibility with proj4js tests
+
+// for compatibility with proj4js tests
+proj4js.toPoint = function(array) {
+  var out = {
+    x: array[0],
+    y: array[1]
+  };
+  if (array.length>2) {
+    out.z = array[2];
+  }
+  if (array.length>3) {
+    out.m = array[3];
+  }
+  return out;
+};
 
 function get_proj4js_transform(P1, P2) {
   return function(p) {

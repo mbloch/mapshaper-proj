@@ -26,8 +26,8 @@ var pj_units = [
 ];
 
 function find_units(id) {
-  var defn = pj_units.reduce(function(memo, arr) {
-    return id === arr[0] ? arr : memo;
+  var arr = pj_units.reduce(function(memo, defn) {
+    return id === defn[0] ? defn : memo;
   }, null);
-  return defn ? {id: arr[0], to_meter: arr[1], name: arr[2]} : null;
+  return arr ? {id: arr[0], to_meter: arr[1], name: arr[2]} : null;
 }
