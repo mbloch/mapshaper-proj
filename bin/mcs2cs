@@ -40,11 +40,8 @@ function init(params) {
       } else {
         P2 = proj.pj_init(projs[1]);
       }
-      if (opts.I) {
-        translateLine = get_proj_function(P2, P1, opts);
-      } else {
-        translateLine = get_proj_function(P1, P2, opts);
-      }
+      translateLine = get_line_converter(P1, P2, opts); // get_proj_function(P1, P2, opts);
+
     } catch(e) {
       if (e.name == 'PJError') {
         throw new Error('projection initialization failure\ncause: ' + e.message);
@@ -52,81 +49,39 @@ function init(params) {
         throw e;
       }
     }
-    return project;
+    return cmd.get_input_transform(translateLine, opts);
   }
 
   throw new Error('usage: mcs2cs [ -eEfIlrstwW [args] ] [ +opts[=arg] ] [ files ]');
-
-  function project(input) {
-    var linesOut = [],
-        linesIn, line, i;
-    if (!input) {
-      linesIn = cmd.read_lines(files);
-    } else {
-      linesIn = input.trim().split('\n');
-    }
-    for (i=0; i<linesIn.length; i++) {
-      line = linesIn[i];
-      if (line[0] == commentChar) continue;
-      line = translateLine(line, i);
-      if (line) {
-        linesOut.push(line);
-      }
-    }
-    return linesOut.join('\n');
-  }
 }
 
-function print_error(msg, line) {
+function print_error(msg, lineNo) {
   if (cli_mode) {
     // TODO: match cs2cs output more closely
-    console.error('line ' + line + ' error: ' + msg);
+    console.error('line ' + lineNo + ' error: ' + msg);
   }
 }
 
-function get_proj_function(P1, P2, opts) {
-  var decimals = opts.w || opts.W ? parseInt(opts.w || opts.W) : 3;
-  var fmtLat = proj.internal.get_dtodms(decimals, !!opts.W, 'N', 'S');
-  var fmtLon = proj.internal.get_dtodms(decimals, !!opts.W, 'E', 'W');
-  var defFmt = P2.is_latlong ? '%.3f' : '%.2f';
-  var fmtNum = cmd.get_dfmt(opts.f || defFmt);
-  var errorLine = opts.e || '*\t*';
-
+function get_line_converter(P1, P2, opts) {
+  var src, dst;
+  if (opts.I) {
+    src = P2;
+    dst = P1;
+  } else {
+    src = P1;
+    dst = P2;
+  }
+  var parseLine = cmd.get_line_parser(src.is_latlong, opts);
+  var formatLine = cmd.get_line_formatter(dst.is_latlong, opts);
   return function(line, i) {
-    var input = line.trim().split(/[\s]+/);
-    var coords = [];
-    var output, oline;
-    if (input.length < 2) return null;
-    if (opts.r) {
-      input = [input[1], input[0]];
-    }
-    if (P1.is_latlong) {
-      coords[0] = proj.internal.dmstod(input[0]);
-      coords[1] = proj.internal.dmstod(input[1]);
-    } else {
-      coords[0] = +input[0];
-      coords[1] = +input[1];
-    }
-    coords[2] = input.length > 2 ? +input[2] : 0;
+    var coords, oline;
     try {
-      proj.pj_transform_point(P1, P2, coords);
-      if (P2.is_latlong) {
-        output = [fmtLon(coords[0]), fmtLat(coords[1])];
-      } else {
-        output = [fmtNum(coords[0]), fmtNum(coords[1])];
-      }
-      if (opts.s) {
-        output = [output[1], output[0]];
-      }
-      oline = output.join('\t');
+      coords = parseLine(line);
+      proj.pj_transform_point(src, dst, coords);
     } catch(e) {
       print_error(e.message, i + 1);
-      oline = errorLine;
+      coords = [Infinity, Infinity, 0];
     }
-    oline += ' ' + fmtNum(coords[2]);
-    if (opts.E) {
-      oline = line + '\t' + oline;
-    }
-    return oline;
-  };
+    return formatLine(coords);
+  }
 }

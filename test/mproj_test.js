@@ -23,6 +23,12 @@ describe('mproj', function () {
     assert.equal(output, expect);
   })
 
+  it ('-If (decimal degree output)', function() {
+    var expect = '-5.000\t-5.000';
+    var output = proj('-I -f %.3f +proj=merc +datum=WGS84')('-556597.45\t-553583.85');
+    assert.equal(output, expect);
+  })
+
   it ('-f %.6f', function() {
     var expect = '-556597.453966\t-553583.846816';
     var output = proj('-f %.6f +proj=merc +datum=WGS84')('5dW 5dS');

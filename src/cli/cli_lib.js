@@ -3,6 +3,87 @@
 var proj = require('../../');
 var api = module.exports = {};
 
+api.get_input_transform = function(translateLine, opts) {
+  var commentChar = opts.t || '#';
+  var files = opts._.length > 0 ? opts._ : null;
+
+  return function(input) {
+    var linesOut = [],
+        linesIn, line, i;
+
+    if (!input) {
+      linesIn = api.read_lines(files);
+    } else {
+      linesIn = input.trim().split('\n');
+    }
+    for (i=0; i<linesIn.length; i++) {
+      line = linesIn[i];
+      if (line[0] == commentChar) continue;
+      line = translateLine(line, i);
+      if (line) {
+        if (opts.E) {
+          line = linesIn[i] + '\t' + line;
+        }
+        linesOut.push(line);
+      }
+    }
+    return linesOut.join('\n');
+  };
+};
+
+api.get_line_parser = function(is_latlong, opts) {
+  var parseDMS = proj.internal.dmstod;
+  return function(line) {
+    var input = line.trim().split(/[\s]+/),
+        coords;
+    if (input.length < 2) return null;
+    if (opts.r) {
+      input = [input[1], input[0]];
+    }
+    if (is_latlong) {
+      coords = [parseDMS(input[0]), parseDMS(input[1])];
+    } else {
+      coords = [+input[0], +input[1]];
+    }
+    coords[2] = input.length > 2 ? +input[2] : 0;
+    return coords;
+  };
+};
+
+api.get_line_formatter = function(is_latlong, opts) {
+  var decimals = opts.w || opts.W ? parseInt(opts.w || opts.W) : 3;
+  var fmtLat = proj.internal.get_dtodms(decimals, !!opts.W, 'N', 'S');
+  var fmtLon = proj.internal.get_dtodms(decimals, !!opts.W, 'E', 'W');
+  var defFmt = is_latlong ? '%.3f' : '%.2f';
+  var fmtNum = api.get_dfmt(opts.f || defFmt);
+
+  if (opts.f) {
+    // decimal degree output if -f is set
+    fmtLat = fmtLon = fmtNum;
+  }
+
+  return function(coords) {
+    var oline, output;
+    if (coords[0] == Infinity) {
+      oline = opts.e || '*\t*';
+    } else {
+      if (is_latlong) {
+        output = [fmtLon(coords[0]), fmtLat(coords[1])];
+      } else {
+        output = [fmtNum(coords[0]), fmtNum(coords[1])];
+      }
+      if (opts.s) {
+        output = [output[1], output[0]];
+      }
+      oline = output.join('\t');
+    }
+    if (coords.length > 2) {
+      oline += ' ' + fmtNum(coords[2]);
+    }
+    return oline;
+  };
+};
+
 api.get_shared_options = function() {
   return require('./parse_args.js')()
     .option('I', {
@@ -123,4 +204,3 @@ function get_proj_info(name, ext) {
     return str;
   }).join('\n');
 }
-

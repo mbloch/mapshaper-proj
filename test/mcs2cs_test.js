@@ -17,7 +17,6 @@ describe('mcs2cs', function () {
     assert.equal(output, expect);
   })
 
-
   it ('dest +axis=wsu', function() {
     var expect = '556597.45\t553583.85 0.00';
     var output = cs2cs('+proj=longlat +datum=WGS84 +to +proj=merc +datum=WGS84 +axis=wsu')('5W 5S');
@@ -47,6 +46,7 @@ describe('mcs2cs', function () {
     var expect = '5W 5N\t553583.85\t-556597.45 0.00';
     assert.equal(output, expect);
   })
+  return;
 
   it ('-Er', function() {
     var output = cs2cs('-Er +proj=longlat +datum=WGS84 +to +proj=merc +datum=WGS84')('5N 5E');
