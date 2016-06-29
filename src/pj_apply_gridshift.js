@@ -5,9 +5,6 @@
 // populated in the coordinate system definition we set it up now.
 function pj_apply_gridshift_2(defn, inverse, xx, yy, zz) {
   fatal("grishift not implemented");
-  if (!defn.gridlist) {
-    defn.gridlist = pj_gridlist_from_nadgrids(pj_param(defn.params, "snadgrids");
-  }
 }
 
 // public API function of Proj.4

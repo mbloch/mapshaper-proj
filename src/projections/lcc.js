@@ -75,8 +75,7 @@ function pj_lcc(P) {
       }
       if (ellips) {
         lp.phi = pj_phi2(pow(rho / c, 1/n), P.e);
-        if (lp.phi == HUGE_VAL)
-            I_ERROR;
+        if (lp.phi == HUGE_VAL) i_error();
       } else
         lp.phi = 2 * atan(pow(c / rho, 1/n)) - M_HALFPI;
       lp.lam = atan2(x, y) / n;

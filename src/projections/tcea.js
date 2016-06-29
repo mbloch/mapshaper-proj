@@ -7,7 +7,7 @@ function pj_tcea(P) {
 
   function s_fwd(lp, xy) {
     xy.x = cos (lp.phi) * sin (lp.lam) / P.k0;
-    xy.y = P.k0 * (atan2 (tan (lp.phi), cos (lp.lam)) - P.phi0)
+    xy.y = P.k0 * (atan2 (tan (lp.phi), cos (lp.lam)) - P.phi0);
   }
 
   function s_inv(xy, lp) {

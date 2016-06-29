@@ -20,10 +20,8 @@ function pj_omerc(P) {
   if (alp || gam) {
     lamc = pj_param(P.params, "rlonc");
     no_off =
-      /* For libproj4 compatability */
-      pj_param(P.params, "tno_off")
-      /* for backward compatibility */
-      || pj_param(P.params, "tno_uoff");
+      /* For libproj4 compatability ... for backward compatibility */
+      pj_param(P.params, "tno_off") || pj_param(P.params, "tno_uoff");
     if (no_off) {
       /* Mark the parameter as used, so that the pj_get_def() return them */
       pj_param(P.params, "sno_uoff");

@@ -50,8 +50,8 @@ function pj_chamb(P) {
     }
     if (i < 3) { /* current point at control point */
       x = c[i].p.x;
-      y = c[i].p.y
-    } else { /* point mean of intersepts */
+      y = c[i].p.y;
+    } else { /* point mean of intercepts */
       x = x0;
       y = y0;
       for (i = 0; i < 3; ++i) {

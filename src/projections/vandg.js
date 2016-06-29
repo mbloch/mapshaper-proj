@@ -137,8 +137,7 @@ function pj_vandg4(P) {
     } else {
       bt = fabs(M_TWO_D_PI * lp.phi);
       bt2 = bt * bt;
-      ct = 0.5 * (bt * (8 - bt * (2 + bt2)) - 5)
-          / (bt2 * (bt - 1));
+      ct = 0.5 * (bt * (8 - bt * (2 + bt2)) - 5) / (bt2 * (bt - 1));
       ct2 = ct * ct;
       dt = M_TWO_D_PI * lp.lam;
       dt = dt + 1 / dt;
@@ -156,6 +155,6 @@ function pj_vandg4(P) {
       xy.y = M_HALFPI * sqrt(1 + dt * fabs(x1) - x1 * x1);
       if (lp.lam < 0) xy.x = -xy.x;
       if (lp.phi < 0) xy.y = -xy.y;
-    };
-  }
+    }
+  };
 }

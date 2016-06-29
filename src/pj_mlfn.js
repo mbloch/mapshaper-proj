@@ -24,8 +24,7 @@ function pj_enfn(es) {
 function pj_mlfn(phi, sphi, cphi, en) {
   cphi *= sphi;
   sphi *= sphi;
-  return(en[0] * phi - cphi * (en[1] + sphi*(en[2]
-    + sphi*(en[3] + sphi*en[4]))));
+  return (en[0] * phi - cphi * (en[1] + sphi*(en[2] + sphi*(en[3] + sphi*en[4]))));
 }
 
 function pj_inv_mlfn(arg, es, en) {

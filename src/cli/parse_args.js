@@ -14,7 +14,7 @@ function Parser() {
   this.option = function(name, obj) {
     defs[name] = obj;
     return this;
-  }
+  };
 
   this.parse = function(params) {
     if (typeof params == 'string') {

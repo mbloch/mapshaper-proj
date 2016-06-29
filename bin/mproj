@@ -32,7 +32,7 @@ function init(params) {
       P = proj.pj_init(opts.proj4);
       translateLine = get_line_converter(P, opts);
     } catch(e) {
-      if (e.name == 'PJError') {
+      if (e.name == 'ProjError') {
         throw new Error('projection initialization failure\ncause: ' + e.message);
       } else {
         throw e;

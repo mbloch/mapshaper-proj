@@ -47,13 +47,13 @@ function e_error(code) {
 }
 
 function fatal(msg, code) {
-  throw new PJError(msg, code);
+  throw new ProjError(msg, code);
   // process.exit(1);
 }
 
-function PJError(msg, code) {
+function ProjError(msg, code) {
   var err = new Error(msg);
-  err.name = 'PJError';
+  err.name = 'ProjError';
   err.code = code || 0;
   return err;
 }

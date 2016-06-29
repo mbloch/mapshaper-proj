@@ -185,7 +185,7 @@ function get_units_info() {
 function get_datum_info() {
   return 'datum\tellipse\tdefinition\n' +
     proj.internal.pj_datums.map(function(arr) {
-      return arr[0] + '\t' + arr[2] + '\t' + arr[1]
+      return arr[0] + '\t' + arr[2] + '\t' + arr[1];
     }).join('\n');
 }
 

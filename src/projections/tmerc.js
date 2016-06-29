@@ -45,14 +45,14 @@ function pj_tmerc(P) {
     n = esp * cosphi * cosphi;
     xy.x = P.k0 * al * (FC1 +
         FC3 * als * (1 - t + n +
-        FC5 * als * (5 + t * (t - 18) + n * (14 - 58 * t)
-        + FC7 * als * (61 + t * ( t * (179 - t) - 479 ) )
+        FC5 * als * (5 + t * (t - 18) + n * (14 - 58 * t) +
+        FC7 * als * (61 + t * ( t * (179 - t) - 479 ) )
         )));
     xy.y = P.k0 * (pj_mlfn(lp.phi, sinphi, cosphi, en) - ml0 +
         sinphi * al * lp.lam * FC2 * ( 1 +
         FC4 * als * (5 - t + n * (9 + 4 * n) +
-        FC6 * als * (61 + t * (t - 58) + n * (270 - 330 * t)
-        + FC8 * als * (1385 + t * ( t * (543 - t) - 3111) )
+        FC6 * als * (61 + t * (t - 58) + n * (270 - 330 * t) +
+        FC8 * als * (1385 + t * ( t * (543 - t) - 3111) )
         ))));
   }
 
@@ -107,15 +107,14 @@ function pj_tmerc(P) {
       t *= t;
       ds = d * d;
       lp.phi -= (con * ds / (1-P.es)) * FC2 * (1 -
-          ds * FC4 * (5 + t * (3 - 9 *  n) + n * (1 - 4 * n) -
-          ds * FC6 * (61 + t * (90 - 252 * n + 45 * t) + 46 * n
-          - ds * FC8 * (1385 + t * (3633 + t * (4095 + 1574 * t)))
-          )));
-      lp.lam = d * (FC1 -
-          ds * FC3 * (1 + 2 * t + n -
-          ds * FC5 * (5 + t * (28 + 24*t + 8*n) + 6 * n
-         - ds * FC7 * (61 + t * (662 + t * (1320 + 720 * t)))
-      ))) / cosphi;
+        ds * FC4 * (5 + t * (3 - 9 *  n) + n * (1 - 4 * n) -
+        ds * FC6 * (61 + t * (90 - 252 * n + 45 * t) + 46 * n -
+        ds * FC8 * (1385 + t * (3633 + t * (4095 + 1574 * t)))
+        )));
+      lp.lam = d * (FC1 - ds * FC3 * (1 + 2 * t + n -
+        ds * FC5 * (5 + t * (28 + 24*t + 8*n) + 6 * n -
+        ds * FC7 * (61 + t * (662 + t * (1320 + 720 * t)))
+        ))) / cosphi;
     }
   }
 
