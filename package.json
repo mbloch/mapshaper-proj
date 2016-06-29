@@ -6,6 +6,8 @@
 	"author": "Matthew Bloch <masiyou@gmail.com>",
 	"license": "MIT",
 	"repository": {
+		"type": "git",
+		"url": "https://github.com/mbloch/mapshaper-proj"
 	},
 	"engines": {
 		"node": ">=0.12.0"
