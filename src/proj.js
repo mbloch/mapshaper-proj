@@ -41,4 +41,10 @@ api.internal = {
   RAD_TO_DEG: RAD_TO_DEG
 };
 
-module.exports = api;
+if (typeof define == 'function' && define.amd) {
+  define('mproj', api);
+} else if (typeof exports == 'object') {
+  module.exports = api;
+} else {
+  this.mproj = api;
+}

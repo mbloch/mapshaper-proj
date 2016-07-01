@@ -23,8 +23,9 @@
 	},
 	"devDependencies": {
 		"catty": "0.0.8",
-		"mocha": ">=2.1.0",
-		"proj4": "~2.3.14"
+		"mocha": "~2.5.0",
+		"proj4": "~2.3.14",
+		"underscore": "~1.7"
 	},
 	"bin": {
 		"mproj": "./bin/mproj",

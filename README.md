@@ -38,7 +38,7 @@ var obj = proj(<source definition>, <dest definition>);
 # WGS84 is assumed if a source definition is not given
 var obj = proj(<dest definition>);
 
-# a shortcut for translating for translating a single point
+# a shortcut for translating a single point
 # <point> is an [x, y] array or an object with x and y properties
 var xy = proj([<source definition>,] dest definition, <point>);
 ```
@@ -56,7 +56,7 @@ var P = proj.pj_init(<proj4 crs definition>);
 var xy = proj.pj_fwd({lam: <longitude in radians>, phi: <latitude in radians>}, P);
 var lp = proj.pj_inv({x: <easting in meters>, y: <northing in meters>}, P);
 
-# transform arrays of coordinates from one coordinate reference system to another
+# transform arrays of coordinates from one coordinate system to another
 proj.pj_transform(<source crs>, <dest crs>, <x array>, <y array>[, <z array>]);
 ```
 
