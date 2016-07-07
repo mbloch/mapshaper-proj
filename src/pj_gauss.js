@@ -9,7 +9,7 @@ function pj_gauss_ini(e, phi0) {
       sphi = sin(phi0),
       cphi = cos(phi0),
       rc = sqrt(1 - es) / (1 - es * sphi * sphi),
-      C = sqrt(1 + es * cphi * cphi / (1 - es)),
+      C = sqrt(1 + es * cphi * cphi * cphi * cphi / (1 - es)),
       chi = asin(sphi / C),
       ratexp = 0.5 * C * e,
       K = tan(0.5 * chi + M_FORTPI) / (pow(tan(0.5 * phi0 + M_FORTPI), C) *
