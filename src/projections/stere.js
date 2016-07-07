@@ -11,7 +11,7 @@ function pj_ups(P) {
   P.y0 = 2000000;
   P.lam0 = 0;
   if (!P.es) e_error(-34);
-  pj_stere(P, M_HALFPI);
+  pj_stere_init(P, M_HALFPI);
 }
 
 function pj_stere(P) {

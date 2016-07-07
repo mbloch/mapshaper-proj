@@ -13,10 +13,10 @@ function pj_omerc(P) {
   var no_rot;
 
   no_rot = pj_param(P.params, "tno_rot");
-    if ((alp = pj_param(P.params, "talpha")) != 0)
-    alpha_c = pj_param(P.params, "ralpha");
-    if ((gam = pj_param(P.params, "tgamma")) != 0)
-    gamma = pj_param(P.params, "rgamma");
+  if ((alp = pj_param(P.params, "talpha")) != 0)
+  alpha_c = pj_param(P.params, "ralpha");
+  if ((gam = pj_param(P.params, "tgamma")) != 0)
+  gamma = pj_param(P.params, "rgamma");
   if (alp || gam) {
     lamc = pj_param(P.params, "rlonc");
     no_off =

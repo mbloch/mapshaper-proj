@@ -11,8 +11,6 @@ Why create another Proj.4 port, when there is already [proj4js](https://github.c
 
 * No EPSG code support.
 
-* No support for parsing WTK strings.
-
 * Only about half of Proj.4's 130-odd projections have been ported.
 
 

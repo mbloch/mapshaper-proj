@@ -9,6 +9,13 @@ exports.aboutEqual = function(a, b, tolerance) {
   }
 };
 
+exports.closeToPoint = function(a, b, tolerance) {
+  if (!exports.isAboutEqual(a[0], b[0], tolerance) ||
+      !exports.isAboutEqual(a[1], b[1], tolerance)) {
+    assert.deepEqual(a, b);
+  }
+};
+
 // for compatibility with proj4js tests
 exports.closeTo = function(a, b, tolerance, str) {
   exports.aboutEqual(a, b, tolerance);
@@ -24,6 +31,7 @@ exports.compareXYZ = function(a, b, tol) {
 
 exports.isAboutEqual = function(a, b, tolerance) {
   tolerance = tolerance || 1e-12;
+  // console.log("diff:", Math.abs(a - b))
   return Math.abs(a - b) <= tolerance;
 };
 

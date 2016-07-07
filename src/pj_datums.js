@@ -4,6 +4,7 @@ var pj_datums = [
   ["WGS84", "towgs84=0,0,0", "WGS84", ""],
   ["GGRS87", "towgs84=-199.87,74.79,246.62", "GRS80", "Greek_Geodetic_Reference_System_1987"],
   ["NAD83", "towgs84=0,0,0", "GRS80", "North_American_Datum_1983"],
+  // nadgrids not supported; NAD27 will trigger an error
   ["NAD27", "nadgrids=@conus,@alaska,@ntv2_0.gsb,@ntv1_can.dat", "clrk66", "North_American_Datum_1927"],
   ["potsdam", "towgs84=598.1,73.7,418.2,0.202,0.045,-2.455,6.7", "bessel", "Potsdam Rauenberg 1950 DHDN"],
   ["carthage","towgs84=-263.0,6.0,431.0", "clrk80ign", "Carthage 1934 Tunisia"],

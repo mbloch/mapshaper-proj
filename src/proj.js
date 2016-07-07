@@ -10,6 +10,7 @@ pj_fwd
 pj_inv
 rtodms
 proj4js
+wkt_to_proj4
 */
 
 // Projections are inserted here by the build script
@@ -38,7 +39,9 @@ api.internal = {
   pj_units: pj_units,
   find_datum: find_datum,
   DEG_TO_RAD: DEG_TO_RAD,
-  RAD_TO_DEG: RAD_TO_DEG
+  RAD_TO_DEG: RAD_TO_DEG,
+  wkt_parse: wkt_parse,
+  wkt_to_proj4: wkt_to_proj4
 };
 
 if (typeof define == 'function' && define.amd) {
