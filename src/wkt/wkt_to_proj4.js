@@ -44,14 +44,13 @@ function wkt_convert_projection(obj) {
     wkt_error('projection not implemented: ' + obj.PROJECTION);
   }
 
+  // handle several special cases by matching PROJCS wkt name
   if (match = /UPS_(North|South)/i.exec(wktName)) {
-    // UPS
     projStr = '+proj=ups';
     if (match[1].toLowerCase() == 'south') {
       projStr += ' +south';
     }
   } else if (match = /UTM_zone_([1-9]{1,2})(N|S)/i.exec(wktName)) {
-    // UTM
     projStr = '+proj=utm +zone=' + match[1];
     if (match[2] == 'S') {
       projStr += ' +south';
@@ -69,6 +68,13 @@ function wkt_convert_projection(obj) {
   if (!geogStr) {
     geogStr = wkt_convert_geogcs(obj.GEOGCS);
   }
+
+  // special cases
+  if (projDefn.proj == 'vandg') {
+    // adding R_A param to match ogr2ogr and epsg (source: https://epsg.io/54029)
+    geogStr += ' +R_A';
+  }
+
   projStr += ' ' + geogStr;
 
   if (unitDefn.to_meter != 1) {

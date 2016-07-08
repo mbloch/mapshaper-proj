@@ -64,7 +64,7 @@ The x and y coordinates of unprojectable points are set to `Infinity`. Other err
 
 ## Building
 
-mapshaper-proj uses the (old-fashioned) technique of concatenating source files and wrapping them in a function to create a  module with a shared scope. This method allows for global variables that are invisible outside of the program, making porting from the original C much simpler.
+mapshaper-proj uses the (old-fashioned) technique of concatenating source files and wrapping them in a function to create a  module with a shared scope. This method allows for global variables that are invisible outside of the program, making porting from the original C much simpler than if we were to make each source file a separate module.
 
 Running `build` creates a build containing all supported projections in the `dist/` directory.
 

@@ -52,9 +52,11 @@ var wkt_projections = [
   // ['nell_h', ''],
   // ['nzmg', 'New_Zealand_Map_Grid'],
   ['nsper', 'Vertical_Near_Side_Perspective'],
-  ['omerc', 'Hotine_Oblique_Mercator'],
-  // ['', 'Hotine_Oblique_Mercator_Two_Point_Natural_Origin'], // omerc?
-  // ['', 'Hotine_Oblique_Mercator_Azimuth_Center'], // omerc?  // http://www.remotesensing.org/geotiff/proj_list/hotine_oblique_mercator.html
+  ['omerc', 'Hotine_Oblique_Mercator'], // A
+  ['omerc', 'Hotine_Oblique_Mercator_Azimuth_Natural_Origin'], // A
+  ['omerc', 'Oblique_Mercator'], // B
+  ['omerc', 'Hotine_Oblique_Mercator_Two_Point_Natural_Origin'],
+  ['omerc', 'Hotine_Oblique_Mercator_Azimuth_Center'], // B
   ['ortho', 'Orthographic'],
   ['poly', 'Polyconic'],
   // ['qua_aut', 'Quartic_Authalic'],
@@ -71,6 +73,7 @@ var wkt_projections = [
   // ['', 'Transverse_Mercator_South_Orientated'], // http://www.remotesensing.org/geotiff/proj_list/transverse_mercator_south_oriented.html
   ['tpeqd', 'Two_Point_Equidistant'],
   ['vandg', 'VanDerGrinten'],
+  ['vandg', 'Van_der_Grinten_I'], // ESRI
   ['wag1', 'Wagner_I'],
   ['wag2', 'Wagner_II'],
   ['wag3', 'Wagner_III'],

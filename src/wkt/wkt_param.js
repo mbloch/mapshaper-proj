@@ -4,7 +4,6 @@ proj4 unusual params
 lat_ts
   see http://spatialreference.org/ref/epsg/3078/
   +proj=stere +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +ellps=WGS84 +datum=WGS84 +units=m +no_defs
-
 alpha  (omerc, ocea)
 gamma
 */
@@ -17,12 +16,21 @@ var wkt_params = [
   ['lat_0', 'latitude_of_center'],
   ['lat_1', 'standard_parallel_1'],
   ['lat_2', 'standard_parallel_2'],
+  ['lat_1', 'latitude_of_point_1'],
+  ['lon_1', 'longitude_of_point_1'],
+  ['lon_2', 'longitude_of_point_2'],
+  ['lat_1', 'latitude_of_point_1'],
+  ['lat_2', 'latitude_of_point_2'],
   ['h', 'height'] // e.g. nsper
 ];
 
 var wkt_param_aliases = {
   central_meridian: 'longitude_of_center',
-  latitude_of_origin: 'latitude_of_center'
+  latitude_of_origin: 'latitude_of_center',
+  longitude_of_1st_point: 'longitude_of_point_1',
+  longitude_of_2nd_point: 'longitude_of_point_2',
+  latitude_of_1st_point: 'latitude_of_point_1',
+  latitude_of_2nd_point: 'latitude_of_point_2',
 };
 
 function wkt_find_param(wktName) {
@@ -60,6 +68,11 @@ function wkt_convert_params(params, projDefn, unitDefn) {
       parts.push('+lat_1=' + index.lat_0);
     }
   }
+  if (projDefn.proj == 'omerc') {
+    if (projDefn.wkt == 'Hotine_Oblique_Mercator' || projDefn.wkt == 'Hotine_Oblique_Mercator_Azimuth_Natural_Origin') {
+      parts.push('+no_uoff');
+    }
+  }
   return parts.join(' ');
 }
 
@@ -77,6 +90,7 @@ function wkt_convert_param(param, projDefn, unitDefn) {
     // see http://spatialreference.org/ref/epsg/3078/
     if (wktName == 'longitude_of_center') p4Name = 'lonc';
     if (wktName == 'azimuth') p4Name = 'alpha';
+    if (wktName == 'rectified_grid_angle') p4Name = 'gamma';
   }
   if (projName == 'merc') {
     if (projDefn.wkt == 'Mercator_2SP' && wktName == 'standard_parallel_1') {

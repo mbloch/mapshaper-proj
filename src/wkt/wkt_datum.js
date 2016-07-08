@@ -16,13 +16,13 @@ function wkt_convert_geogcs(geogcs, opts) {
     // TODO: in addition to semimajor, ESRI supports spheres based on
     //   semiminor and authalic radii; could support these
     str = '+a=' + spheroid[1];
-  } else if (datumName == 'WGS_1984') {
+  } else if (datumName == 'wgs1984') {
     str = '+datum=WGS84';
-  } else if (datumName == 'NORTH_AMERICAN_1983') {
+  } else if (datumName == 'northamerican1983') {
     str = '+datum=NAD83';
-  } else if (datumName == 'OSGB_1936') {
+  } else if (datumName == 'osgb1936') {
     str = '+datum=OSGB36'
-  } else if (sphName == 'GRS_1980') {
+  } else if (sphName == 'grs1980') {
     str = '+ellps=GRS80';
   } else {
   // TODO: consider identifying more datums or ellipsoids by name
@@ -43,9 +43,7 @@ function wkt_convert_geogcs(geogcs, opts) {
 }
 
 function wkt_harmonize_geo_name(name) {
-  name = name.replace(/^(GCS|D)_/i, '');
-  name = name.toUpperCase();
-  return name;
+  return name.replace(/^(GCS|D)_/i, '').replace(/[ _]/g, '').toLowerCase();
 }
 
 function wkt_check_units(UNIT, expect) {
