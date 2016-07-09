@@ -8,7 +8,7 @@ var assert = require('assert'),
 // using params: -s_srs EPSG:4326 -t_srs <prj file>.
 // With some ESRI prj files, ogr2ogr needed to use -t_srs ESRI::<prj file>.
 
-// failed data points:
+// Failed transformations:
 
 // ['nsper_world_esri.prj', [1, 2], []],
 // unable to generate reference output with ogr2ogr
@@ -22,10 +22,10 @@ var assert = require('assert'),
 //
 // Projection notes:
 //
-// web mercator
+// * web mercator
 // see https://trac.osgeo.org/gdal/ticket/3962
 //
-// omerc
+// * omerc
 // see:
 //   https://trac.osgeo.org/gdal/ticket/2745
 //   http://www.remotesensing.org/geotiff/proj_list/hotine_oblique_mercator.html/
@@ -49,12 +49,23 @@ var assert = require('assert'),
 //   Hotine_Oblique_Mercator_Two_Point_Natural_Origin
 //   The original ESRI World Hotine .prj fails because lat_1 == 0; I changed lat_1 for this test
 //
-// http://spatialreference.org/ref/epsg/29701/
-//  Laborde
-//  http://www.remotesensing.org/geotiff/proj_list/laborde_oblique_mercator.html
+// Laborde and Swiss variants
+//    not implemented
+//    http://spatialreference.org/ref/epsg/29701/
+//    http://www.remotesensing.org/geotiff/proj_list/laborde_oblique_mercator.html
 //
 
 var data = [
+  // Winkel Tripel not supported by ogr2ogr; used cs2cs for reference
+  ['wintri_ogc.prj', [-120, 41], [-11691753.25345371663570, 5074501.02620531246066]],
+  ['wintri_esri.prj', [-120, 41], [-11691753.25345371663570, 5074501.02620531246066]],
+  ['lcc_oregon_esri.prj', [-120, 41], [1450537.5375859991, -273135.36473478895]],
+  ['lcc_oregon_ogc.prj', [-120, 41], [1450537.5375859991, -273135.36473478895]],
+  ['lcc_1sp_ogc.prj', [-172, -15], [-205317.11617721518, 41182.49849648412]],
+  ['eqdc_ogc.prj', [100, 35], [417087.1137573342, 565820.5682668928]],
+  ['eqdc_esri.prj', [100, 35], [417087.1137573342, 565820.5682668928]],
+  // [eqdc_south_america_esri.prj] ogr2ogr wkt parsing seems faulty (ignores lat_0 and lon_0)
+  ['eqdc_south_america_esri.prj', [-50, -30], [918910.1611633918, 190286.81628897172]],
   ['albers_australia_ogc.prj', [100, 5], [-3954044.7637846502, 2318.607577734529]],
   ['albers_australia_esri.prj', [100, 5], [-3954044.7637846502, 2318.607577734529]],
   ['omerc_kertau_esri.prj', [100, 5], [-26896.88540470556, 27531.305812492505]],
@@ -88,8 +99,6 @@ var data = [
   ['etrs89_austria_ogc.prj', [50, 48], [3035037.6274828496, 1089081.8935549718]],
   ['world_sinusoidal_esri.prj', [100, 35], [9128816.964617956, 3874592.9016950703]],
   ['world_sinusoidal_ogc.prj', [100, 35], [9128816.964617956, 3874592.9016950703]],
-  ['equidistant_conic_esri.prj', [100, 35], [417087.1137573342, 565820.5682668928]],
-  ['equidistant_conic_ogc.prj', [100, 35], [417087.1137573342, 565820.5682668928]],
   // http://spatialreference.org/ref/epsg/27700/
   ['british_national_grid_esri.prj', [-1, 50], [471764.56177428545, 11571.317991569958]],
   ['british_national_grid_ogc.prj', [-1, 50], [471764.56177428545, 11571.317991569958]],
@@ -111,7 +120,6 @@ var data = [
   ['utm_18N_csrs98_esri.prj', [-76, 2], [388786.6987287634, 221094.86683121312]],
   ['stateplane_ny_li_nad83_feet_esri.prj', [-75, 41], [708222.941382124, 305182.4263439535]],
   ['stateplane_ny_li_nad83_feet_ogc.prj', [-75, 41], [708222.941382124, 305182.4263439535]],
-  ['lcc_1sp_ogc.prj', [-172, -15], [-205317.11617721518, 41182.49849648412]],
   ['robinson_world_esri.prj', [1, 2], [94452.16280596999, 213903.8360054024]],
   ['robinson_sphere_esri.prj', [1, 2], [94346.47283945685, 213664.4821505745]],
   ['wgs84_esri.prj', [1, 2], [1, 2]],
@@ -129,7 +137,7 @@ describe('wkt parsing + mproj transform', function() {
       var tol = arr[3] || 1e-7;
       var wkt = fs.readFileSync('test/prj/' + file, 'utf8');
       var proj4 = wkt_to_proj4(wkt);
-      // console.log(proj4)
+      console.log(proj4)
       var output = mproj(proj4, lp);
       helpers.closeToPoint(output, xy, tol);
     })

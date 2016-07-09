@@ -1,5 +1,4 @@
 
-
 // Table for looking up proj4 projection ids from WKT names
 // Sources: https://github.com/mapgears/mitab/blob/master/ogr/ogr_srs_api.h
 // Entries that are not supported in mapshaper-proj are commented out
@@ -36,7 +35,7 @@ var wkt_projections = [
   // ['imw_p', 'International_Map_of_the_World_Polyconic'],
   // ['kav7', ''],
   // ['krovak', 'Krovak'],
-  // ['laborde', 'Laborde_Oblique_Mercator'], // laborde
+  // ['laborde', 'Laborde_Oblique_Mercator'],
   ['lcc', 'Lambert_Conformal_Conic'],
   ['lcc', 'Lambert_Conformal_Conic_1SP'],
   ['lcc', 'Lambert_Conformal_Conic_2SP'],

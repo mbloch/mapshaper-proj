@@ -9,7 +9,7 @@ wkt_parse
 
 var WKT_OMIT_DEFAULTS = true;
 
-// @str contents of a .prj file
+// @str A WKT CRS definition string (e.g. contents of a .prj file)
 function wkt_to_proj4(str) {
   var o = wkt_parse(str);
   var proj4;
@@ -21,10 +21,10 @@ function wkt_to_proj4(str) {
     proj4 = '+proj=longlat ' + wkt_convert_geogcs(o.GEOGCS);
 
   } else if (o.GEOCCS) {
-    wkt_error('geocentric coordinates not supported');
+    wkt_error('geocentric coordinates are not supported');
 
   } else {
-    wkt_error('not a recognized CS type');
+    wkt_error('missing a supported WKT CS type');
   }
   return proj4;
 }

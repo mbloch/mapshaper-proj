@@ -19,7 +19,6 @@ function pj_wink1(P) {
   }
 }
 
-
 function pj_wink2(P) {
   var cosphi1 = cos(pj_param(P.params, "rlat_1"));
   var MAX_ITER = 10,
