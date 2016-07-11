@@ -10,7 +10,7 @@ function wkt_convert_geogcs(geogcs, opts) {
       rf = spheroid[2],
       str, pm;
 
-  wkt_check_units(geogcs.UNIT, 'degree')
+  wkt_check_units(geogcs.UNIT, 'degree');
 
   if (aux_sphere) {
     // TODO: in addition to semimajor, ESRI supports spheres based on
@@ -21,7 +21,7 @@ function wkt_convert_geogcs(geogcs, opts) {
   } else if (datumName == 'northamerican1983') {
     str = '+datum=NAD83';
   } else if (datumName == 'osgb1936') {
-    str = '+datum=OSGB36'
+    str = '+datum=OSGB36';
   } else if (sphName == 'grs1980') {
     str = '+ellps=GRS80';
   } else {

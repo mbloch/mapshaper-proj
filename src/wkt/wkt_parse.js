@@ -14,7 +14,7 @@ function wkt_parse(str) {
   str = str.replace(/, *([a-zA-Z]+) *(?=[,\]])/g, ',"$1"'); // wrap axis direction keywords in quotes
   // str = str.replace(/[^\]]*$/, ''); // esri .prj string may have extra stuff appended
   try {
-    obj = JSON.parse(str)
+    obj = JSON.parse(str);
   } catch(e) {
     wkt_error('unparsable WKT format');
   }
@@ -31,7 +31,7 @@ function wkt_reorder(arr, obj) {
   if (name == 'GEOGCS' || name == 'GEOCCS' || name == 'PROJCS' || name == 'DATUM') {
     obj[name] = {
       NAME: arr[1]
-    }
+    };
     for (i=2; i<arr.length; i++) {
       if (Array.isArray(arr[i])) {
         wkt_reorder(arr[i], obj[name]);

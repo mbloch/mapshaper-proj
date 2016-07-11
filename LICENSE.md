@@ -1,7 +1,7 @@
 
-This software is a port of [Proj.4](https://github.com/OSGeo/proj.4]). A copy of the Proj.4 license is included below.
+This software is a port of [Proj.4](https://github.com/OSGeo/proj.4]). A copy of the Proj.4 license is included below, as required by the MIT license.
 
-New work is released under the same version of the MIT license,
+New work is released under the same MIT license (see below) and
 Copyright (c) 2016, Matthew Bloch
 
 --------------
@@ -28,8 +28,9 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 
 --------------
-Following is a list of ported Proj.4 source code files that name other copyright
-holders in their header blocks (together with the above MIT license).
+Following is a list of ported Proj.4 source code files that include copies of
+the above MIT license in comment blocks, and their respective copyright
+holders.
 
 --------------
 PJ_aea.c

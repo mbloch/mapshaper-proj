@@ -1,9 +1,8 @@
 # mapshaper-proj
 
-This software is a JavaScript port of the Proj.4 map projection library, which is used by QGIS, GDAL and other popular geospatial software packages. It is intended to be used by [mapshaper](https://github.com/mbloch/mapshaper). Naturally, anyone is welcome to use it and improve it.
+This software is a JavaScript port of the Proj.4 map projection library. Although it was created to be used by [mapshaper](https://github.com/mbloch/mapshaper), all are welcome to use and improve it.
 
 Why create another Proj.4 port, when there is already [proj4js](https://github.com/proj4js/proj4js)? Unlike proj4js, this port is a very literal translation to JavaScript, so staying up-to-date with future changes to Proj.4 should be relatively simple. This software's output should also be more consistent with Proj.4's output.
-
 
 ##### Missing features
 

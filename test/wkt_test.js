@@ -137,7 +137,7 @@ describe('wkt parsing + mproj transform', function() {
       var tol = arr[3] || 1e-7;
       var wkt = fs.readFileSync('test/prj/' + file, 'utf8');
       var proj4 = wkt_to_proj4(wkt);
-      console.log(proj4)
+      // console.log(proj4)
       var output = mproj(proj4, lp);
       helpers.closeToPoint(output, xy, tol);
     })
