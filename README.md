@@ -8,8 +8,6 @@ Why create another Proj.4 port, when there is already [proj4js](https://github.c
 
 * No support for datum transformations using grid files.
 
-* No EPSG code support.
-
 * Only about half of Proj.4's 130-odd projections have been ported.
 
 
