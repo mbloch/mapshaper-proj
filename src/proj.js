@@ -37,6 +37,7 @@ api.internal = {
   pj_list: pj_list,
   pj_ellps: pj_ellps,
   pj_units: pj_units,
+  pj_read_opts: pj_read_opts,
   find_datum: find_datum,
   DEG_TO_RAD: DEG_TO_RAD,
   RAD_TO_DEG: RAD_TO_DEG,

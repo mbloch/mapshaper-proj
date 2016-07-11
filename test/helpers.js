@@ -11,7 +11,8 @@ exports.aboutEqual = function(a, b, tolerance) {
 
 exports.closeToPoint = function(a, b, tolerance) {
   if (!exports.isAboutEqual(a[0], b[0], tolerance) ||
-      !exports.isAboutEqual(a[1], b[1], tolerance)) {
+      !exports.isAboutEqual(a[1], b[1], tolerance) ||
+      a.length > 2 && !exports.isAboutEqual(a[2], b[2], tolerance)) {
     assert.deepEqual(a, b);
   }
 };

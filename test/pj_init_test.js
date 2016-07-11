@@ -1,8 +1,38 @@
 var assert = require('assert'),
+    helpers = require('./helpers.js'),
     api = require('../');
 
 describe('pj_init.js', function () {
+
+  describe('+init= tests', function () {
+    // reference data was generated using:
+    // cs2cs -f %.14f +proj=longlat +datum=WGS84 +to <proj4 string>
+
+    function test(projStr, lp, xy, tol) {
+      it(projStr, function() {
+        var output = api(api.WGS84, projStr, lp);
+        tol = tol || 1e-7;
+        helpers.closeToPoint(output, xy, tol);
+      })
+    }
+
+    // NAD83 / Idaho Central (ftUS)
+    test('+init=epsg:2242', [-90, 45, 0],
+      [7843758.87995513156056, 2161449.59161074040458, 0]);
+    // Ain el Abd / Aramco Lambert
+    test('+init=epsg:2318', [40, 45, 0],
+      [-666427.66579883545637, 2254673.09066507359967, -25.61474410723895]);
+    // ED50 / TM27
+    test('+init=epsg:2319', [20, 45, 0],
+      [-51882.06449849705677, 5009028.38139596953988, -38.32251742761582]);
+    // TWD97 (geocent)
+    test('+init=epsg:3822', [20, 45, 0],
+      [4245146.81261895131320, 1545107.07988334191032, 4487348.40875480137765]);
+  })
+
+
   describe('pj_get_params()', function () {
+
     function test(str, obj) {
       var params = Object.keys(obj).reduce(function(memo, key) {
         memo[key] = {used: false, param: obj[key]};

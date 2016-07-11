@@ -1,4 +1,11 @@
-/* @requires pj_param, pj_datum_set, pj_ell_set, pj_units */
+/* @requires
+pj_param
+pj_datum_set
+pj_ell_set
+pj_units
+pj_initcache
+pj_open_lib
+*/
 
 // Returns an initialized projection object
 // @args a proj4 string
@@ -21,9 +28,8 @@ function pj_init(args) {
     error(-1);
   }
 
-  // TODO: implement +init
   if (pj_param(params, "tinit")) {
-    fatal("+init argument not implemented");
+    get_init(params, pj_param(params, "sinit"));
   }
 
   name = pj_param(params, "sproj");
@@ -37,7 +43,7 @@ function pj_init(args) {
   }
 
   if (!pj_param(params, "bno_defs")) {
-    get_defaults(P, name);
+    get_defaults(P.params, name);
   }
 
   pj_datum_set(P);
@@ -91,9 +97,50 @@ function pj_init(args) {
 
   init_units(P);
   init_prime_meridian(P);
-
   defn.init(P);
   return P;
+}
+
+// Merge default params
+// NOTE: Proj.4 loads defaults from the file nad/proj_def.dat
+// This function applies the default ellipsoid from proj_def.dat but
+//   ignores the other defaults, which could be considered undesirable
+//   (see e.g. https://github.com/OSGeo/proj.4/issues/201)
+function get_defaults(params, name) {
+  get_opt(params, '+ellps=WGS84');
+}
+
+function get_init(params, initStr) {
+  var defn = pj_search_initcache(initStr),
+      parts, paramStr;
+  if (defn) return defn;
+  parts = initStr.split(':');
+  if (parts.length < 2) {
+    error(-3);
+  }
+  paramStr = pj_read_lib_opts(parts[0], parts[1]);
+  if (!paramStr) {
+    error(-2);
+  }
+  pj_insert_initcache(initStr, defn);
+  // merge init params
+  get_opt(params, paramStr);
+}
+
+// Merge params from a proj4 string
+// (Slightly different interface from Proj.4 get_opts())
+function get_opt(params, args) {
+  var newParams = pj_get_params(args);
+  var geoIsSet = ['datum', 'ellps', 'a', 'b', 'rf', 'f'].reduce(function(memo, key) {
+    return memo || key in params;
+  }, false);
+  Object.keys(newParams).forEach(function(key) {
+    // don't override existing params
+    if (key in params) return;
+    // don't set ellps if earth model info is set
+    if (key == 'ellps' && geoIsSet) return;
+    params[key] = newParams[key];
+  });
 }
 
 function init_prime_meridian(P) {
@@ -174,17 +221,4 @@ function is_wgs84(P) {
   return P.datum_type == PJD_3PARAM &&
     P.datum_params[0] == P.datum_params[1] == P.datum_params[2] === 0 &&
     P.a == 6378137 && Math.abs(P.es - 0.006694379990) < 0.000000000050;
-}
-
-// TODO: try to read a defaults file, like Proj.4 does
-// see https://github.com/OSGeo/proj.4/blob/master/nad/proj_def.dat
-function get_defaults(P, name) {
-  P.ellps = "WGS84";
-  if (name == 'aea') {
-    P.lat_1 = 29.5;
-    P.lat_2 = 45.5;
-  } else if (name == 'lcc') {
-    P.lat_1 = 33;
-    P.lat_2 = 45;
-  }
 }
