@@ -14,7 +14,9 @@
 	},
 	"scripts": {
 		"test": "mocha --check-leaks -R dot",
-		"pretest": "node build"
+		"pretest": "node build",
+		"prepublish": "npm test",
+		"postpublish": "./release"
 	},
 	"main": "./dist/mproj.js",
 	"dependencies": {
