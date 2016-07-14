@@ -2,7 +2,7 @@
 
 This software is a JavaScript port of the Proj.4 map projection library. Although it was created to be used by [mapshaper](https://github.com/mbloch/mapshaper), all are welcome to use and improve it.
 
-Why create another Proj.4 port, when there is already [proj4js](https://github.com/proj4js/proj4js)? Unlike proj4js, this port is a very literal translation to JavaScript, so staying up-to-date with future changes to Proj.4 should be relatively simple. This software's output should also be more consistent with Proj.4's output.
+Why create another Proj.4 port, when there is already [proj4js](https://github.com/proj4js/proj4js)? Unlike proj4js, this port is a very literal translation to JavaScript, so staying up-to-date with future changes to Proj.4 should be relatively simple. Also, this software's output is more consistent with Proj.4's output.
 
 ##### Missing features
 

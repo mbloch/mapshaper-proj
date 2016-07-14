@@ -1,7 +1,6 @@
 .DS_Store
 __*
 node_modules
-npm-debug.log
 .npmignore
 .jshintrc
 CHANGELOG.md

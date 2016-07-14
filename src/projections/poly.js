@@ -36,33 +36,35 @@ function pj_poly(P) {
   }
 
   function e_inv(xy, lp) {
+    var x = xy.x, y = xy.y;
     var r, c, sp, cp, s2ph, ml, mlb, mlp, dPhi, i;
-    xy.y += ml0;
-    if (fabs(xy.y) <= TOL) {
-      lp.lam = xy.x;
+    y += ml0;
+    if (fabs(y) <= TOL) {
+      lp.lam = x;
       lp.phi = 0;
     } else {
-    r = xy.y * xy.y + xy.x * xy.x;
-    for (lp.phi = xy.y, i = I_ITER; i ; --i) {
-      sp = sin(lp.phi);
-      s2ph = sp * ( cp = cos(lp.phi));
-      if (fabs(cp) < ITOL)
+      r = y * y + x * x;
+      for (lp.phi = y, i = I_ITER; i>0 ; --i) {
+        sp = sin(lp.phi);
+        s2ph = sp * (cp = cos(lp.phi));
+        if (fabs(cp) < ITOL)
+          i_error();
+        c = sp * (mlp = sqrt(1 - P.es * sp * sp)) / cp;
+        ml = pj_mlfn(lp.phi, sp, cp, en);
+        mlb = ml * ml + r;
+        mlp = P.one_es / (mlp * mlp * mlp);
+        lp.phi += (dPhi =
+          ( ml + ml + c * mlb - 2 * y * (c * ml + 1) ) / (
+          P.es * s2ph * (mlb - 2 * y * ml) / c +
+          2 * (y - ml) * (c * mlp - 1 / s2ph) - mlp - mlp));
+        if (fabs(dPhi) <= ITOL)
+          break;
+      }
+      if (!i) {
         i_error();
-      c = sp * (mlp = sqrt(1 - P.es * sp * sp)) / cp;
-      ml = pj_mlfn(lp.phi, sp, cp, en);
-      mlb = ml * ml + r;
-      mlp = P.one_es / (mlp * mlp * mlp);
-      lp.phi += ( dPhi =
-        ( ml + ml + c * mlb - 2 * xy.y * (c * ml + 1) ) / (
-        P.es * s2ph * (mlb - 2 * xy.y * ml) / c +
-        2* (xy.y - ml) * (c * mlp - 1 / s2ph) - mlp - mlp ));
-      if (fabs(dPhi) <= ITOL)
-        break;
-    }
-    if (!i)
-      e_error();
-    c = sin(lp.phi);
-    lp.lam = asin(xy.x * tan(lp.phi) * sqrt(1 - P.es * c * c)) / sin(lp.phi);
+      }
+      c = sin(lp.phi);
+      lp.lam = asin(x * tan(lp.phi) * sqrt(1 - P.es * c * c)) / sin(lp.phi);
     }
   }
 
@@ -93,7 +95,7 @@ function pj_poly(P) {
           0.5 * ( lp.phi * lp.phi + B) * tp) /
           ((lp.phi - xy.y) / tp - 1));
       } while (fabs(dphi) > CONV && --i);
-      if (! i) i_error();
+      if (!i) i_error();
       lp.lam = asin(xy.x * tan(lp.phi)) / sin(lp.phi);
     }
   }
