@@ -10,7 +10,8 @@ function pj_fwd(lp, P) {
   var EPS = 1e-12;
   var t = fabs(lp.phi) - M_HALFPI;
 
-  if (t > EPS || fabs(lp.lam) > 10) {
+  // if (t > EPS || fabs(lp.lam) > 10) {
+  if (!(t <= EPS && fabs(lp.lam) <= 10)) { // catch NaNs
     pj_ctx_set_errno(-14);
   } else {
     ctx.last_errno = 0; // clear a previous error

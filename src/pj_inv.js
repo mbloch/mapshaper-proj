@@ -12,7 +12,8 @@ function pj_inv(xy, P) {
   var EPS = 1e-12;
   var lp = {lam: 0, phi: 0};
 
-  if (xy.x == HUGE_VAL || xy.y == HUGE_VAL) {
+  // if (xy.x == HUGE_VAL || xy.y == HUGE_VAL) {
+  if (!(xy.x < HUGE_VAL && xy.y < HUGE_VAL)) { // catch NaNs
     pj_ctx_set_errno(-15);
   } else {
     ctx.last_errno = 0;
