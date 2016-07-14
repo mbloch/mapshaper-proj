@@ -5,39 +5,36 @@ pj_add(pj_wag4, 'wag4', 'Wagner IV', '\n\tPCyl Sph');
 pj_add(pj_wag5, 'wag5', 'Wagner V', '\n\tPCyl Sph');
 
 function pj_moll(P) {
-  pj_moll_init_Q(P, M_HALFPI);
-  pj_moll_init(P);
+  pj_moll_init(P, pj_moll_init_Q(P, M_HALFPI));
 }
 
 function pj_wag4(P) {
-  pj_moll_init_Q(P, M_PI/3);
-  pj_moll_init(P);
+  pj_moll_init(P, pj_moll_init_Q(P, M_PI/3));
 }
 
 function pj_wag5(P) {
-  P.opaque = {
+  var Q = {
     C_x: 0.90977,
     C_y: 1.65014,
     C_p: 3.00896
   };
-  pj_moll_init(P);
+  pj_moll_init(P, Q);
 }
 
 function pj_moll_init_Q(P, p) {
   var sp = sin(p),
       p2 = p + p,
       r = sqrt(M_TWOPI * sp / (p2 + sin(p2)));
-  P.opaque = {
+  return {
     C_x: 2 * r / M_PI,
     C_y: r / sp,
     C_p: p2 + sin(p2)
   };
 }
 
-function pj_moll_init(P) {
+function pj_moll_init(P, Q) {
   var MAX_ITER = 10,
-      LOOP_TOL = 1e-7,
-      Q = P.opaque;
+      LOOP_TOL = 1e-7;
   P.fwd = s_fwd;
   P.inv = s_inv;
   P.es = 0;
@@ -62,7 +59,8 @@ function pj_moll_init(P) {
   function s_inv(xy, lp) {
     lp.phi = aasin(xy.y / Q.C_y);
     lp.lam = xy.x / (Q.C_x * cos(lp.phi));
-    if (fabs(lp.lam) < M_PI) {
+    // if (fabs(lp.lam) < M_PI) { // from Proj.4; fails for edge coordinates
+    if (fabs(lp.lam) - M_PI < EPS10) { // allows inv projection of world layer
       lp.phi += lp.phi;
       lp.phi = aasin((lp.phi + sin(lp.phi)) / Q.C_p);
     } else {
