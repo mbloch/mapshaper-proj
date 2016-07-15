@@ -42,6 +42,7 @@ pj_init.c
 PJ_omerc.c
 PJ_sterea.c
 proj_etmerc.c
+PJ_gilbert.c (from libproj4)
 
 Copyright (c) 2008 2006 2003 1995, Gerald Evenden
 
