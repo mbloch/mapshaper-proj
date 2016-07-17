@@ -43,17 +43,21 @@ function error(code) {
 // see projects.h E_ERROR macro
 function e_error(code) {
   pj_ctx_set_errno(code);
-  fatal(error_msg(code), code);
+  fatal();
 }
 
-function fatal(msg, code) {
-  throw new ProjError(msg, code);
-  // process.exit(1);
+function fatal(msg, o) {
+  if (!o) o = {};
+  if (!o.code) o.code = ctx.last_errno || 0;
+  if (!msg) msg = error_msg(o.code);
+  throw new ProjError(msg, o);
 }
 
-function ProjError(msg, code) {
+function ProjError(msg, o) {
   var err = new Error(msg);
   err.name = 'ProjError';
-  err.code = code || 0;
+  Object.keys(o).forEach(function(k) {
+    err[k] = o[k];
+  });
   return err;
 }

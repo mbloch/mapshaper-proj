@@ -4,16 +4,20 @@
 // @p an array containing [x, y] or [x, y, z] coordinates
 //     latlong coordinates are assumed to be in decimal degrees
 function pj_transform_point(srcdefn, dstdefn, p) {
-  var xx = [p[0]],
+  var z = p.length > 2,
+      xx = [p[0]],
       yy = [p[1]],
-      z = p.length > 2,
-      zz = z ? [p[2]] : [0];
+      zz = [z ? p[2] : 0];
   if (srcdefn.is_latlong) {
     xx[0] *= DEG_TO_RAD;
     yy[0] *= DEG_TO_RAD;
   }
   ctx.last_errno = 0;
   pj_transform(srcdefn, dstdefn, xx, yy, zz);
+  if (ctx.last_errno || xx[0] == HUGE_VAL) {
+    // throw error if translation fails
+    fatal(null, {point: p});
+  }
   if (dstdefn.is_latlong) {
     xx[0] *= RAD_TO_DEG;
     yy[0] *= RAD_TO_DEG;
@@ -21,9 +25,6 @@ function pj_transform_point(srcdefn, dstdefn, p) {
   p[0] = xx[0];
   p[1] = yy[0];
   if (z) p[2] = zz[0];
-  if (ctx.last_errno || p[0] == HUGE_VAL) {
-    error(ctx.last_errno); // throw error if translation fails
-  }
 }
 
 // Transform arrays of coordinates; latlong coords are in radians
