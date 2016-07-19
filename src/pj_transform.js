@@ -63,7 +63,7 @@ function pj_transform(srcdefn, dstdefn, xx, yy, zz) {
   } else if (!srcdefn.is_latlong) {
     if (!srcdefn.inv3d && !srcdefn.inv) {
       // Proj.4 returns error code -17 (a bug?)
-      fatal("source projection not invertable");
+      fatal("source projection not invertible");
     }
     if (srcdefn.inv3d) {
       fatal("inverse 3d transformations not supported");
