@@ -50,3 +50,8 @@ Copyright (c) 2008 2006 2003 1995, Gerald Evenden
 pj_generic_selftest.c
 
 Copyright (c) 2016, Thomas Knudsen
+
+--------------
+PJ_times.c
+
+Copyright (c) 2016, Kristian Evers
