@@ -8,9 +8,13 @@ function pj_is_geocent(P) {
 }
 
 function pj_latlong_from_proj(P) {
-  var defn = '+proj=latlong';
-  var got_datum = false;
+  var defn = '+proj=latlong' + get_geod_defn(P);
+  return pj_init(defn);
+}
 
+function get_geod_defn(P) {
+  var got_datum = false,
+      defn = '';
   if ('datum' in P.params) {
     got_datum = true;
     defn += get_param(P, 'datum');
@@ -41,12 +45,31 @@ function pj_latlong_from_proj(P) {
   defn += get_param(P, 'R_lat_a');
   defn += get_param(P, 'R_lat_g');
   defn += get_param(P, 'pm');
-  return pj_init(defn);
+  return defn;
+}
+
+// Not in Proj.4
+function get_proj_defn(P) {
+  // skip geodetic params and some initialization-related params
+  var skip = 'datum,ellps,a,b,es,rf,f,towgs84,nadgrids,R,R_A,R_V,R_a,R_lat_a,R_lat_g,pm,init,no_defs'.split(',');
+  var defn = '';
+  Object.keys(P.params).forEach(function(name) {
+    if (skip.indexOf(name) == -1) {
+      defn += get_param(P, name);
+    }
+  });
+  // add geodetic params
+  defn += get_geod_defn(P);
+  return defn.trim();
 }
 
 function get_param(P, name) {
+  var param = '';
   if (name in P.params) {
-    return ' +' + name + '=' + pj_param(P.params, 's' + name);
+    param = ' +' + name;
+    if (P.params[name].param !== true) {
+      param += '=' + pj_param(P.params, 's' + name);
+    }
   }
-  return '';
+  return param;
 }

@@ -31,6 +31,7 @@ api.internal = {
   dmstor: dmstor,
   get_rtodms: get_rtodms,
   get_dtodms: get_dtodms,
+  get_proj_defn: get_proj_defn,
   pj_latlong_from_proj: pj_latlong_from_proj,
   pj_get_params: pj_get_params,
   pj_datums: pj_datums,
