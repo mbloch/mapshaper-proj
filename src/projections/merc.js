@@ -17,7 +17,7 @@ function pj_merc(P) {
 
   if (P.es) { // ellipsoid
     if (is_phits) {
-      P.k0 = pj_msfn(Math.sin(phits), Math.cos(phits), P.es);
+      P.k0 = pj_msfn(sin(phits), cos(phits), P.es);
     }
     P.inv = e_inv;
     P.fwd = e_fwd;
@@ -35,7 +35,7 @@ function pj_merc(P) {
   }
 
   function e_inv(xy, lp) {
-    lp.phi = pj_phi2(Math.exp(-xy.y / P.k0), P.e);
+    lp.phi = pj_phi2(exp(-xy.y / P.k0), P.e);
     if (lp.phi === HUGE_VAL) {
       i_error();
     }
@@ -43,15 +43,15 @@ function pj_merc(P) {
   }
 
   function s_fwd(lp, xy) {
-    if (Math.abs(Math.abs(lp.phi) - M_HALFPI) <= EPS10) {
+    if (fabs(fabs(lp.phi) - M_HALFPI) <= EPS10) {
       f_error();
     }
     xy.x = P.k0 * lp.lam;
-    xy.y = P.k0 * Math.log(Math.tan(M_FORTPI + 0.5 * lp.phi));
+    xy.y = P.k0 * log(tan(M_FORTPI + 0.5 * lp.phi));
   }
 
   function s_inv(xy, lp) {
-    lp.phi = M_HALFPI - 2 * Math.atan(Math.exp(-xy.y / P.k0));
+    lp.phi = M_HALFPI - 2 * atan(exp(-xy.y / P.k0));
     lp.lam = xy.x / P.k0;
   }
 }
