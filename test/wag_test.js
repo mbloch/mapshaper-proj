@@ -38,7 +38,40 @@ describe('wag.js', function () {
 
     helpers.fwd_test(sargs, fwd_in, s_fwd_expect);
     helpers.inv_test(sargs, inv_in, s_inv_expect);
+  })
 
+  describe('Wagner III', function () {
+
+    var s_fwd_expect = [
+    [223387.02171816575,  111701.07212763709],
+    [223387.02171816575,  -111701.07212763709],
+    [-223387.02171816575,  111701.07212763709],
+    [-223387.02171816575,  -111701.07212763709]
+    ];
+
+    var s_inv_expect = [
+    [0.001790493109880963,  0.00089524655489191132],
+    [0.001790493109880963,  -0.00089524655489191132],
+    [-0.001790493109880963,  0.00089524655489191132],
+    [-0.001790493109880963,  -0.00089524655489191132]
+    ];
+
+    var sargs = "+proj=wag3   +a=6400000    +lat_1=0.5 +lat_2=2";
+
+    helpers.fwd_test(sargs, fwd_in, s_fwd_expect);
+    helpers.inv_test(sargs, inv_in, s_inv_expect);
+  })
+
+  describe('Wagner VII', function () {
+    var s_fwd_expect = [
+    [ 198601.87695731167,  125637.0457141714],
+    [ 198601.87695731167, -125637.0457141714],
+    [-198601.87695731167,  125637.0457141714],
+    [-198601.87695731167, -125637.0457141714]
+    ];
+
+    var sargs = "+proj=wag7   +a=6400000    +lat_1=0.5 +lat_2=2";
+    helpers.fwd_test(sargs, fwd_in, s_fwd_expect);
   })
 
 });
