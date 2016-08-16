@@ -6,19 +6,17 @@ function dmstor(str) {
 }
 
 function dmstod(str) {
-  var deg = /-?[0-9.]+d/i.exec(str);
-  var min = /[0-9.]+'/.exec(str);
-  var sec = /[0-9.]+"/.exec(str);
-  var inv = /[ws][\s]*$/i.test(str);
-  var d = parseFloat(deg ? deg[0] : str);
-  if (min) {
-    d += parseFloat(min[0]) / 60;
-  }
-  if (sec) {
-    d += parseFloat(sec[0]) / 3600;
-  }
-  if (inv) {
-    d = -d;
+  var match = /(-?[0-9.]+)d?([0-9.]*)'?([0-9.]*)"?([nsew]?)$/i.exec(str);
+  var d = NaN;
+  var deg, min, sec;
+  if (match) {
+    deg = match[1] || '0';
+    min = match[2] || '0';
+    sec = match[3] || '0';
+    d = Number(deg) + Number(min) / 60 + Number(sec) / 3600;
+    if (/[ws]/i.test(match[4])) {
+      d = -d;
+    }
   }
   if (isNaN(d)) {
     // throw an exception instead of just setting an error code
