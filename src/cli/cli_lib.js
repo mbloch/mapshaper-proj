@@ -155,14 +155,75 @@ api.read_lines = function(files) {
 };
 
 api.get_dfmt = function(fmt) {
-  var m = /%\.(1?[0-9])f/.exec(fmt || '');
-  var decimals = m ? +m[1] : 3;
-  return function(num) {
-    var str = num.toFixed(decimals); // round
-    // str = +String(str); // remove trailing zeros
+  // TODO: support ' flag and type g
+  var match = /^%([0+-]*)([0-9]*)\.?([0-9]*)([fe])$/i.exec(fmt.trim());
+  if (!match) {
+    error("unsupported format: " + fmt);
+  }
+  var type = match[4].toLowerCase(),
+      uc = type != match[4],
+      flags = match[1],
+      width = parseInt(match[2]),
+      decimals = match[3].length > 0 ? parseInt(match[3]) : 6,
+      leftAlign = flags.indexOf('-') > -1,
+      zeroPad = flags.indexOf('0') > -1,
+      showPos = flags.indexOf('+') > -1,
+      fmt = get_num_formatter(type, decimals);
+
+  return function(val) {
+    // TODO: handle Infinity and -Infinity
+    var str;
+    if (isNaN(val)) {
+      str = 'nan';
+    } else {
+      str = fmt(val);
+      if (showPos && /^[0-9]/.test(str)) {
+        str = '+' + str;
+      }
+      if (width > str.length) {
+        if (leftAlign) {
+          str = right_pad(str, width - str.length, ' ');
+        } else {
+          str = left_pad(str, width - str.length, zeroPad ? '0' : ' ');
+        }
+      }
+    }
+    if (uc) {
+      str = str.toUpperCase();
+    }
     return str;
   };
-};
+}
+
+function right_pad(str, chars, padChar) {
+  while (chars-- > 0) str += padChar;
+  return str;
+}
+
+function left_pad(str, chars, padChar) {
+  var c = str[0],
+      hasSign = c == '-' || c == '+';
+  if (hasSign) {
+    str = str.substr(1);
+  }
+  while (chars-- > 0) str = padChar + str;
+  if (hasSign) {
+    str = c + str;
+  }
+  return str;
+}
+
+function get_num_formatter(type, decimals) {
+  return function(val) {
+    var str = '';
+    if (type == 'f') {
+      str = val.toFixed(decimals | 0);
+    } else if (type == 'e') {
+      str = decimals ? val.toExponential(decimals) : val.toExponential();
+    }
+    return str;
+  };
+}
 
 function error(msg) {
   throw new Error(msg || 'an unknown error occurred');
