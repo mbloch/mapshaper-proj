@@ -1,7 +1,7 @@
 
 var pj_datums = [
   /* id defn ellipse_id comments */
-  ["WGS84", "towgs84=0,0,0", "WGS84", ""],
+  ["WGS84", "towgs84=0,0,0", "WGS84", "WGS_1984"], // added comment for wkt creation
   ["GGRS87", "towgs84=-199.87,74.79,246.62", "GRS80", "Greek_Geodetic_Reference_System_1987"],
   ["NAD83", "towgs84=0,0,0", "GRS80", "North_American_Datum_1983"],
   // nadgrids not supported; NAD27 will trigger an error
@@ -45,5 +45,5 @@ function find_datum(id) {
   var defn = pj_datums.reduce(function(memo, arr) {
     return arr[0] === id ? arr : memo;
   }, null);
-  return defn ? {id: defn[0], defn: defn[1], ellipse_id: defn[2], comments: defn[3]} : null;
+  return defn ? {id: defn[0], defn: defn[1], ellipse_id: defn[2], name: defn[3]} : null;
 }

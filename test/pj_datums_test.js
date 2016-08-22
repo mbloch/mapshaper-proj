@@ -8,7 +8,7 @@ describe('pj_datums.js', function () {
         id: 'WGS84',
         defn: 'towgs84=0,0,0',
         ellipse_id: 'WGS84',
-        comments: ''
+        name: 'WGS_1984'
       };
       assert.deepEqual(api.internal.find_datum('WGS84'), target);
     })
