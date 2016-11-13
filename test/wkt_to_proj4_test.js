@@ -10,7 +10,15 @@ var files = [
   ['robinson_world_esri.prj', '+proj=robin +datum=WGS84 +no_defs'],
   ['robinson_sphere_esri.prj', '+proj=robin +a=6371000 +no_defs'],
   ['wgs84_esri.prj', '+proj=longlat +datum=WGS84'],
-  ['wgs84_ogc.prj', '+proj=longlat +datum=WGS84']
+  ['wgs84_ogc.prj', '+proj=longlat +datum=WGS84'],
+  ['web_mercator_esri.prj', '+proj=merc +a=6378137 +no_defs'],
+  ['web_mercator_aux_sphere_esri.prj', '+proj=merc +a=6378137 +no_defs'],
+  ['web_mercator_v2_esri.prj', '+proj=merc +a=6378137 +no_defs'],
+  ['web_mercator_v2_ogc.prj', '+proj=merc +a=6378137 +no_defs'],
+  ['web_mercator_v3_esri.prj', '+proj=merc +a=6378137 +no_defs'],
+  ['web_mercator_v3_ogc.prj', '+proj=merc +a=6378137 +no_defs'],
+  ['web_mercator_v4.prj', '+proj=merc +a=6378137 +no_defs']
+
 ];
 
 // files = [files[0]];

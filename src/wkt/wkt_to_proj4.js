@@ -15,7 +15,7 @@ function wkt_to_proj4(str) {
   var proj4;
 
   if (o.PROJCS) {
-    proj4 = wkt_convert_projection(o.PROJCS);
+    proj4 = wkt_convert_projcs(o.PROJCS);
 
   } else if (o.GEOGCS) {
     proj4 = '+proj=longlat ' + wkt_convert_geogcs(o.GEOGCS);
@@ -29,13 +29,13 @@ function wkt_to_proj4(str) {
   return proj4;
 }
 
-function wkt_convert_projection(obj) {
-  var projDefn = wkt_get_proj(obj.PROJECTION);
-  var wktName = obj.NAME.replace(/ /g, '_');
+function wkt_convert_projcs(obj) {
+  var projDefn = wkt_get_proj_by_name(obj.PROJECTION);
+  var wktNameSlug = obj.NAME.replace(/[-_ \/]+/g, '_');
   var unitDefn, i, match, projStr, geogStr, paramStr;
 
   // TODO: implement separate ogc vertical units param
-  unitDefn = wkt_get_unit(obj.UNIT);
+  unitDefn = wkt_convert_unit(obj.UNIT);
 
   if (!projDefn) {
     wkt_error('unknown projection: ' + obj.PROJECTION);
@@ -45,17 +45,17 @@ function wkt_convert_projection(obj) {
   }
 
   // handle several special cases by matching PROJCS wkt name
-  if (match = /UPS_(North|South)/i.exec(wktName)) {
+  if (match = /UPS_(North|South)/i.exec(wktNameSlug)) {
     projStr = '+proj=ups';
     if (match[1].toLowerCase() == 'south') {
       projStr += ' +south';
     }
-  } else if (match = /UTM_zone_([1-9]{1,2})(N|S)/i.exec(wktName)) {
+  } else if (match = /UTM_zone_([0-9]{1,2})(N|S)/i.exec(wktNameSlug)) {
     projStr = '+proj=utm +zone=' + match[1];
     if (match[2] == 'S') {
       projStr += ' +south';
     }
-  } else if (/(Web_Mercator|Pseudo-Mercator)/i.test(wktName)) {
+  } else if (/(Web_Mercator|Pseudo_Mercator)/i.test(wktNameSlug)) {
     // kludge for web mercator
     projStr = '+proj=merc';
     geogStr = wkt_convert_geogcs(obj.GEOGCS, {aux_sphere: true});
