@@ -37,6 +37,7 @@ function pj_ortho(P) {
       break;
     case N_POLE:
       coslam = -coslam;
+      /* falls through */
     case S_POLE:
       if (fabs(lp.phi - P.phi0) - EPS10 > M_HALFPI) f_error();
       xy.y = cosphi * coslam;

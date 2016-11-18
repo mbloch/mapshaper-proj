@@ -55,6 +55,7 @@ function pj_gnom(P) {
             break;
         case N_POLE:
             coslam = - coslam;
+            /* falls through */
         case S_POLE:
             xy.y *= cosphi * coslam;
             break;

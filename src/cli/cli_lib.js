@@ -155,7 +155,8 @@ api.read_lines = function(files) {
 };
 
 api.get_dfmt = function(fmt) {
-  // TODO: support ' flag and type g
+  // http://www.gnu.org/software/libc/manual/html_node/Floating_002dPoint-Conversions.html
+  // TODO: support " " and "#" flags and type g/G
   var match = /^%([0+-]*)([0-9]*)\.?([0-9]*)([fe])$/i.exec(fmt.trim());
   if (!match) {
     error("unsupported format: " + fmt);
@@ -168,7 +169,7 @@ api.get_dfmt = function(fmt) {
       leftAlign = flags.indexOf('-') > -1,
       zeroPad = flags.indexOf('0') > -1,
       showPos = flags.indexOf('+') > -1,
-      fmt = get_num_formatter(type, decimals);
+      formatter = get_num_formatter(type, decimals);
 
   return function(val) {
     // TODO: handle Infinity and -Infinity
@@ -176,7 +177,7 @@ api.get_dfmt = function(fmt) {
     if (isNaN(val)) {
       str = 'nan';
     } else {
-      str = fmt(val);
+      str = formatter(val);
       if (showPos && /^[0-9]/.test(str)) {
         str = '+' + str;
       }
@@ -193,7 +194,7 @@ api.get_dfmt = function(fmt) {
     }
     return str;
   };
-}
+};
 
 function right_pad(str, chars, padChar) {
   while (chars-- > 0) str += padChar;

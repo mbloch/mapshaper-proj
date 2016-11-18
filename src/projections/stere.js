@@ -3,7 +3,6 @@
 pj_add(pj_stere, 'stere', 'Stereographic', '\n\tAzi, Sph&Ell\n\tlat_ts=');
 pj_add(pj_ups, 'ups', 'Universal Polar Stereographic', '\n\tAzi, Sph&Ell\n\tsouth');
 
-
 function pj_ups(P) {
   P.phi0 = pj_param(P.params, "bsouth") ? -M_HALFPI : M_HALFPI;
   P.k0 = 0.994;
@@ -68,6 +67,7 @@ function pj_stere_init(P, phits) {
       case OBLIQ:
         sinph0 = sin(P.phi0);
         cosph0 = cos(P.phi0);
+        /* falls through */
       case EQUIT:
         akm1 = 2 * P.k0;
         break;
@@ -107,6 +107,7 @@ function pj_stere_init(P, phits) {
         lp.phi = -lp.phi;
         coslam = -coslam;
         sinphi = -sinphi;
+        /* falls through */
       case N_POLE:
         xy.x = akm1 * pj_tsfn (lp.phi, sinphi, P.e);
         xy.y = - xy.x * coslam;
@@ -138,6 +139,7 @@ function pj_stere_init(P, phits) {
     case N_POLE:
       coslam = - coslam;
       phi = - phi;
+      /* falls through */
     case S_POLE:
       if (fabs(phi - M_HALFPI) < TOL) f_error();
       xy.x = sinlam * (xy.y = akm1 * tan (M_FORTPI + 0.5 * phi));
@@ -170,6 +172,7 @@ function pj_stere_init(P, phits) {
         break;
       case N_POLE:
         xy.y = -xy.y;
+        /* falls through */
       case S_POLE:
         phi_l = M_HALFPI - 2 * atan (tp = - rho / akm1);
         halfpi = -M_HALFPI;
@@ -215,6 +218,7 @@ function pj_stere_init(P, phits) {
         break;
       case N_POLE:
         xy.y = -xy.y;
+        /* falls through */
       case S_POLE:
         if (fabs (rh) <= EPS10)
             lp.phi = P.phi0;

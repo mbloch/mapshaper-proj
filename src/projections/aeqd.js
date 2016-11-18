@@ -69,6 +69,7 @@ function pj_aeqd(P) {
     switch (mode) {
       case N_POLE:
         coslam = - coslam;
+        /* falls through */
       case S_POLE:
         xy.x = (rho = fabs(Mp - pj_mlfn(lp.phi, sinphi, cosphi, en))) *
             sin(lp.lam);
@@ -144,6 +145,7 @@ function pj_aeqd(P) {
       case N_POLE:
         lp.phi = -lp.phi;
         coslam = -coslam;
+        /* falls through */
       case S_POLE:
         if (fabs(lp.phi - M_HALFPI) < EPS10) f_error();
         xy.x = (xy.y = (M_HALFPI + lp.phi)) * sin(lp.lam);

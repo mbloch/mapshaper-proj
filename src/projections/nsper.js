@@ -79,6 +79,7 @@ function pj_tpers_init(P, height, tiltAngle, azimuth) {
         break;
       case N_POLE:
         coslam = - coslam;
+        /* falls through */
       case S_POLE:
         xy.y *= cosphi * coslam;
         break;

@@ -138,6 +138,7 @@ function pj_laea(P) {
         break;
       case N_POLE:
         xy.y = -xy.y;
+        /* falls through */
       case S_POLE:
         q = (xy.x * xy.x + xy.y * xy.y);
         if (!q) {
@@ -176,6 +177,7 @@ function pj_laea(P) {
         break;
       case N_POLE:
         coslam = -coslam;
+        /* falls through */
       case S_POLE:
         if (fabs(lp.phi + P.phi0) < EPS10) f_error();
         xy.y = M_FORTPI - lp.phi * 0.5;

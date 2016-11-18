@@ -1,10 +1,11 @@
 /* @requires pj_err */
 
-// Convert a formatted value in DMS or decimal degrees to radians
 function dmstor(str) {
   return dmstod(str) * DEG_TO_RAD;
 }
 
+// Parse a formatted value in DMS DM or D to a numeric value
+// Delimiters: D|d (degrees), ' (minutes), " (seconds)
 function dmstod(str) {
   var match = /(-?[0-9.]+)d?([0-9.]*)'?([0-9.]*)"?([nsew]?)$/i.exec(str);
   var d = NaN;
@@ -13,7 +14,7 @@ function dmstod(str) {
     deg = match[1] || '0';
     min = match[2] || '0';
     sec = match[3] || '0';
-    d = Number(deg) + Number(min) / 60 + Number(sec) / 3600;
+    d = (+deg) + (+min) / 60 + (+sec) / 3600;
     if (/[ws]/i.test(match[4])) {
       d = -d;
     }
