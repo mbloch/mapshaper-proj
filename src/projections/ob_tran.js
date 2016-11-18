@@ -1,12 +1,12 @@
 /* @requires aasincos */
 
-pj_add(pj_ob_trans, 'ob_trans', 'General Oblique Transformation', "\n\tMisc Sph" +
+pj_add(pj_ob_tran, 'ob_tran', 'General Oblique Transformation', "\n\tMisc Sph" +
   "\n\to_proj= plus parameters for projection" +
   "\n\to_lat_p= o_lon_p= (new pole) or" +
   "\n\to_alpha= o_lon_c= o_lat_c= or" +
   "\n\to_lon_1= o_lat_1= o_lon_2= o_lat_2=");
 
-function pj_ob_trans(P) {
+function pj_ob_tran(P) {
   var name, defn, P2;
   var lamp, cphip, sphip, phip;
   var lamc, phic, alpha;
@@ -23,6 +23,13 @@ function pj_ob_trans(P) {
     P2[key] = P[key];
   });
   defn.init(P2);
+
+  // NOT in Proj.4
+  // fix output units when doing latlong transform (see pj_transform.js)
+  if (P2.is_latlong && P.to_meter == 1) {
+    P.to_meter = DEG_TO_RAD;
+    P.fr_meter = RAD_TO_DEG;
+  }
 
   if (pj_param(P.params, "to_alpha")) {
     lamc  = pj_param(P.params, "ro_lon_c");

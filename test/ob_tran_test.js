@@ -2,7 +2,7 @@ var assert = require('assert'),
     api = require('../'),
     helpers = require('./helpers');
 
-describe('ob_trans.js', function () {
+describe('ob_tran.js', function () {
 
   var fwd_in = [
     [ 2, 1],
@@ -32,7 +32,7 @@ describe('ob_trans.js', function () {
     [-65.862385598848391,  51.830295078417215]
   ];
 
-  var sargs = "+proj=ob_trans +a=6400000 +o_proj=latlon +o_lon_p=20 +o_lat_p=20 +lon_0=180";
+  var sargs = "+proj=ob_tran +a=6400000 +o_proj=latlon +o_lon_p=20 +o_lat_p=20 +lon_0=180";
 
   helpers.fwd_test(sargs, fwd_in, s_fwd_expect);
   helpers.inv_test(sargs, inv_in, s_inv_expect);
