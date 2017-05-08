@@ -1,3 +1,6 @@
+v0.0.7
+* Fix npm publishing error
+
 v0.0.6
 * Fix error parsing some wkt PROJECTION parameters
 
