@@ -30,7 +30,8 @@ function wkt_to_proj4(str) {
 }
 
 function wkt_convert_projection(obj) {
-  var projDefn = wkt_get_proj(obj.PROJECTION);
+  var projName = obj.PROJECTION[0];
+  var projDefn = wkt_get_proj(projName);
   var wktName = obj.NAME.replace(/ /g, '_');
   var unitDefn, i, match, projStr, geogStr, paramStr;
 
@@ -38,10 +39,10 @@ function wkt_convert_projection(obj) {
   unitDefn = wkt_get_unit(obj.UNIT);
 
   if (!projDefn) {
-    wkt_error('unknown projection: ' + obj.PROJECTION);
+    wkt_error('unknown projection: ' + projName);
   }
   if (!projDefn.proj) {
-    wkt_error('projection not implemented: ' + obj.PROJECTION);
+    wkt_error('projection not implemented: ' + projName);
   }
 
   // handle several special cases by matching PROJCS wkt name

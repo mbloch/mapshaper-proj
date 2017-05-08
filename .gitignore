@@ -3,5 +3,4 @@ __*
 node_modules
 .npmignore
 .jshintrc
-CHANGELOG.md
 release*
