@@ -1,6 +1,12 @@
-v0.0.6
+v0.0.8
 * Add support for converting projection objects to WKT (for generating .prj files)
 * Add Goode Homolosine projection
+
+v0.0.7
+* Fix npm publishing error
+
+v0.0.6
+* Fix error parsing some wkt PROJECTION parameters
 
 v0.0.5
 * Add get_proj_defn(), for converting a projection object to a Proj.4 string
