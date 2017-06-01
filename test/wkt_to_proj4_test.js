@@ -1,7 +1,8 @@
 var assert = require('assert'),
-    wkt_to_proj4 = require('../').internal.wkt_to_proj4,
+    api = require('../'),
+    wkt_to_proj4 = api.internal.wkt_to_proj4,
+    wkt_from_proj4 = api.internal.wkt_from_proj4,
     fs = require('fs');
-
 
 var files = [
   ['nsper_world_esri.prj', '+proj=nsper +h=35800000 +datum=WGS84 +no_defs'],
@@ -11,17 +12,33 @@ var files = [
   ['robinson_sphere_esri.prj', '+proj=robin +a=6371000 +no_defs'],
   ['wgs84_esri.prj', '+proj=longlat +datum=WGS84'],
   ['wgs84_ogc.prj', '+proj=longlat +datum=WGS84'],
-  ['web_mercator_esri.prj', '+proj=merc +a=6378137 +no_defs'],
-  ['web_mercator_aux_sphere_esri.prj', '+proj=merc +a=6378137 +no_defs'],
+  ['web_mercator_esri.prj', '+proj=merc +lat_ts=0 +a=6378137 +no_defs'], // standard_parallel_1 not handled
+  ['web_mercator_aux_sphere_esri.prj', '+proj=merc +lat_ts=0 +a=6378137 +no_defs'], // 8 Auxiliary_Sphere_Type and standard_parallel_1
   ['web_mercator_v2_esri.prj', '+proj=merc +a=6378137 +no_defs'],
   ['web_mercator_v2_ogc.prj', '+proj=merc +a=6378137 +no_defs'],
   ['web_mercator_v3_esri.prj', '+proj=merc +a=6378137 +no_defs'],
   ['web_mercator_v3_ogc.prj', '+proj=merc +a=6378137 +no_defs'],
-  ['web_mercator_v4.prj', '+proj=merc +a=6378137 +no_defs']
-
+  ['web_mercator_v4.prj', '+proj=merc +lat_ts=0 +a=6378137 +no_defs']  //standard_parallel_1
 ];
 
-// files = [files[0]];
+// files = [files[13]];
+
+describe('proj4 -> WKT -> proj4', function () {
+  files.forEach(function(arr) {
+    var proj4 = arr[1];
+    it(proj4, function() {
+      var wkt = wkt_from_proj4(proj4);
+      var output = wkt_to_proj4(wkt);
+      if (output != proj4) {
+        console.log(proj4, '\n');
+        console.log(output)
+        console.log('\n', wkt)
+      }
+      assert.equal(output, proj4);
+    });
+
+  });
+});
 
 describe('wkt_to_proj4.js', function() {
   files.forEach(function(arr) {
@@ -31,7 +48,8 @@ describe('wkt_to_proj4.js', function() {
       var wkt = fs.readFileSync('test/prj/' + file, 'utf8');
       var output = wkt_to_proj4(wkt);
       if (output != expect) {
-        // console.log(output); console.log(); console.log(expect);
+        console.log(output);
+        console.log(expect);
       }
       assert.equal(output, expect);
     })

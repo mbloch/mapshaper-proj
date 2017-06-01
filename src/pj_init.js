@@ -112,19 +112,15 @@ function get_defaults(params, name) {
 
 function get_init(params, initStr) {
   var defn = pj_search_initcache(initStr),
-      parts, paramStr;
+      parts, opts;
   if (defn) return defn;
-  parts = initStr.split(':');
-  if (parts.length < 2) {
-    error(-3);
-  }
-  paramStr = pj_read_lib_opts(parts[0], parts[1]);
-  if (!paramStr) {
+  opts = pj_read_init_opts(initStr);
+  if (!opts) {
     error(-2);
   }
   pj_insert_initcache(initStr, defn);
   // merge init params
-  get_opt(params, paramStr);
+  get_opt(params, opts.opts);
 }
 
 // Merge params from a proj4 string

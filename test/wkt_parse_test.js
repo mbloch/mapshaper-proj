@@ -6,7 +6,6 @@ var assert = require('assert'),
 
 describe('wkt_parse.js', function() {
   it('wgs84 esri', function() {
-    return;
     var str = fs.readFileSync('test/prj/wgs84_esri.prj', 'utf8');
     var expect = {
       GEOGCS: {

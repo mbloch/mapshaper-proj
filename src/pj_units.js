@@ -25,6 +25,15 @@ var pj_units = [
   [null, null, null]
 ];
 
+function find_units_by_value(val) {
+  return pj_units.reduce(function(memo, defn) {
+    if (val == +defn[1]) {
+      memo = find_units(defn[0]);
+    }
+    return memo;
+  }, null);
+}
+
 function find_units(id) {
   var arr = pj_units.reduce(function(memo, defn) {
     return id === defn[0] ? defn : memo;

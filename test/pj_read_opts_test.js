@@ -1,10 +1,10 @@
 var assert = require('assert'),
-    read_opts = require('../').internal.pj_read_opts;
+    proj = require('../')
 
 function expect(initStr, expected) {
   it (initStr, function() {
-    var parts = initStr.split(':');
-    assert.strictEqual(read_opts('nad/' + parts[0], parts[1]), expected);
+    var o = proj.internal.pj_read_init_opts(initStr);
+    assert.strictEqual(o.opts, expected);
   });
 }
 

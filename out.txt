@@ -1,0 +1,36 @@
+
+
+  proj4 -> WKT -> proj4
+PROJECTION Transverse_Mercator
+    1) +proj=utm +zone=18 +datum=WGS84 +no_defs
+
+
+  0 passing (11ms)
+  1 failing
+
+  1) proj4 -> WKT -> proj4 +proj=utm +zone=18 +datum=WGS84 +no_defs:
+     Error: Unrecognized WKT element:
+      at wkt_error (/Users/199000/mb4/proj/dist/mproj.js:1754:9)
+      at /Users/199000/mb4/proj/dist/mproj.js:2988:7
+      at Array.forEach (native)
+      at wkt_stringify_reorder (/Users/199000/mb4/proj/dist/mproj.js:2974:15)
+      at /Users/199000/mb4/proj/dist/mproj.js:2985:30
+      at Array.forEach (native)
+      at wkt_stringify_reorder (/Users/199000/mb4/proj/dist/mproj.js:2974:15)
+      at wkt_stringify (/Users/199000/mb4/proj/dist/mproj.js:2944:28)
+      at wkt_from_proj4 (/Users/199000/mb4/proj/dist/mproj.js:3065:10)
+      at context.<anonymous> (/Users/199000/mb4/proj/test/wkt_to_proj4_beta.js:31:17)
+      at callFn (/usr/local/lib/node_modules/mocha/lib/runnable.js:266:21)
+      at Test.Runnable.run (/usr/local/lib/node_modules/mocha/lib/runnable.js:259:7)
+      at Runner.runTest (/usr/local/lib/node_modules/mocha/lib/runner.js:387:10)
+      at /usr/local/lib/node_modules/mocha/lib/runner.js:470:12
+      at next (/usr/local/lib/node_modules/mocha/lib/runner.js:312:14)
+      at /usr/local/lib/node_modules/mocha/lib/runner.js:322:7
+      at next (/usr/local/lib/node_modules/mocha/lib/runner.js:257:23)
+      at Immediate.<anonymous> (/usr/local/lib/node_modules/mocha/lib/runner.js:289:5)
+      at runCallback (timers.js:672:20)
+      at tryOnImmediate (timers.js:645:5)
+      at processImmediate [as _immediateCallback] (timers.js:617:5)
+
+
+

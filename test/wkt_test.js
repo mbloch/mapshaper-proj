@@ -2,6 +2,7 @@ var assert = require('assert'),
     mproj = require('../'),
     helpers = require('./helpers.js'),
     wkt_to_proj4 = mproj.internal.wkt_to_proj4,
+    wkt_from_proj4 = mproj.internal.wkt_from_proj4,
     fs = require('fs');
 
 // Reference data points were (mostly) generated using ogr2ogr (gdal v1.11.3_1)
@@ -68,7 +69,7 @@ var data = [
   ['eqdc_south_america_esri.prj', [-50, -30], [918910.1611633918, 190286.81628897172]],
   ['albers_australia_ogc.prj', [100, 5], [-3954044.7637846502, 2318.607577734529]],
   ['albers_australia_esri.prj', [100, 5], [-3954044.7637846502, 2318.607577734529]],
-  ['omerc_kertau_esri.prj', [100, 5], [-26896.88540470556, 27531.305812492505]],
+  ['omerc_kertau_esri.prj', [100, 5], [-26896.88540470556, 27531.305812492505]], // 10
   ['omerc_kertau_ogc.prj', [100, 5], [-26896.88540470556, 27531.305812492505]],
   // omerc_world_*, based on ESRI "World Hotine", could not be generated
   // with ogr2ogr; used cs2cs instead
@@ -81,7 +82,7 @@ var data = [
   // using lower precision for inverse conversion (the imprecision is present in Proj.4)
   ['vandg_world_esri.prj', [-90, 45], [-9360276.075469567, 5654149.842884019],, 1e-3],
   ['vandg_world_ogc.prj', [-90, 45], [-9360276.075469567, 5654149.842884019],, 1e-3],
-  ['laea_ogc.prj', [-90, 45], [783770.551150511, 48487.045984816374]],
+  ['laea_ogc.prj', [-90, 45], [783770.551150511, 48487.045984816374]], // 20
   ['laea_esri.prj', [-90, 45], [783770.551150511, 48487.045984816374]],
   ['mercator_1sp_esri.prj', [111, 12], [4010972.658327883, 2232691.567371556]],
   // ogr2ogr gave slightly different output for mercator_1sp_ogc.prj; cs2cs gave this output (why?)
@@ -92,7 +93,7 @@ var data = [
   ['cassini_esri.prj', [-60, 12], [558884.9181788838, 591657.0256998448]],
   ['azimuthal_equidistant_esri.prj', [-125, 56], [-3107373.5903223804, 2175806.4119775034]],
   ['azimuthal_equidistant_ogc.prj', [-125, 56], [-3107373.5903223804, 2175806.4119775034]],
-  ['bc_albers_esri.prj', [-125, 56], [1062242.5254453921, 1223288.3193571875]],
+  ['bc_albers_esri.prj', [-125, 56], [1062242.5254453921, 1223288.3193571875]], // 30
   ['mollweide_world_esri.prj', [50, 48], [3900693.4468074273, 5662449.7203778215]],
   ['mollweide_world_ogc.prj', [50, 48], [3900693.4468074273, 5662449.7203778215]],
   ['etrs89_austria_esri.prj', [50, 48], [3035037.6274828496, 1089081.8935549718]],
@@ -103,7 +104,7 @@ var data = [
   ['british_national_grid_esri.prj', [-1, 50], [471764.56177428545, 11571.317991569958]],
   ['british_national_grid_ogc.prj', [-1, 50], [471764.56177428545, 11571.317991569958]],
   ['equirectangular_sphere_esri.prj', [1, 40], [55597.46332227937, 4447797.06578235]],
-  ['equirectangular_sphere_ogc.prj', [1, 40], [55597.46332227937, 4447797.06578235]],
+  ['equirectangular_sphere_ogc.prj', [1, 40], [55597.46332227937, 4447797.06578235]], // 40
   ['web_mercator_v3_esri.prj', [1, 40], [111319.4907932736, 4865942.279503176]],
   ['web_mercator_v3_ogc.prj', [1, 40], [111319.4907932736, 4865942.279503176]],
   ['web_mercator_v2_esri.prj', [1, 40], [111319.4907932736, 4865942.279503176]],
@@ -126,27 +127,40 @@ var data = [
   ['wgs84_ogc.prj', [1, 2], [1, 2]]
 ];
 
-// data = [data[0]]
+// data = [data[4]]
 
-describe('wkt parsing + mproj transform', function() {
-  data.forEach(function(arr) {
-    var file = arr[0],
-        lp = arr[1],
-        xy = arr[2];
-    it('[fwd] ' + file, function() {
-      var tol = arr[3] || 1e-7;
+describe('wkt.js', function () {
+  describe('wkt parsing + mproj transform', function() {
+    data.forEach(function(arr) {
+      var file = arr[0],
+          lp = arr[1],
+          xy = arr[2];
       var wkt = fs.readFileSync('test/prj/' + file, 'utf8');
       var proj4 = wkt_to_proj4(wkt);
-      // console.log(proj4)
-      var output = mproj(proj4, lp);
-      helpers.closeToPoint(output, xy, tol);
-    })
-    it('[inv] ' + file, function() {
-      var tol = arr[4] || 1e-6;
-      var wkt = fs.readFileSync('test/prj/' + file, 'utf8');
-      var proj4 = wkt_to_proj4(wkt);
-      var output = mproj(proj4, mproj.WGS84, xy);
-      helpers.closeToPoint(output, lp, tol);
+
+      it('[fwd] ' + file, function() {
+        var tol = arr[3] || 1e-7;
+        var output = mproj(proj4, lp);
+        helpers.closeToPoint(output, xy, tol);
+      })
+      it('[inv] ' + file, function() {
+        var tol = arr[4] || 1e-6;
+        var output = mproj(proj4, mproj.WGS84, xy);
+        helpers.closeToPoint(output, lp, tol);
+      })
+      it('[fwd] ' + file + ' proj4 -> wkt -> proj4', function() {
+        // additional roundtrip to test wkt generation
+        var tol = arr[3] || 1e-7;
+        var wkt_2 = wkt_from_proj4(proj4);
+        var proj4_2 = wkt_to_proj4(wkt_2);
+        // console.log(">>>", file);
+        // console.log(proj4)
+        // console.log(proj4_2);
+        // console.log(wkt_2);
+        var output = mproj(proj4_2, lp);
+        helpers.closeToPoint(output, xy, tol);
+      })
     })
   })
+
 })

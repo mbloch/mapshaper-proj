@@ -2191,7 +2191,7 @@
 # Pulkovo 1942 / 3-degree Gauss-Kruger CM 72E
 <2599> +proj=tmerc +lat_0=0 +lon_0=72 +k=1 +x_0=500000 +y_0=0 +ellps=krass +towgs84=23.92,-141.27,-80.9,0,0.35,0.82,-0.12 +units=m +no_defs  <>
 # Lietuvos Koordinoei Sistema 1994 (deprecated)
-<2600> +proj=tmerc +lat_0=0 +lon_0=24 +k=0.9998 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs  <>
+<2600> +proj=tmerc +lat_0=0 +lon_0=24 +k=0.9998 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,27370,0,0 +units=m +no_defs  <>
 # Pulkovo 1942 / 3-degree Gauss-Kruger CM 75E
 <2601> +proj=tmerc +lat_0=0 +lon_0=75 +k=1 +x_0=500000 +y_0=0 +ellps=krass +towgs84=23.92,-141.27,-80.9,0,0.35,0.82,-0.12 +units=m +no_defs  <>
 # Pulkovo 1942 / 3-degree Gauss-Kruger CM 78E

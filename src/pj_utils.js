@@ -1,3 +1,4 @@
+/* @pj_param */
 
 function pj_is_latlong(P) {
   return !P || P.is_latlong;
@@ -5,11 +6,6 @@ function pj_is_latlong(P) {
 
 function pj_is_geocent(P) {
   return !P || P.is_geocent;
-}
-
-function pj_latlong_from_proj(P) {
-  var defn = '+proj=latlong' + get_geod_defn(P);
-  return pj_init(defn);
 }
 
 function get_geod_defn(P) {
@@ -48,7 +44,7 @@ function get_geod_defn(P) {
   return defn;
 }
 
-// Not in Proj.4
+
 function get_proj_defn(P) {
   // skip geodetic params and some initialization-related params
   var skip = 'datum,ellps,a,b,es,rf,f,towgs84,nadgrids,R,R_A,R_V,R_a,R_lat_a,R_lat_g,pm,init,no_defs'.split(',');

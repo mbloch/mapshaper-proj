@@ -1,32 +1,34 @@
 
-// TODO: add OGC names
-var wkt_aliases = {
-
-
-};
 
 function wkt_parse(str) {
+  return wkt_parse_reorder(wkt_unpack(str), {});
+}
+
+// Convert WKT string to a JS object
+// WKT format: http://docs.opengeospatial.org/is/12-063r5/12-063r5.html#11
+function wkt_unpack(str) {
+
   var obj;
-  // reference http://docs.opengeospatial.org/is/12-063r5/12-063r5.html#11
+  // Use regex to convert WKT to valid JSON
   str = str.replace(/""/g, '\\"'); // convert WKT doublequote to JSON escaped quote
   str = str.replace(/([A-Z0-9]+)\[/g, '["$1",'); // convert WKT entities to JSON arrays
-  // TODO: more targeted regex
-  str = str.replace(/, *([a-zA-Z]+) *(?=[,\]])/g, ',"$1"'); // wrap axis direction keywords in quotes
+  str = str.replace(/, *([a-zA-Z]+) *(?=[,\]])/g, ',"$1"'); // quote axis keywords
   // str = str.replace(/[^\]]*$/, ''); // esri .prj string may have extra stuff appended
   try {
     obj = JSON.parse(str);
   } catch(e) {
     wkt_error('unparsable WKT format');
   }
-  return wkt_reorder(obj, {});
+  return obj;
 }
 
-function wkt_harmonize_keyword(name) {
-  return wkt_aliases[name] || name;
-}
-
-function wkt_reorder(arr, obj) {
-  var name = wkt_harmonize_keyword(arr[0]),
+// Rearrange a parsed WKT file for easier traversal
+// E.g.
+//   ["WGS84", ...]  to  {NAME: "WGS84"}
+//   ["PROJECTION", "Mercator"]  to  {PROJECTION: "Mercator"}
+//   ["PARAMETER", <param1>], ...  to  {PARAMETER: [<param1>, ...]}
+function wkt_parse_reorder(arr, obj) {
+  var name = arr[0], // TODO: handle alternate OGC names
       i;
   if (name == 'GEOGCS' || name == 'GEOCCS' || name == 'PROJCS' || name == 'DATUM') {
     obj[name] = {
@@ -34,7 +36,7 @@ function wkt_reorder(arr, obj) {
     };
     for (i=2; i<arr.length; i++) {
       if (Array.isArray(arr[i])) {
-        wkt_reorder(arr[i], obj[name]);
+        wkt_parse_reorder(arr[i], obj[name]);
       } else {
         throw wkt_error("WKT parse error");
       }

@@ -26,7 +26,7 @@ function pj_param(params, code) {
     if (type == 'i') {
       val = parseInt(param);
     } else if (type == 'd') {
-      // Proj.4 handles local-specific decimal mark
+      // Proj.4 handles locale-specific decimal mark
       // TODO: what to do about NaNs
       val = pj_atof(param);
     } else if (type == 'r') {

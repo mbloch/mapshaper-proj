@@ -3,38 +3,54 @@
 
 // Return opts from a section of a config file,
 //   or null if not found or unable to read file
-function pj_read_lib_opts(file, id) {
-  var path, str;
+function pj_read_init_opts(initStr) {
+  var parts = initStr.split(':'),
+      file = parts[0],
+      id = parts[1],
+      path, o;
+  if (!id) {
+    error(-3);
+  }
   try {
-    path = require('path').join(__dirname, '../nad', file);
-    str = pj_read_opts(path, id);
+    path = require('path');
+    // assumes compiled library is in the dist/ directory
+    o = pj_read_opts(path.join(path.dirname(__filename), '../nad', file), id);
   } catch(e) {}
-  return str || null;
+  return o || null;
 }
 
 // Read projections params from a file and return in a standard format
 function pj_read_opts(path, id) {
   var contents = require('fs').readFileSync(path, 'utf8'),
-      str = '',
-      idx;
+      opts = '', comment = '',
+      idx, idx2;
   // get requested parameters
   idx = contents.indexOf('<' + id + '>');
   if (idx > -1) {
-    str = contents.substr(idx + id.length + 2);
-    str = str.substr(0, str.indexOf('<'));
-  }
-  // remove comments
-  str = str.replace(/#.*/g, '');
-  // convert all whitespace to single <sp>
-  str = str.replace(/[\s]+/g, ' ');
+    // get comment text
+    idx2 = contents.lastIndexOf('#', idx);
+    if (idx2 > -1) {
+      comment = contents.substring(idx2 + 1, idx).trim();
+      if (/\n/.test(comment)) {
+        comment = '';
+      }
+    }
+    // get projection params
+    opts = contents.substr(idx + id.length + 2);
+    opts = opts.substr(0, opts.indexOf('<'));
+    // remove comments
+    opts = opts.replace(/#.*/g, '');
+    // convert all whitespace to single <sp>
+    opts = opts.replace(/[\s]+/g, ' ');
 
-  // if '+' is missing from args, add it
-  // kludge: protect spaces in +title= opts
-  str = str.replace(/\+title=[^+]*[^ +]/g, function(match) {
-    return match.replace(/ /g, '\t');
-  });
-  str = ' ' + str;
-  str = str.replace(/ (?=[a-z])/ig, ' +');
-  str = str.replace(/\t/g, ' ');
-  return str.trim() || null;
+    // if '+' is missing from args, add it
+    // kludge: protect spaces in +title= opts
+    opts = opts.replace(/\+title=[^+]*[^ +]/g, function(match) {
+      return match.replace(/ /g, '\t');
+    });
+    opts = ' ' + opts;
+    opts = opts.replace(/ (?=[a-z])/ig, ' +');
+    opts = opts.replace(/\t/g, ' ').trim();
+  }
+  return opts ? {opts: opts, comment: comment} : null;
 }

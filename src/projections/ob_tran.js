@@ -38,7 +38,7 @@ function pj_ob_tran(P) {
 
     if (fabs(fabs(phic) - M_HALFPI) <= TOL) E_ERROR(-32);
     lamp = lamc + aatan2(-cos(alpha), -sin(alpha) * sin(phic));
-    phip = aasin(P.ctx,cos(phic) * sin(alpha));
+    phip = aasin(cos(phic) * sin(alpha));
 
   } else if (pj_param(P.params, "to_lat_p")) { /* specified new pole */
     lamp = pj_param(P.params, "ro_lon_p");

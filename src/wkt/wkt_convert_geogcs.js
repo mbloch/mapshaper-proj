@@ -10,22 +10,24 @@ function wkt_convert_geogcs(geogcs, opts) {
       rf = spheroid[2],
       str, pm;
 
-  wkt_check_units(geogcs.UNIT, 'degree');
+  // TODO: consider identifying more datums or ellipsoids by name
+  var datums = {
+    northamericandatum1983: 'NAD83',
+    northamerican1983: 'NAD83', // ESRI
+    wgs1984: 'WGS84',
+    osgb1936: 'OSGB36'
+  };
 
+  wkt_check_units(geogcs.UNIT, 'degree');
   if (aux_sphere) {
     // TODO: in addition to semimajor, ESRI supports spheres based on
     //   semiminor and authalic radii; could support these
     str = '+a=' + spheroid[1];
-  } else if (datumName == 'wgs1984') {
-    str = '+datum=WGS84';
-  } else if (datumName == 'northamerican1983') {
-    str = '+datum=NAD83';
-  } else if (datumName == 'osgb1936') {
-    str = '+datum=OSGB36';
+  } else if (datumName in datums) {
+    str = '+datum=' + datums[datumName];
   } else if (sphName == 'grs1980') {
     str = '+ellps=GRS80';
   } else {
-  // TODO: consider identifying more datums or ellipsoids by name
    str = '+a=' + a;
     if (rf > 0) {
       str += ' +rf=' + rf;
