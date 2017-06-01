@@ -54,7 +54,7 @@ function wkt_get_geogcs_name(P) {
 
 function wkt_get_ellps_name(P) {
   var ellps = find_ellps(wkt_get_ellps_id(P));
-  return ellps && ellps.name || 'Unknown ellipsoid';
+  return ellps ? ellps.name : 'Unknown ellipsoid';
 }
 
 function wkt_get_datum_name(P) {

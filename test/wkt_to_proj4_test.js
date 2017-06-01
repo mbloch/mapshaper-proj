@@ -18,11 +18,9 @@ var files = [
   ['web_mercator_v2_ogc.prj', '+proj=merc +a=6378137 +no_defs'],
   ['web_mercator_v3_esri.prj', '+proj=merc +a=6378137 +no_defs'],
   ['web_mercator_v3_ogc.prj', '+proj=merc +a=6378137 +no_defs'],
-  ['web_mercator_v4.prj', '+proj=merc +lat_ts=0 +a=6378137 +no_defs']  //standard_parallel_1
-  // ['g33_dotacional_educacion_escuelas.prj', '+proj=lcc +lon_0=-66.43333333333334 +lat_0=17.833333333333332 +lat_1=18.433333333333334 +x_0=200000 +y_0=200000 +lat_2=18.033333333333335 +ellps=GRS80 +no_defs']
+  ['web_mercator_v4.prj', '+proj=merc +lat_ts=0 +a=6378137 +no_defs'], //standard_parallel_1
+  ['g33_dotacional_educacion_escuelas.prj', '+proj=lcc +lon_0=-66.43333333333334 +lat_0=17.833333333333332 +lat_1=18.433333333333334 +x_0=200000 +y_0=200000 +lat_2=18.033333333333335 +ellps=GRS80 +no_defs']
 ];
-
-// files = [files[13]];
 
 describe('proj4 -> WKT -> proj4', function () {
   files.forEach(function(arr) {

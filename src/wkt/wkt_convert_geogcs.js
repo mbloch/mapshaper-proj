@@ -25,7 +25,8 @@ function wkt_convert_geogcs(geogcs, opts) {
     str = '+a=' + spheroid[1];
   } else if (datumName in datums) {
     str = '+datum=' + datums[datumName];
-  } else if (sphName == 'grs1980') {
+  } else if (/^grs1980/.test(sphName)) { // handle cases like "GRS 1980(IUGG, 1980)"
+    // TODO: improve support for named ellipsoids
     str = '+ellps=GRS80';
   } else {
    str = '+a=' + a;
