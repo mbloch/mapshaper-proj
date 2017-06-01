@@ -1,4 +1,4 @@
-v0.0.8
+v0.0.8 (unreleased)
 * Add support for converting projection objects to WKT (for generating .prj files)
 * Add Goode Homolosine projection
 

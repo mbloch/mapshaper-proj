@@ -13,7 +13,7 @@
 		"node": ">=0.12.0"
 	},
 	"scripts": {
-		"test": "mocha --check-leaks -R dot",
+		"test": "mocha --recursive --check-leaks -R dot",
 		"pretest": "node build",
 		"prepublish": "npm test",
 		"postpublish": "./release"
