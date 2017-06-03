@@ -135,7 +135,7 @@ function pj_etmerc(P) {
       tmp = clenS(utg, 2*Cn, 2*Ce);
       Cn += tmp[0];
       Ce += tmp[1];
-      Ce = atan(sinh(Ce)); /* Replaces: Ce = 2*(atan(exp(Ce)) - FORTPI); */
+      Ce = atan(sinh(Ce)); /* Replaces: Ce = 2*(atan(exp(Ce)) - M_FORTPI); */
       /* compl. sph. LAT -> Gaussian LAT, LNG */
       sin_Cn = sin(Cn);
       cos_Cn = cos(Cn);
