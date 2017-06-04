@@ -95,7 +95,7 @@ function pj_omerc(P) {
   if (no_off)
     u_0 = 0;
   else {
-    u_0 = fabs(ArB * atan2(sqrt(D * D - 1), cos(alpha_c)));
+    u_0 = fabs(ArB * atan(sqrt(D * D - 1) / cos(alpha_c)));
     if (P.phi0 < 0)
         u_0 = - u_0;
   }
