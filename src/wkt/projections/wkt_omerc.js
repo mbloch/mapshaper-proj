@@ -30,9 +30,9 @@ function wkt_proj4_is_omerc(P) {
 }
 
 function wkt_proj4_is_omerc_A(P) {
-  return wkt_proj4_is_omerc(P) && 'no_uoff' in P.params;
+  return wkt_proj4_is_omerc(P) && ('no_uoff' in P.params || 'no_off' in P.params);
 }
 
 function wkt_proj4_is_omerc_B(P) {
-  return wkt_proj4_is_omerc(P) && 'no_uoff' in P.params === false;
+  return wkt_proj4_is_omerc(P) && !wkt_proj4_is_omerc_A(P);
 }
