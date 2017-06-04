@@ -44,16 +44,16 @@ function pj_stere_init(P, phits) {
             akm1 = 2 * P.k0 /
                sqrt(pow(1 + P.e, 1 + P.e) * pow(1 - P.e, 1 - P.e));
         else {
-            akm1 = cos (phits) /
-               pj_tsfn (phits, t = sin(phits), P.e);
+            akm1 = cos(phits) /
+               pj_tsfn(phits, t = sin(phits), P.e);
             t *= P.e;
             akm1 /= sqrt(1 - t * t);
         }
         break;
       case EQUIT:
       case OBLIQ:
-        t = sin (P.phi0);
-        X = 2 * atan (ssfn(P.phi0, t, P.e)) - M_HALFPI;
+        t = sin(P.phi0);
+        X = 2 * atan(ssfn(P.phi0, t, P.e)) - M_HALFPI;
         t *= P.e;
         akm1 = 2 * P.k0 * cos(P.phi0) / sqrt(1 - t * t);
         sinX1 = sin(X);
@@ -99,7 +99,8 @@ function pj_stere_init(P, phits) {
         xy.x = A * cosX;
         break;
       case EQUIT:
-        A = 2 * akm1 / (1 + cosX * coslam);
+        /* zero division is handled in pj_fwd */
+        A = akm1 / (1 + cosX * coslam);
         xy.y = A * sinX;
         xy.x = A * cosX;
         break;

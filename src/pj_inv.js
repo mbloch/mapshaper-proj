@@ -32,7 +32,8 @@ function pj_inv(xy, P) {
       lp.lam = lp.phi = HUGE_VAL;
     }
   }
-  if (ctx.last_errno || isNaN(lp.lam) || isNaN(lp.phi)) {
+  if (ctx.last_errno || !isFinite(lp.lam) || !isFinite(lp.phi)) {
+    // isFinite() catches NaN and +/- Infinity but not null
     lp.lam = lp.phi = HUGE_VAL;
   }
   return lp;

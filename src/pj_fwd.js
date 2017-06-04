@@ -32,7 +32,8 @@ function pj_fwd(lp, P) {
       xy.x = xy.y = HUGE_VAL;
     }
   }
-  if (ctx.last_errno || isNaN(xy.x) || isNaN(xy.y)) {
+  if (ctx.last_errno || !isFinite(xy.x) || !isFinite(xy.y)) {
+    // isFinite() catches NaN and +/- Infinity but not null
     xy.x = xy.y = HUGE_VAL;
   }
   return xy;
