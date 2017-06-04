@@ -4,8 +4,8 @@ function pj_ocea(P) {
   var phi_0 = 0,
       phi_1, phi_2, lam_1, lam_2, lonz, alpha,
       rok, rtk, sinphi, cosphi, singam, cosgam;
-  rok = P.a / P.k0;
-  rtk = P.a * P.k0;
+  rok = 1 / P.k0;
+  rtk = P.k0;
   /*If the keyword "alpha" is found in the sentence then use 1point+1azimuth*/
   if (pj_param(P.params, "talpha")) {
     /*Define Pole of oblique transformation from 1 point & 1 azimuth*/
@@ -27,6 +27,11 @@ function pj_ocea(P) {
       sin(phi_1) * cos(phi_2) * cos(lam_2),
       sin(phi_1) * cos(phi_2) * sin(lam_2) -
       cos(phi_1) * sin(phi_2) * sin(lam_1) );
+
+    /* take care of P->lam0 wrap-around when +lam_1=-90*/
+    if (lam_1 == -M_HALFPI)
+      singam = -singam;
+
     /*Equation 9-2 page 80 (http://pubs.usgs.gov/pp/1395/report.pdf)*/
     sinphi = atan(-cos(singam - lam_1) / tan(phi_1));
   }
