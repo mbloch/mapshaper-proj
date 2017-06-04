@@ -123,7 +123,8 @@ function pj_tmerc(P) {
     var g = 0.5 * (h - 1 / h);
     h = cos (P.phi0 + xy.y / esp);
     lp.phi = asin(sqrt((1 - h * h) / (1 + g * g)));
-    if (xy.y < 0) lp.phi = -lp.phi;
+    /* Make sure that phi is on the correct hemisphere when false northing is used */
+    if (xy.y < 0 && -lp.phi + P.phi0 < 0) lp.phi = -lp.phi;
     lp.lam = (g || h) ? atan2(g, h) : 0;
   }
 }
