@@ -66,10 +66,6 @@ function pj_omerc(P) {
           gamma = alpha_c;
     } else
         alpha_c = asin(D*sin(gamma0 = gamma));
-    if ((con = fabs(alpha_c)) <= TOL ||
-        fabs(con - M_PI) <= TOL ||
-        fabs(fabs(P.phi0) - M_HALFPI) <= TOL)
-        e_error(-32);
     P.lam0 = lamc - asin(0.5 * (F - 1 / F) * tan(gamma0)) / B;
   } else {
     H = pow(pj_tsfn(phi1, sin(phi1), P.e), B);
