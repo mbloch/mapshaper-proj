@@ -48,7 +48,7 @@ describe('aea.js', function () {
       [-0.0017966300767030448,  -0.00090437009538581453]
     ];
 
-    var sargs = "+proj=aea   +a=6400000    +lat_1=0 +lat_2=2";
+    var sargs = "+proj=aea   +R=6400000    +lat_1=0 +lat_2=2";
     var eargs = "+proj=aea   +ellps=GRS80  +lat_1=0 +lat_2=2";
 
     helpers.fwd_test(sargs, fwd_in, s_fwd_expect);
