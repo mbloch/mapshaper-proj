@@ -60,6 +60,7 @@ function pj_robin(P) {
   function s_fwd(lp, xy) {
     var i, dphi;
     i = floor((dphi = fabs(lp.phi)) * C1);
+    if (i < 0) f_error();
     if (i >= NODES) i = NODES - 1;
     dphi = RAD_TO_DEG * (dphi - RC1 * i);
     xy.x = V(X[i], dphi) * FXC * lp.lam;
@@ -79,7 +80,11 @@ function pj_robin(P) {
       }
     } else { /* general problem */
       /* in Y space, reduce to table interval */
-      for (i = floor(lp.phi * NODES);;) {
+      i = floor(lp.phi * NODES);
+      if (i < 0 || i >= NODES) {
+        return i_error();
+      }
+      for (;;) {
         if (Y[i][0] > lp.phi) --i;
         else if (Y[i+1][0] <= lp.phi) ++i;
         else break;
