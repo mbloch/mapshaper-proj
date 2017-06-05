@@ -39,6 +39,7 @@ PJ_airy.c
 PJ_aitoff.c
 pj_gauss.c
 pj_init.c
+PJ_nzmg.c
 PJ_omerc.c
 PJ_sterea.c
 proj_etmerc.c
@@ -55,3 +56,8 @@ Copyright (c) 2016, Thomas Knudsen
 PJ_times.c
 
 Copyright (c) 2016, Kristian Evers
+
+-------------
+PJ_krovak.c
+
+Copyright (c) 2001, Thomas Flemming, tf@ttqv.com
