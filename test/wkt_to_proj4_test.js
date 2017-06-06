@@ -19,6 +19,12 @@ var files = [
   ['web_mercator_v3_esri.prj', '+proj=merc +a=6378137 +no_defs'],
   ['web_mercator_v3_ogc.prj', '+proj=merc +a=6378137 +no_defs'],
   ['web_mercator_v4.prj', '+proj=merc +lat_ts=0 +a=6378137 +no_defs'], //standard_parallel_1
+  ['nzgd_ogc.prj', '+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +datum=nzgd49 +no_defs'],
+  ['nzgd_esri.prj', '+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +datum=nzgd49 +no_defs'],
+  // http://epsg.io/2393 and https://github.com/proj4js/proj4js/issues/222
+  ['tmerc_epsg2393_ogc.prj', '+proj=tmerc +lon_0=27 +x_0=3500000 +ellps=intl +towgs84=-96.062,-82.428,-121.753,4.801,0.345,-1.376,1.496 +no_defs'],
+  // ESRI wkt from epsg is missing wgs84 params -- test fails
+  // ['tmerc_epsg2393_esri.prj', '+proj=tmerc +lon_0=27 +x_0=3500000 +ellps=intl +towgs84=-96.062,-82.428,-121.753,4.801,0.345,-1.376,1.496 +no_defs'],
   ['g33_dotacional_educacion_escuelas.prj', '+proj=lcc +lon_0=-66.43333333333334 +lat_0=17.833333333333332 +lat_1=18.433333333333334 +x_0=200000 +y_0=200000 +lat_2=18.033333333333335 +ellps=GRS80 +no_defs']
 ];
 
@@ -29,7 +35,7 @@ describe('proj4 -> WKT -> proj4', function () {
       var wkt = wkt_from_proj4(proj4);
       var output = wkt_to_proj4(wkt);
       if (output != proj4) {
-        console.log(proj4, '\n');
+        console.log(proj4);
         console.log(output)
         console.log('\n', wkt)
       }
@@ -39,7 +45,7 @@ describe('proj4 -> WKT -> proj4', function () {
   });
 });
 
-describe('wkt_to_proj4.js', function() {
+describe('WKT -> proj4', function() {
   files.forEach(function(arr) {
     var file = arr[0],
         expect = arr[1];
@@ -49,6 +55,7 @@ describe('wkt_to_proj4.js', function() {
       if (output != expect) {
         console.log(output);
         console.log(expect);
+        console.log('\n', wkt)
       }
       assert.equal(output, expect);
     })

@@ -17,7 +17,6 @@
   ['laborde', 'Laborde_Oblique_Mercator'],
   ['mbtfps', ''],
   ['nell_h', ''],
-  ['nzmg', 'New_Zealand_Map_Grid'],
   ['ocea', ''], // see OneNote notes
   ['qua_aut', 'Quartic_Authalic'],
   ['', 'Swiss_Oblique_Cylindrical'], // http://www.remotesensing.org/geotiff/proj_list/swiss_oblique_cylindrical.html
@@ -49,6 +48,7 @@
   ['mill', 'Miller_Cylindrical'],
   ['moll', 'Mollweide'],
   ['nsper', 'Vertical_Near_Side_Perspective', 'h'],
+  ['nzmg', 'New_Zealand_Map_Grid', 'lat_0b'],
   ['ortho', 'Orthographic', 'lat_0b'],
   ['poly', 'Polyconic'],
   ['robin', 'Robinson'],
