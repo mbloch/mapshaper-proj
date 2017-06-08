@@ -28,9 +28,8 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 
 --------------
-Following is a list of ported Proj.4 source code files that include copies of
-the above MIT license in comment blocks, and their respective copyright
-holders.
+Following is a list of ported Proj.4 source code files that include the names
+of additional copyright holders, in accordance with the above license.
 
 --------------
 PJ_aea.c
@@ -61,3 +60,8 @@ Copyright (c) 2016, Kristian Evers
 PJ_krovak.c
 
 Copyright (c) 2001, Thomas Flemming, tf@ttqv.com
+
+-------------
+PJ_qsc.c
+
+Copyright (c) 2011, 2012  Martin Lambers <marlam@marlam.de>
