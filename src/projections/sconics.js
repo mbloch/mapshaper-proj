@@ -70,7 +70,7 @@ function pj_sconic(P, type) {
     case 'PCONIC':
       n = sin(sig);
       c2 = cos(del);
-      c1 = 1. / tan(sig);
+      c1 = 1 / tan(sig);
       if (fabs(del = P.phi0 - sig) - EPS >= M_HALFPI)
         E_ERROR(-43);
       rho_0 = c2 * (c1 - tan(del));
