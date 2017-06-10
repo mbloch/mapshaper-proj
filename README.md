@@ -8,7 +8,7 @@ Why create another Proj.4 port, when there is already [proj4js](https://github.c
 
 * No support for datum transformations using grid files.
 
-* About 1/3 of Proj.4's 130-odd projections have not been ported.
+* About 1/5 of Proj.4's 130-odd projections have not been ported.
 
 
 ## Command line programs: mproj and mcs2cs

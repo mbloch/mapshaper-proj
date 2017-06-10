@@ -1,3 +1,6 @@
+v0.0.9
+* 
+
 v0.0.8
 * Add support for converting Proj.4 definitions to WKT (for generating .prj files)
 * Add Goode Homolosine projection

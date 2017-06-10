@@ -70,7 +70,6 @@ describe('mod_ster.js', function () {
       [-165.002520561440946, -10.0012411200022999]
     ];
 
-
     var sargs = "+proj=lee_os   +a=6400000    +lat_1=0.5 +lat_2=2 +n=0.5";
 
     helpers.fwd_test(sargs, fwd_in, s_fwd_expect);
