@@ -1,5 +1,6 @@
 v0.0.9
-* 
+* Ported many more projections from Proj.4.
+* Ported commits to Proj.4 through 2017-04-10.
 
 v0.0.8
 * Add support for converting Proj.4 definitions to WKT (for generating .prj files)
