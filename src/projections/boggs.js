@@ -9,6 +9,7 @@ function pj_boggs(P) {
       FXC2 = 1.11072,
       FYC = 0.49931;
   P.fwd = s_fwd;
+  P.es = 0;
 
   function s_fwd(lp, xy) {
     var theta, th1, c, i;
