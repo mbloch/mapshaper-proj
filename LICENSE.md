@@ -58,6 +58,7 @@ Copyright (c) 2016, Kristian Evers
 
 -------------
 PJ_krovak.c
+PJ_healpix.c
 
 Copyright (c) 2001, Thomas Flemming, tf@ttqv.com
 
@@ -65,3 +66,5 @@ Copyright (c) 2001, Thomas Flemming, tf@ttqv.com
 PJ_qsc.c
 
 Copyright (c) 2011, 2012  Martin Lambers <marlam@marlam.de>
+
+-------------

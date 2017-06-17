@@ -17,8 +17,8 @@ var fabs = Math.abs,
     hypot = Math.hypot,
     sinh = Math.sinh,
     cosh = Math.cosh,
-    min = Math.min,
-    max = Math.max;
+    MIN = Math.min,
+    MAX = Math.max;
 
 // constants from math.h
 var HUGE_VAL = Infinity,
