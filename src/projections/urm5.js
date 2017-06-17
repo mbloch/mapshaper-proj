@@ -4,6 +4,7 @@ pj_add(pj_urm5, 'urm5', 'Urmaev V', '\n\tPCyl., Sph., no inv.\n\tn= q= alpha=');
 
 function pj_urm5(P) {
   var m, rmn, q3, n;
+  var alpha, t;
   n = pj_param(P.params, "dn");
   if (n > 0 && n <= 1 === false) {
     e_error(-40);
