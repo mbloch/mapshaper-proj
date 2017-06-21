@@ -73,6 +73,12 @@ function pj_init(args) {
   P.is_long_wrap_set = pj_param(params, 'tlon_wrap');
   if (P.is_long_wrap_set) {
     P.long_wrap_center = pj_param(params, 'rlon_wrap');
+    // Don't accept excessive values otherwise we might perform badly
+    // when correcting longitudes around it
+    // The test is written this way to error on long_wrap_center "=" NaN
+    if(!(fabs(P.long_wrap_center) < 10 * M_TWOPI)) {
+      error(-14);
+    }
   }
 
   if (pj_param(params, 'saxis')) {

@@ -57,6 +57,9 @@ function pj_ell_set(P) {
       a = sqrt(a * b);
       es = 0;
     } else if (pj_param(params, 'bR_h')) {
+      if (a + b === 0) {
+        error(-20);
+      }
       a = 2 * a * b / (a + b);
       es = 0;
     } else if (i = pj_param(params, 'tR_lat_a') || pj_param(params, 'tR_lat_g')) {

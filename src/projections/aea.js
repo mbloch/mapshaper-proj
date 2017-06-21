@@ -35,6 +35,7 @@ function pj_aea_init(P, phi1, phi2) {
       cosphi = cos(phi2);
       m2 = pj_msfn(sinphi, cosphi, P.es);
       ml2 = pj_qsfn(sinphi, P.e, P.one_es);
+      // Ignoring Proj.4 div0 check (above checks should prevent this)
       n = (m1 * m1 - m2 * m2) / (ml2 - ml1);
     }
     ec = 1 - 0.5 * P.one_es * log((1 - P.e) / (1 + P.e)) / P.e;

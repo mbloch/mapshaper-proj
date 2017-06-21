@@ -13,8 +13,10 @@ function pj_ob_tran(P) {
   var lam1, lam2, phi1, phi2, con;
   var TOL = 1e-10;
 
-  name = pj_param(P.params, 'so_proj') || E_ERROR(-26);
-  defn = pj_list[name] || E_ERROR(-37);
+  name = pj_param(P.params, 'so_proj');
+  defn = pj_list[name];
+  if (!name) e_error(-26);
+  if (!defn || name == 'ob_tran') e_error(-37);
   P.es = 0;
   // copy params to second object
   P2 = {};
@@ -36,7 +38,7 @@ function pj_ob_tran(P) {
     phic  = pj_param(P.params, "ro_lat_c");
     alpha = pj_param(P.params, "ro_alpha");
 
-    if (fabs(fabs(phic) - M_HALFPI) <= TOL) E_ERROR(-32);
+    if (fabs(fabs(phic) - M_HALFPI) <= TOL) e_error(-32);
     lamp = lamc + aatan2(-cos(alpha), -sin(alpha) * sin(phic));
     phip = aasin(cos(phic) * sin(alpha));
 
@@ -53,7 +55,7 @@ function pj_ob_tran(P) {
     if (fabs(phi1 - phi2) <= TOL ||
         (con = fabs(phi1)) <= TOL ||
         fabs(con - M_HALFPI) <= TOL ||
-        fabs(fabs(phi2) - M_HALFPI) <= TOL) E_ERROR(-33);
+        fabs(fabs(phi2) - M_HALFPI) <= TOL) e_error(-33);
     lamp = atan2(cos(phi1) * sin(phi2) * cos(lam1) -
         sin(phi1) * cos(phi2) * cos(lam2),
         sin(phi1) * cos(phi2) * sin(lam2) -
