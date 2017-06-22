@@ -1,3 +1,6 @@
+v0.0.10
+* Ported more projections and fixes from Proj.4.
+
 v0.0.9
 * Ported many more projections from Proj.4.
 * Ported commits to Proj.4 through 2017-04-10.
