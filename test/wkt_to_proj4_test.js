@@ -5,6 +5,7 @@ var assert = require('assert'),
     fs = require('fs');
 
 var files = [
+  ['tmerc_wuhan_ejdl.prj', '+proj=tmerc +x_0=500000 +lon_0=114 +ellps=krass +no_defs'],
   ['nsper_world_esri.prj', '+proj=nsper +h=35800000 +datum=WGS84 +no_defs'],
   ['utm_18N_esri.prj', '+proj=utm +zone=18 +datum=WGS84 +no_defs'],
   ['stateplane_ny_li_nad83_feet_esri.prj', '+proj=lcc +x_0=300000 +lon_0=-74 +lat_1=40.66666666666666 +lat_2=41.03333333333333 +lat_0=40.16666666666666 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs'],

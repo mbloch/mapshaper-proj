@@ -1,3 +1,7 @@
+v0.0.11
+* [wkt] Added Gauss_Kruger as an alias of Transverse_Mercator for parsing WKT.
+* Changed name of "krass" ellipsoid from "Krassovsky, 1942" to "Krasovsky 1940".
+
 v0.0.10
 * Ported more projections and fixes from Proj.4.
 

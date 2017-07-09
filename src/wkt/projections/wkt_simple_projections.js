@@ -54,7 +54,7 @@
   ['robin', 'Robinson'],
   ['sinu', 'Sinusoidal'],
   ['sterea', 'Oblique_Stereographic,Double_Stereographic'], // http://geotiff.maptools.org/proj_list/oblique_stereographic.html
-  ['tmerc', 'Transverse_Mercator', 'lat_0b'],
+  ['tmerc', 'Transverse_Mercator,Gauss_Kruger', 'lat_0b'],
   ['tpeqd', 'Two_Point_Equidistant', 'lat_1b,lat_2b,lon_1,lon_2'],
   // ['vandg', 'VanDerGrinten,Van_der_Grinten_I'], // slight complication, see wkt_vandg.js
   ['wag1', 'Wagner_I'],

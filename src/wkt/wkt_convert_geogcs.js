@@ -37,7 +37,7 @@ function wkt_convert_geogcs(geogcs, opts) {
 }
 
 function wkt_find_ellps_id(spheroid) {
-  // TODO: validate ellipsoid parameters?
+  // TODO: match on ellipsoid parameters rather than name
   var aliases = {
     international1924: "intl"
   };
