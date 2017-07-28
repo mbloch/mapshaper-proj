@@ -1,3 +1,6 @@
+v0.0.12
+* Added internal function for caching the contents of a proj definition file, to bypass loading from a file.
+
 v0.0.11
 * [wkt] Added Gauss_Kruger as an alias of Transverse_Mercator for parsing WKT.
 * Changed name of "krass" ellipsoid from "Krassovsky, 1942" to "Krasovsky 1940".
