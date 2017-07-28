@@ -8,6 +8,17 @@ function expect(initStr, expected) {
   });
 }
 
+describe('mproj_insert_libcache() pj_read_opts()', function () {
+  it('add a library as a string and read a definition from it', function () {
+    var str = '# ED50(ED77)\n<4154> +proj=longlat +ellps=intl +towgs84=-117,-132,-164,0,0,0,0 +no_defs  <>';
+    proj.internal.mproj_insert_libcache('test', str)
+    assert.deepEqual(proj.internal.pj_read_init_opts('test:4154'), {
+      opts: '+proj=longlat +ellps=intl +towgs84=-117,-132,-164,0,0,0,0 +no_defs',
+      comment: 'ED50(ED77)'
+    });
+  })
+})
+
 describe('pj_open_lib.js pj_read_opts()', function () {
   expect('esri:2000', '+proj=tmerc +lat_0=0 +lon_0=-62 +k=0.999500 +x_0=400000 +y_0=0 +ellps=clrk80 +units=m +no_defs');
   expect('nad27:101', '+proj=tmerc +datum=NAD27 +lon_0=-85d50 +lat_0=30d30 +k=.99996 +x_0=152400.3048006096 +y_0=0 +no_defs');

@@ -117,16 +117,16 @@ function get_defaults(params, name) {
 }
 
 function get_init(params, initStr) {
-  var defn = pj_search_initcache(initStr),
-      parts, opts;
-  if (defn) return defn;
-  opts = pj_read_init_opts(initStr);
-  if (!opts) {
+  var defn = pj_search_initcache(initStr);
+  if (!defn) {
+    defn = pj_read_init_opts(initStr);
+    pj_insert_initcache(initStr, defn);
+  }
+  if (!defn) {
     error(-2);
   }
-  pj_insert_initcache(initStr, defn);
   // merge init params
-  get_opt(params, opts.opts);
+  get_opt(params, defn.opts);
 }
 
 // Merge params from a proj4 string

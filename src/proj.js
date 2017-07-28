@@ -51,7 +51,8 @@ api.internal = {
   wkt_from_proj4: wkt_from_proj4,
   wkt_make_projcs: wkt_make_projcs,
   wkt_get_geogcs_name: wkt_get_geogcs_name,
-  wkt_stringify: wkt_stringify
+  wkt_stringify: wkt_stringify,
+  mproj_insert_libcache: mproj_insert_libcache
 };
 
 if (typeof define == 'function' && define.amd) {

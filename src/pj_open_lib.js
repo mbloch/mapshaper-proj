@@ -1,28 +1,41 @@
 // Replacement functions for Proj.4 pj_open_lib() (see pj_open_lib.c)
 // and get_opt() (see pj_init.c)
 
+var libcache = {};
+
+// add a definition library without reading from a file (for use by web app)
+function mproj_insert_libcache(libId, contents) {
+  libcache[libId] = contents;
+}
+
 // Return opts from a section of a config file,
 //   or null if not found or unable to read file
 function pj_read_init_opts(initStr) {
   var parts = initStr.split(':'),
-      file = parts[0],
-      id = parts[1],
-      path, o;
-  if (!id) {
+      libId = parts[0],
+      crsId = parts[1],
+      libStr = '',
+      libPath, path, o;
+  if (!crsId) {
     error(-3);
   }
-  try {
-    path = require('path');
-    // assumes compiled library is in the dist/ directory
-    o = pj_read_opts(path.join(path.dirname(__filename), '../nad', file), id);
-  } catch(e) {}
-  return o || null;
+  libStr = libcache[libId];
+  if (!libStr) {
+    try {
+      // path to library assumes mproj script is in the dist/ directory
+      // read error is handled elsewhere
+      path = require('path');
+      libPath = path.join(path.dirname(__filename), '../nad', libId);
+      libStr = require('fs').readFileSync(libPath, 'utf8');
+      libcache[libId] = libStr;
+    } catch(e) {}
+  }
+  return pj_find_opts(libStr, crsId) || null;
 }
 
-// Read projections params from a file and return in a standard format
-function pj_read_opts(path, id) {
-  var contents = require('fs').readFileSync(path, 'utf8'),
-      opts = '', comment = '',
+// Find params in contents of an init file
+function pj_find_opts(contents, id) {
+  var opts = '', comment = '',
       idx, idx2;
   // get requested parameters
   idx = contents.indexOf('<' + id + '>');
