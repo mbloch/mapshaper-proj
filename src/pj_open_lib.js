@@ -8,18 +8,21 @@ function mproj_insert_libcache(libId, contents) {
   libcache[libId] = contents;
 }
 
+function mproj_search_libcache(libId) {
+  return libcache[libId] || null;
+}
+
 // Return opts from a section of a config file,
 //   or null if not found or unable to read file
 function pj_read_init_opts(initStr) {
   var parts = initStr.split(':'),
       libId = parts[0],
       crsId = parts[1],
-      libStr = '',
-      libPath, path, o;
+      libStr, libPath, path, o;
   if (!crsId) {
     error(-3);
   }
-  libStr = libcache[libId];
+  libStr = mproj_search_libcache(libId);
   if (!libStr) {
     try {
       // path to library assumes mproj script is in the dist/ directory
@@ -30,7 +33,7 @@ function pj_read_init_opts(initStr) {
       libcache[libId] = libStr;
     } catch(e) {}
   }
-  return pj_find_opts(libStr, crsId) || null;
+  return libStr ? pj_find_opts(libStr, crsId) : null;
 }
 
 // Find params in contents of an init file

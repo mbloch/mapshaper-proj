@@ -1,3 +1,6 @@
+v0.0.13
+* Added function to search for a cached proj definition file (for mapshaper integration).
+
 v0.0.12
 * Added internal function for caching the contents of a proj definition file, to bypass loading from a file.
 

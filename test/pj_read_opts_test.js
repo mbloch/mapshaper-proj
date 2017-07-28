@@ -11,7 +11,9 @@ function expect(initStr, expected) {
 describe('mproj_insert_libcache() pj_read_opts()', function () {
   it('add a library as a string and read a definition from it', function () {
     var str = '# ED50(ED77)\n<4154> +proj=longlat +ellps=intl +towgs84=-117,-132,-164,0,0,0,0 +no_defs  <>';
-    proj.internal.mproj_insert_libcache('test', str)
+    proj.internal.mproj_insert_libcache('test', str);
+    assert(proj.internal.mproj_search_libcache('test') == str);
+    assert(proj.internal.mproj_search_libcache('missing') === null);
     assert.deepEqual(proj.internal.pj_read_init_opts('test:4154'), {
       opts: '+proj=longlat +ellps=intl +towgs84=-117,-132,-164,0,0,0,0 +no_defs',
       comment: 'ED50(ED77)'
