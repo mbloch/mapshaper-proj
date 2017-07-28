@@ -2,7 +2,11 @@
 	"name": "mproj",
 	"version": "0.0.11",
 	"description": "A JavaScript port of the Proj.4 cartographic projections library",
-	"keywords": ["projections", "proj4", "cartography"],
+	"keywords": [
+		"projections",
+		"proj4",
+		"cartography"
+	],
 	"author": "Matthew Bloch <masiyou@gmail.com>",
 	"license": "MIT",
 	"repository": {

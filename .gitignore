@@ -5,3 +5,4 @@ node_modules
 .jshintrc
 release*
 dist/*.js
+package-lock.json
