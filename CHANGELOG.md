@@ -1,3 +1,6 @@
+v0.0.14
+* Ignore +nadgrids=@null parameters (instead of throwing an error).
+
 v0.0.13
 * Added function to search for a cached proj definition file (for mapshaper integration).
 

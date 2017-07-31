@@ -20,11 +20,14 @@ function pj_datum_set(P) {
     }
   }
 
-  if (nadgrids = pj_param(P.params, "snadgrids")) {
+  nadgrids = pj_param(P.params, "snadgrids");
+  if (nadgrids && nadgrids != '@null') {
     fatal("+nadgrids is not implemented");
-  } else if (catalog = pj_param(P.params, "scatalog")) {
+  }
+  if (catalog = pj_param(P.params, "scatalog")) {
     fatal("+catalog is not implemented");
-  } else if (towgs84 = pj_param(P.params, "stowgs84")) {
+  }
+  if (towgs84 = pj_param(P.params, "stowgs84")) {
     towgs84.split(',').forEach(function(s, i) {
       params[i] = pj_atof(s) || 0;
     });

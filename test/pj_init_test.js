@@ -16,6 +16,10 @@ describe('pj_init.js', function () {
       })
     }
 
+    // webmercator (defn contains +nadgrids=@null)
+    test('+init=epsg:3785', [10, 10, 0],
+      [1113194.90793273434974, 1118889.97485795826651, 0]);
+
     // NAD83 / Idaho Central (ftUS)
     test('+init=epsg:2242', [-90, 45, 0],
       [7843758.87995513156056, 2161449.59161074040458, 0]);
