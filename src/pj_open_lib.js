@@ -19,7 +19,7 @@ function pj_read_init_opts(initStr) {
       libId = parts[0],
       crsId = parts[1],
       libStr, libPath, path, o;
-  if (!crsId) {
+  if (!crsId || !libId) {
     error(-3);
   }
   libStr = mproj_search_libcache(libId);
@@ -31,7 +31,9 @@ function pj_read_init_opts(initStr) {
       libPath = path.join(path.dirname(__filename), '../nad', libId);
       libStr = require('fs').readFileSync(libPath, 'utf8');
       libcache[libId] = libStr;
-    } catch(e) {}
+    } catch(e) {
+      fatal('unable to read from \'init\' file named ' + libId); // not in Proj.4
+    }
   }
   return libStr ? pj_find_opts(libStr, crsId) : null;
 }

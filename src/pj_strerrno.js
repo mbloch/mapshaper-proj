@@ -2,7 +2,7 @@
 var pj_err_list = [
   "no arguments in initialization list",  /*  -1 */
   "no options found in 'init' file",    /*  -2 */
-  "no colon in init= string",     /*  -3 */
+  "invalid init= string",   /*  -3 */ // Proj.4 text: "no colon in init= string",
   "projection not named",       /*  -4 */
   "unknown projection id",      /*  -5 */
   "effective eccentricity = 1",      /*  -6 */
