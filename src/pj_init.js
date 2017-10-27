@@ -76,7 +76,7 @@ function pj_init(args) {
     // Don't accept excessive values otherwise we might perform badly
     // when correcting longitudes around it
     // The test is written this way to error on long_wrap_center "=" NaN
-    if(!(fabs(P.long_wrap_center) < 10 * M_TWOPI)) {
+    if (fabs(P.long_wrap_center) < 10 * M_TWOPI === false) {
       error(-14);
     }
   }

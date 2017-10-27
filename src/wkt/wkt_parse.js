@@ -1,19 +1,32 @@
 
 
 function wkt_parse(str) {
-  return wkt_parse_reorder(wkt_unpack(str), {});
+  var obj = {};
+  wkt_unpack(str).forEach(function(part) {
+    wkt_parse_reorder(part, obj);
+  });
+  return obj;
 }
 
 // Convert WKT string to a JS object
 // WKT format: http://docs.opengeospatial.org/is/12-063r5/12-063r5.html#11
 function wkt_unpack(str) {
-
   var obj;
-  // Use regex to convert WKT to valid JSON
-  str = str.replace(/""/g, '\\"'); // convert WKT doublequote to JSON escaped quote
-  str = str.replace(/([A-Z0-9]+)\[/g, '["$1",'); // convert WKT entities to JSON arrays
-  str = str.replace(/, *([a-zA-Z]+) *(?=[,\]])/g, ',"$1"'); // quote axis keywords
+  // Convert WKT escaped quote to JSON escaped quote
+  str = str.replace(/""/g, '\\"');
+
+  // Convert WKT entities to JSON arrays
+  str = str.replace(/([A-Z0-9]+)\[/g, '["$1",');
+
+  // Enclose axis keywords in quotes to create valid JSON strings
+  str = str.replace(/, *([a-zA-Z]+) *(?=[,\]])/g, ',"$1"');
+
   // str = str.replace(/[^\]]*$/, ''); // esri .prj string may have extra stuff appended
+
+  // WKT may have a "VERTCS" section after "PROJCS" section; enclosing contents
+  //   in brackets to create valid JSON array.
+  str = '[' + str + ']';
+
   try {
     obj = JSON.parse(str);
   } catch(e) {
@@ -22,7 +35,7 @@ function wkt_unpack(str) {
   return obj;
 }
 
-// Rearrange a parsed WKT file for easier traversal
+// Rearrange a subarray of a parsed WKT file for easier traversal
 // E.g.
 //   ["WGS84", ...]  to  {NAME: "WGS84"}
 //   ["PROJECTION", "Mercator"]  to  {PROJECTION: "Mercator"}
@@ -30,7 +43,7 @@ function wkt_unpack(str) {
 function wkt_parse_reorder(arr, obj) {
   var name = arr[0], // TODO: handle alternate OGC names
       i;
-  if (name == 'GEOGCS' || name == 'GEOCCS' || name == 'PROJCS' || name == 'DATUM') {
+  if (name == 'GEOGCS' || name == 'GEOCCS' || name == 'PROJCS' || name == 'DATUM' || name == 'VERTCS') {
     obj[name] = {
       NAME: arr[1]
     };

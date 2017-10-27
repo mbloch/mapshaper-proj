@@ -1,3 +1,6 @@
+v0.0.15
+* Accept .prj files with "VERTCS" definitions (VERTCS is ignored).
+
 v0.0.14
 * Ignore +nadgrids=@null parameters (instead of throwing an error).
 
