@@ -1,3 +1,9 @@
+v0.0.17
+* Add Equal Earth projection as "eqearth".
+
+v0.0.16
+* Accept library names in either case (e.g. EPSG and epsg).
+
 v0.0.15
 * Accept .prj files with "VERTCS" definitions (VERTCS is ignored).
 
