@@ -1,3 +1,6 @@
+v0.0.18
+* Improvement to eqearth inverse formula.
+
 v0.0.17
 * Add Equal Earth projection as "eqearth".
 
