@@ -1,3 +1,6 @@
+v0.0.19
+* Ported bertin1953 from PROJ.
+
 v0.0.18
 * Improvement to eqearth inverse formula.
 
