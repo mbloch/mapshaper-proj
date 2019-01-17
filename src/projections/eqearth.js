@@ -42,8 +42,8 @@ function pj_eqearth(P) {
     var paramLat = Math.asin(M * Math.sin(lp.phi)),
         paramLatSq = paramLat * paramLat,
         paramLatPow6 = paramLatSq * paramLatSq * paramLatSq;
-    xy.x = lp.lam * Math.cos(paramLat)
-            / (M * (A1 + 3 * A2 * paramLatSq + paramLatPow6 * (7 * A3 + 9 * A4 * paramLatSq)));
+    xy.x = lp.lam * Math.cos(paramLat) /
+            (M * (A1 + 3 * A2 * paramLatSq + paramLatPow6 * (7 * A3 + 9 * A4 * paramLatSq)));
     xy.y = paramLat * (A1 + A2 * paramLatSq + paramLatPow6 * (A3 + A4 * paramLatSq));
   }
 
@@ -65,8 +65,8 @@ function pj_eqearth(P) {
     }
     paramLatSq = paramLat * paramLat;
     paramLatPow6 = paramLatSq * paramLatSq * paramLatSq;
-    lp.lam = M * xy.x * (A1 + 3 * A2 * paramLatSq + paramLatPow6 * (7 * A3 + 9 * A4 * paramLatSq))
-            / Math.cos(paramLat);
+    lp.lam = M * xy.x * (A1 + 3 * A2 * paramLatSq + paramLatPow6 * (7 * A3 + 9 * A4 * paramLatSq)) /
+            Math.cos(paramLat);
     lp.phi = Math.asin(Math.sin(paramLat) / M);
   }
 }

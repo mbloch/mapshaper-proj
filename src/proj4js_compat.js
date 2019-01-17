@@ -2,9 +2,12 @@
 //    proj4(fromProjection[, toProjection, coordinates])
 
 function proj4js(arg1, arg2, arg3) {
-  var oneArg = typeof arg2 !== 'string';
   var p, fromStr, toStr, P1, P2, transform;
-  if (oneArg) {
+  if (typeof arg1 != 'string') {
+    // E.g. Webpack's require function tries to initialize mproj by calling
+    // the module function.
+    return api;
+  } else if (typeof arg2 != 'string') {
     fromStr = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'; // '+datum=WGS84 +proj=lonlat';
     toStr = arg1;
     p = arg2;

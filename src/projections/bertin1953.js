@@ -42,9 +42,9 @@ function pj_bertin1953(P) {
 
     /* Adjust pre-projection */
     if (lp.lam + lp.phi < -fu) {
-      d = (lp.lam - lp.phi + 1.6) * (lp.lam + lp.phi + fu) / 8.;
+      d = (lp.lam - lp.phi + 1.6) * (lp.lam + lp.phi + fu) / 8;
       lp.lam += d;
-      lp.phi -= 0.8 * d * sin(lp.phi + M_PI / 2.);
+      lp.phi -= 0.8 * d * sin(lp.phi + M_PI / 2);
     }
 
     /* Project with Hammer (1.68,2) */

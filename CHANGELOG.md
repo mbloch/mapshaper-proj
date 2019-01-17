@@ -1,3 +1,6 @@
+v0.0.20
+* Fixed webpack compatibility issue.
+
 v0.0.19
 * Ported bertin1953 from PROJ.
 
