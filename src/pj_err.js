@@ -50,6 +50,8 @@ function fatal(msg, o) {
   if (!o) o = {};
   if (!o.code) o.code = ctx.last_errno || 0;
   if (!msg) msg = error_msg(o.code);
+  // reset error code, so processing can continue after this error is handled
+  ctx.last_errno = 0;
   throw new ProjError(msg, o);
 }
 
