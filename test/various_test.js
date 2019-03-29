@@ -81,4 +81,13 @@ describe('transform tests', function () {
     .values('1d32\'21.33"W 17d3\'47.233"N 0.000', '2000000.00\t1999999.99 0.00')
     .values('15d4\'42.357"E  14d48\'56.372"N 0.000', '4000000.00\t2000000.01 0.00')
 
+
+  // test Patterson
+  helpers.test_cs2cs('+proj=latlong +datum=WGS84 +to +proj=patterson +a=6371008.7714 +b=6371008.7714 +units=m')
+    .values('-180 90', '-20015114.35\t11409566.82 0.00')
+    .values('-135 67.5', '-15011335.76\t8729502.05 0.00')
+
+  helpers.test_cs2cs('+proj=patterson +a=6371008.7714 +b=6371008.7714 +units=m +to +proj=latlong +datum=WGS84')
+    .values('-20015114.35 11409566.82', '180dW\t90dN 0.000')
+
 })
