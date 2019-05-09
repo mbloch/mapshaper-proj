@@ -1,3 +1,6 @@
+v0.0.22
+* Fix for converting +proj=stere to WKT
+
 v0.0.21
 * Ported patterson from PROJ.
 
