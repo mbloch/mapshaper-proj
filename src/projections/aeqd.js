@@ -1,4 +1,4 @@
-/* @requires pj_mlfn aasincos Math Geodesic GeodesicLine */
+/* @requires pj_mlfn aasincos geodesic */
 
 pj_add(pj_aeqd, 'aeqd', 'Azimuthal Equidistant', '\n\tAzi, Sph&Ell\n\tlat_0 guam');
 

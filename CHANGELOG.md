@@ -1,3 +1,6 @@
+v0.0.23
+* Expose Charles Karney's GeographicLib as mproj.internal.GeographicLib
+
 v0.0.22
 * Fix for converting +proj=stere to WKT
 

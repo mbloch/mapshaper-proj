@@ -7,7 +7,6 @@
   http://geotiff.maptools.org/proj_list/polar_stereographic.html
   http://geotiff.maptools.org/proj_list/stereographic.html
   http://geotiff.maptools.org/proj_list/random_issues.html#stereographic
-
 */
 
 add_wkt_parser(get_simple_parser_test('Stereographic,Polar_Stereographic,Stereographic_North_Pole,Stereographic_South_Pole'),

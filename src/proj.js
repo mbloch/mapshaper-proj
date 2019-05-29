@@ -11,6 +11,7 @@ pj_inv
 rtodms
 proj4js_compat
 wkt
+geodesic
 */
 
 // Projections are inserted here by the build script
@@ -53,7 +54,8 @@ api.internal = {
   wkt_get_geogcs_name: wkt_get_geogcs_name,
   wkt_stringify: wkt_stringify,
   mproj_insert_libcache: mproj_insert_libcache,
-  mproj_search_libcache: mproj_search_libcache
+  mproj_search_libcache: mproj_search_libcache,
+  GeographicLib: GeographicLib
 };
 
 if (typeof define == 'function' && define.amd) {
