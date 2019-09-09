@@ -1,3 +1,6 @@
+v0.0.24
+* Expose pj_add() as mproj.pj_add
+
 v0.0.23
 * Expose Charles Karney's GeographicLib as mproj.internal.GeographicLib
 

@@ -21,7 +21,6 @@ function wkt_keys(o) {
   });
 }
 
-
 // Rearrange a generated WKT object for easier string conversion
 // inverse of wkt_parse_reorder()
 function wkt_stringify_reorder(o, depth) {
