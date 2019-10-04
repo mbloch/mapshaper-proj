@@ -1,6 +1,6 @@
 {
 	"name": "mproj",
-	"version": "0.0.25",
+	"version": "0.0.26",
 	"description": "A JavaScript port of the Proj.4 cartographic projections library",
 	"keywords": [
 		"projections",
@@ -23,6 +23,11 @@
 		"postpublish": "./release"
 	},
 	"main": "./dist/mproj.js",
+  "files": [
+    "bin/**",
+    "nad/**",
+    "dist/**"
+  ],
 	"dependencies": {
 		"rw": "~1.3.2",
 		"geographiclib": "1.48.0"

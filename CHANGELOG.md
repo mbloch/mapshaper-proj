@@ -1,3 +1,6 @@
+v0.0.26
+* Remove source code and other unneeded files from npm distribution.
+
 v0.0.25
 * Generate WKT strings with embedded Proj.4 strings as a fallback, like gdal.
 
