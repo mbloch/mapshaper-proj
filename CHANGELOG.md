@@ -1,3 +1,6 @@
+v0.0.25
+* Generate WKT strings with embedded Proj.4 strings as a fallback, like gdal.
+
 v0.0.24
 * Expose pj_add() as mproj.pj_add
 
