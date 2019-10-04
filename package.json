@@ -1,6 +1,6 @@
 {
 	"name": "mproj",
-	"version": "0.0.24",
+	"version": "0.0.25",
 	"description": "A JavaScript port of the Proj.4 cartographic projections library",
 	"keywords": [
 		"projections",
@@ -29,7 +29,7 @@
 	},
 	"devDependencies": {
 		"catty": "0.0.8",
-		"mocha": "^6.0.2",
+		"mocha": "^6.2.1",
 		"proj4": "~2.3.14",
 		"underscore": "~1.7"
 	},

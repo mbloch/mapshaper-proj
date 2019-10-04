@@ -3,7 +3,6 @@ var assert = require('assert'),
     wkt_parse = api.internal.wkt_parse,
     fs = require('fs');
 
-
 describe('wkt_parse.js', function() {
   it('wgs84 esri', function() {
     var str = fs.readFileSync('test/prj/wgs84_esri.prj', 'utf8');

@@ -4,6 +4,8 @@ wkt_unit
 wkt_convert_geogcs
 */
 
+// Converts a PROJCS WKT in object format to a Proj.4 string
+// Throws an Error if unable to convert
 function wkt_convert_projcs(projcs) {
   return find_wkt_parser(projcs)(projcs);
 }

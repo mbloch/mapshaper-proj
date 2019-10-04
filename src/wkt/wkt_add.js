@@ -16,7 +16,7 @@ function add_simple_wkt_maker(projId, wktProjection, params) {
 function get_simple_parser_test(wktNames) {
   var slugs = wkt_split_names(wktNames).map(wkt_name_to_slug);
   return function(obj) {
-    var wktName = obj.PROJECTION[0]; // TODO: handle unexected structure
+    var wktName = obj.PROJECTION[0]; // TODO: handle unexpected structure
     return slugs.indexOf(wkt_name_to_slug(wktName)) > -1;
   };
 }

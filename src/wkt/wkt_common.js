@@ -1,4 +1,4 @@
-/* @require pj_utils */
+/* @require pj_utils wkt_fallback */
 
 // Global collections of WKT parsers and makers
 // arr[0] is test function; arr[1] is conversion function
@@ -17,22 +17,30 @@ function wkt_is_string(val) {
 function find_wkt_parser(projcs) {
   var parser = find_wkt_conversion_function(projcs, wkt_parsers);
   if (!parser) {
+    parser = get_fallback_wkt_parser(projcs);
+  }
+  if (!parser) {
     wkt_error('unsupported WKT definition: ' + get_wkt_label(projcs));
   }
   return parser;
 }
 
 function find_wkt_maker(P) {
-  var marker = find_wkt_conversion_function(P, wkt_makers);
-  if (!marker) {
+  var maker = find_wkt_conversion_function(P, wkt_makers);
+  if (!maker) {
+    maker = get_fallback_wkt_maker(P);
+  }
+  if (!maker) {
     wkt_error('unsupported projection: ' + get_proj_label(P));
   }
-  return marker;
+  return maker;
 }
 
 function find_wkt_conversion_function(o, arr) {
+  var is_match;
   for (var i=0; i<arr.length; i++) {
-    if (arr[i][0](o)) return arr[i][1];
+    is_match = arr[i][0];
+    if (is_match(o)) return arr[i][1];
   }
   return null;
 }

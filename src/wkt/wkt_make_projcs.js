@@ -1,5 +1,6 @@
 /* @requires wkt_make_geogcs */
 
+// Converts a Proj object to a WKT in object format
 function wkt_make_projcs(P) {
   return find_wkt_maker(P)(P);
 }

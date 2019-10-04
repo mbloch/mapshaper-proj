@@ -44,7 +44,7 @@ function get_geod_defn(P) {
   return defn;
 }
 
-
+// Convert an initialized proj object back to a Proj.4 string
 function get_proj_defn(P) {
   // skip geodetic params and some initialization-related params
   var skip = 'datum,ellps,a,b,es,rf,f,towgs84,nadgrids,R,R_A,R_V,R_a,R_lat_a,R_lat_g,pm,init,no_defs'.split(',');
