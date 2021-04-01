@@ -1,3 +1,6 @@
+v0.0.27
+* Fixed bug related to reading UTM South .prj files
+
 v0.0.26
 * Remove source code and other unneeded files from npm distribution.
 
