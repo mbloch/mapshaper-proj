@@ -1,4 +1,4 @@
-v0.0.28
+v0.0.29
 * Added forward spherical formula for the "Cupola" projection.
 
 v0.0.27
