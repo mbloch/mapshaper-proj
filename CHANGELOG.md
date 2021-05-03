@@ -1,3 +1,6 @@
+v0.0.28
+* Added forward spherical formula for the "Cupola" projection.
+
 v0.0.27
 * Fixed bug related to reading UTM South .prj files
 
