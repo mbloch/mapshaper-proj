@@ -18,6 +18,7 @@ function pj_param(params, code) {
       obj = params[name],
       isset = obj !== void 0,
       val, param;
+
   if (type == 't') {
     val = isset;
   } else if (isset) {
