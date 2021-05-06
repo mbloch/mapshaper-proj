@@ -1,3 +1,6 @@
+v0.0.31
+* Apply default 11.023 degree central meridian to cupola.
+
 v0.0.30
 * Updates to the Cupola projection.
 
