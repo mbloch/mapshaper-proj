@@ -1,4 +1,4 @@
-pj_add(pj_ocea, 'ocea', 'Oblique Cylindrical Equal Area', '\n\tCyl, Sph lonc= alpha= or\n\tlat_1= lat_2= lon_1= lon_2=');
+pj_add(pj_ocea, 'ocea', 'Oblique Cylindrical Equal Area', 'Cyl, Sph lonc= alpha= or\nlat_1= lat_2= lon_1= lon_2=');
 
 function pj_ocea(P) {
   var phi_0 = 0,

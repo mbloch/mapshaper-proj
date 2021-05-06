@@ -1,5 +1,5 @@
 /* @requires gn_sinu, moll */
-pj_add(pj_goode, 'goode', "Goode Homolosine", "\n\tPCyl, Sph.");
+pj_add(pj_goode, 'goode', 'Goode Homolosine', 'PCyl, Sph.');
 
 function pj_goode(P) {
   var Y_COR = 0.05280,

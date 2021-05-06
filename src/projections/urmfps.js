@@ -1,7 +1,7 @@
 /* @requires aasincos */
 
-pj_add(pj_urmfps, 'urmfps', 'Urmaev Flat-Polar Sinusoidal', '\n\tPCyl, Sph.\n\tn=');
-pj_add(pj_wag1, 'wag1', 'Wagner I (Kavraisky VI)', '\n\tPCyl, Sph.');
+pj_add(pj_urmfps, 'urmfps', 'Urmaev Flat-Polar Sinusoidal', 'PCyl, Sph.\nn=');
+pj_add(pj_wag1, 'wag1', 'Wagner I (Kavraisky VI)', 'PCyl, Sph.');
 
 
 function pj_wag1(P) {

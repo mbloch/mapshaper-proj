@@ -1,4 +1,4 @@
-pj_add(pj_geocent, 'geocent', 'Geocentric', '\n\t');
+pj_add(pj_geocent, 'geocent', 'Geocentric', '');
 
 function pj_geocent(P) {
   P.is_geocent = true;

@@ -1,7 +1,7 @@
 /* @requires aasincos */
 
-pj_add(pj_putp6, 'putp6', 'Putnins P6', '\n\tPCyl., Sph.');
-pj_add(pj_putp6p, 'putp6p', 'Putnins P6\'', '\n\tPCyl., Sph.');
+pj_add(pj_putp6, 'putp6', 'Putnins P6', 'PCyl., Sph.');
+pj_add(pj_putp6p, 'putp6p', 'Putnins P6\'', 'PCyl., Sph.');
 
 function pj_putp6p(P) {
   pj_putp6(P, true);

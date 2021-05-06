@@ -1,4 +1,4 @@
-pj_add(pj_patterson, 'patterson', 'Patterson Cylindrical', '\n\tCyl., Sph.');
+pj_add(pj_patterson, 'patterson', 'Patterson Cylindrical', 'Cyl., Sph.');
 
 function pj_patterson(P) {
   var K1 = 1.0148,

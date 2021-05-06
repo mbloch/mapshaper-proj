@@ -1,7 +1,7 @@
 /* @requires aasincos */
 
-pj_add(pj_putp4p, 'putp4p', 'Putnins P4\'', '\n\tPCyl., Sph.');
-pj_add(pj_weren, 'weren', 'Werenskiold I', '\n\tPCyl., Sph.');
+pj_add(pj_putp4p, 'putp4p', 'Putnins P4\'', 'PCyl., Sph.');
+pj_add(pj_weren, 'weren', 'Werenskiold I', 'PCyl., Sph.');
 
 function pj_putp4p(P) {
   pj_putp4p_init(P, 0.874038744, 3.883251825);

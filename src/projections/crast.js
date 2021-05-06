@@ -1,4 +1,4 @@
-pj_add(pj_crast, 'crast', 'Craster Parabolic (Putnins P4)', '\n\tPCyl., Sph.');
+pj_add(pj_crast, 'crast', 'Craster Parabolic (Putnins P4)', 'PCyl., Sph.');
 
 function pj_crast(P) {
   var XM = 0.97720502380583984317;

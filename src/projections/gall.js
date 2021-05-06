@@ -1,4 +1,4 @@
-pj_add(pj_gall, 'gall', 'Gall (Gall Stereographic)', '\n\tCyl, Sph');
+pj_add(pj_gall, 'gall', 'Gall (Gall Stereographic)', 'Cyl, Sph');
 
 function pj_gall(P) {
   var YF = 1.70710678118654752440,

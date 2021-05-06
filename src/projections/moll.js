@@ -1,8 +1,8 @@
 /* @requires aasincos */
 
-pj_add(pj_moll, 'moll', 'Mollweide', '\n\tPCyl Sph');
-pj_add(pj_wag4, 'wag4', 'Wagner IV', '\n\tPCyl Sph');
-pj_add(pj_wag5, 'wag5', 'Wagner V', '\n\tPCyl Sph');
+pj_add(pj_moll, 'moll', 'Mollweide', 'PCyl Sph');
+pj_add(pj_wag4, 'wag4', 'Wagner IV', 'PCyl Sph');
+pj_add(pj_wag5, 'wag5', 'Wagner V', 'PCyl Sph');
 
 function pj_moll(P) {
   pj_moll_init(P, pj_moll_init_Q(P, M_HALFPI));

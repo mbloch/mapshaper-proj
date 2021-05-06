@@ -1,6 +1,6 @@
 /* @requires pj_mlfn */
 
-pj_add(pj_cass, 'cass', 'Cassini', '\n\tCyl, Sph&Ell');
+pj_add(pj_cass, 'cass', 'Cassini', 'Cyl, Sph&Ell');
 
 function pj_cass(P) {
   var C1 = 0.16666666666666666666,

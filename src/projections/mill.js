@@ -1,4 +1,4 @@
-pj_add(pj_mill, 'mill', 'Miller Cylindrical', '\n\tCyl, Sph');
+pj_add(pj_mill, 'mill', 'Miller Cylindrical', 'Cyl, Sph');
 
 function pj_mill(P) {
 

@@ -1,10 +1,10 @@
 /* @requires pj_zpoly1 */
 
-pj_add(pj_mil_os, 'mil_os', 'Miller Oblated Stereographic', '\n\tAzi(mod)');
-pj_add(pj_lee_os, 'lee_os', 'Lee Oblated Stereographic', '\n\tAzi(mod)');
-pj_add(pj_gs48, 'gs48', 'Mod Stereographic of 48 U.S.', '\n\tAzi(mod)');
-pj_add(pj_alsk, 'alsk', 'Mod Stereographic of Alaska', '\n\tAzi(mod)');
-pj_add(pj_gs50, 'gs50', 'Mod Stereographic of 50 U.S.', '\n\tAzi(mod)');
+pj_add(pj_mil_os, 'mil_os', 'Miller Oblated Stereographic', 'Azi(mod)');
+pj_add(pj_lee_os, 'lee_os', 'Lee Oblated Stereographic', 'Azi(mod)');
+pj_add(pj_gs48, 'gs48', 'Mod Stereographic of 48 U.S.', 'Azi(mod)');
+pj_add(pj_alsk, 'alsk', 'Mod Stereographic of Alaska', 'Azi(mod)');
+pj_add(pj_gs50, 'gs50', 'Mod Stereographic of 50 U.S.', 'Azi(mod)');
 
 function pj_mil_os(P) {
   var AB = [

@@ -1,6 +1,6 @@
 /* @requires pj_mlfn aasincos geodesic */
 
-pj_add(pj_aeqd, 'aeqd', 'Azimuthal Equidistant', '\n\tAzi, Sph&Ell\n\tlat_0 guam');
+pj_add(pj_aeqd, 'aeqd', 'Azimuthal Equidistant', 'Azi, Sph&Ell\nlat_0 guam');
 
 function pj_aeqd(P) {
   var EPS10 = 1.e-10,

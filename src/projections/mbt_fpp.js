@@ -1,4 +1,4 @@
-pj_add(pj_mbt_fpp, 'mbt_fpp', 'McBride-Thomas Flat-Polar Parabolic', '\n\tCyl., Sph.');
+pj_add(pj_mbt_fpp, 'mbt_fpp', 'McBride-Thomas Flat-Polar Parabolic', 'Cyl., Sph.');
 
 function pj_mbt_fpp(P) {
   var CS = 0.95257934441568037152,

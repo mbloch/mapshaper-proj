@@ -1,6 +1,6 @@
 /* @requires pj_msfn, pj_tsfn */
 
-pj_add(pj_lcc, 'lcc', 'Lambert Conformal Conic', '\n\tConic, Sph&Ell\n\tlat_1= and lat_2= or lat_0=');
+pj_add(pj_lcc, 'lcc', 'Lambert Conformal Conic', 'Conic, Sph&Ell\nlat_1= and lat_2= or lat_0=');
 
 function pj_lcc(P) {
   var EPS10 = 1e-10;

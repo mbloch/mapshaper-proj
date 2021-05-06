@@ -1,6 +1,6 @@
 /* @requires aasincos */
 
-pj_add(pj_somerc, 'somerc', 'Swiss. Obl. Mercator', '\n\tCyl, Ell\n\tFor CH1903');
+pj_add(pj_somerc, 'somerc', 'Swiss. Obl. Mercator', 'Cyl, Ell\nFor CH1903');
 
 function pj_somerc(P) {
   var K, c, hlf_e, kR, cosp0, sinp0;

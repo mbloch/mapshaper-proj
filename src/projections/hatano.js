@@ -1,4 +1,4 @@
-pj_add(pj_hatano, 'hatano', 'Hatano Asymmetrical Equal Area', '\n\tPCyl., Sph.');
+pj_add(pj_hatano, 'hatano', 'Hatano Asymmetrical Equal Area', 'PCyl., Sph.');
 
 function pj_hatano(P) {
   var NITER = 20;

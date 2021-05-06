@@ -1,8 +1,8 @@
 /* @requires aasincos */
 
-pj_add(pj_wag2, 'wag2', 'Wagner II', '\n\tPCyl., Sph.');
-pj_add(pj_wag3, 'wag3', 'Wagner III', '\n\tPCyl., Sph.\n\tlat_ts=');
-pj_add(pj_wag7, 'wag7', 'Wagner VII', '\n\tMisc Sph, no inv.');
+pj_add(pj_wag2, 'wag2', 'Wagner II', 'PCyl., Sph.');
+pj_add(pj_wag3, 'wag3', 'Wagner III', 'PCyl., Sph.\nlat_ts=');
+pj_add(pj_wag7, 'wag7', 'Wagner VII', 'Misc Sph, no inv.');
 
 function pj_wag2(P) {
   var C_x = 0.92483,

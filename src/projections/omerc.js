@@ -1,7 +1,7 @@
 /* @requires pj_phi2 */
 
-pj_add(pj_omerc, 'omerc', 'Oblique Mercator', '\n\tCyl, Sph&Ell no_rot' +
-    '\n\talpha= [gamma=] [no_off] lonc= or\n\t lon_1= lat_1= lon_2= lat_2=');
+pj_add(pj_omerc, 'omerc', 'Oblique Mercator', 'Cyl, Sph&Ell no_rot\n' +
+    'alpha= [gamma=] [no_off] lonc= or\nlon_1= lat_1= lon_2= lat_2=');
 
 function pj_omerc(P) {
   var TOL = 1e-7;

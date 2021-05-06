@@ -1,6 +1,6 @@
 /* @requires aasincos */
 
-pj_add(pj_putp2, 'putp2', 'Putnins P2', '\n\tPCyl., Sph.');
+pj_add(pj_putp2, 'putp2', 'Putnins P2', 'PCyl., Sph.');
 
 function pj_putp2(P) {
   var C_x = 1.89490,

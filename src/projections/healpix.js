@@ -1,6 +1,6 @@
 /* @require pj_qsfn pj_msfn */
-pj_add(pj_healpix, 'healpix', 'HEALPix', '\n\tSph., Ellps.');
-pj_add(pj_rhealpix, 'rhealpix', 'rHEALPix', '\n\tSph., Ellps.\n\tnorth_square= south_square=');
+pj_add(pj_healpix, 'healpix', 'HEALPix', 'Sph., Ellps.');
+pj_add(pj_rhealpix, 'rhealpix', 'rHEALPix', 'Sph., Ellps.\nnorth_square= south_square=');
 
 function pj_rhealpix(P) {
   pj_healpix(P, true);

@@ -1,5 +1,5 @@
 
-pj_add(pj_gnom, 'gnom', 'Gnomonic', '\n\tAzi, Sph.');
+pj_add(pj_gnom, 'gnom', 'Gnomonic', 'Azi, Sph.');
 
 function pj_gnom(P) {
   var EPS10 = 1.e-10,

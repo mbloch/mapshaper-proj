@@ -1,7 +1,7 @@
-pj_add(pj_vandg, 'vandg', 'van der Grinten (I)', '\n\tMisc Sph');
-pj_add(pj_vandg2, 'vandg2', 'van der Grinten II', '\n\tMisc Sph, no inv.');
-pj_add(pj_vandg3, 'vandg3', 'van der Grinten III', '\n\tMisc Sph, no inv.');
-pj_add(pj_vandg4, 'vandg4', 'van der Grinten IV', '\n\tMisc Sph, no inv.');
+pj_add(pj_vandg, 'vandg', 'van der Grinten (I)', 'Misc Sph');
+pj_add(pj_vandg2, 'vandg2', 'van der Grinten II', 'Misc Sph, no inv.');
+pj_add(pj_vandg3, 'vandg3', 'van der Grinten III', 'Misc Sph, no inv.');
+pj_add(pj_vandg4, 'vandg4', 'van der Grinten IV', 'Misc Sph, no inv.');
 
 function pj_vandg(P) {
   var TOL = 1.e-10,

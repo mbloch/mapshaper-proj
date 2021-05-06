@@ -261,8 +261,13 @@ function get_proj_info(name, ext) {
     var defn = pj_list[key],
         str = key + ' : ' + defn.name;
     if (name || ext) {
-      str += defn.description;
+      str += fmt_description(defn.description);
     }
     return str;
   }).join('\n');
+}
+
+function fmt_description(str) {
+  if (!str) return '';
+  return '\n\t' + str.split('\n').join('\n\t');
 }

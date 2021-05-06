@@ -1,4 +1,4 @@
-pj_add(pj_mbt_fpq, 'mbt_fpq', 'McBryde-Thomas Flat-Polar Quartic', '\n\tCyl., Sph.');
+pj_add(pj_mbt_fpq, 'mbt_fpq', 'McBryde-Thomas Flat-Polar Quartic', 'Cyl., Sph.');
 
 function pj_mbt_fpq(P) {
   var NITER = 20,

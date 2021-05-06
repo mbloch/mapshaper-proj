@@ -1,5 +1,5 @@
-pj_add(pj_etmerc, 'etmerc', 'Extended Transverse Mercator', '\n\tCyl, Sph\n\tlat_ts=(0)\nlat_0=(0)');
-pj_add(pj_utm, 'utm', 'Universal Transverse Mercator (UTM)', '\n\tCyl, Sph\n\tzone= south');
+pj_add(pj_etmerc, 'etmerc', 'Extended Transverse Mercator', 'Cyl, Sph\nlat_ts=(0)\nlat_0=(0)');
+pj_add(pj_utm, 'utm', 'Universal Transverse Mercator (UTM)', 'Cyl, Sph\nzone= south');
 
 
 function pj_utm_zone(P) {

@@ -1,6 +1,6 @@
 /* @requires aasincos */
 
-pj_add(pj_urm5, 'urm5', 'Urmaev V', '\n\tPCyl., Sph., no inv.\n\tn= q= alpha=');
+pj_add(pj_urm5, 'urm5', 'Urmaev V', 'PCyl., Sph., no inv.\nn= q= alpha=');
 
 function pj_urm5(P) {
   var m, rmn, q3, n;

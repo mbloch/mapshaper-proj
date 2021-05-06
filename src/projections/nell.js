@@ -1,4 +1,4 @@
-pj_add(pj_nell, 'nell', 'Nell', '\n\tPCyl., Sph.');
+pj_add(pj_nell, 'nell', 'Nell', 'PCyl., Sph.');
 
 function pj_nell(P) {
   var MAX_ITER = 10;

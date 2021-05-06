@@ -1,6 +1,6 @@
 /* @requires aasincos */
 
-pj_add(pj_chamb, 'chamb', 'Chamberlin Trimetric', '\n\tMisc Sph, no inv.\n\tlat_1= lon_1= lat_2= lon_2= lat_3= lon_3=');
+pj_add(pj_chamb, 'chamb', 'Chamberlin Trimetric', 'Misc Sph, no inv.\nlat_1= lon_1= lat_2= lon_2= lat_3= lon_3=');
 
 function pj_chamb(P) {
   var THIRD  = 1/3,

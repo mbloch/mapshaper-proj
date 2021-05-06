@@ -1,9 +1,9 @@
 /* @requires aasincos */
 
-pj_add(pj_kav5, 'kav5', 'Kavraisky V', '\n\tPCyl., Sph.');
-pj_add(pj_qua_aut, 'qua_aut', 'Quartic Authalic', '\n\tPCyl., Sph.');
-pj_add(pj_fouc, 'fouc', 'Foucaut', '\n\tPCyl., Sph.');
-pj_add(pj_mbt_s, 'mbt_s', 'McBryde-Thomas Flat-Polar Sine (No. 1)', '\n\tPCyl., Sph.');
+pj_add(pj_kav5, 'kav5', 'Kavraisky V', 'PCyl., Sph.');
+pj_add(pj_qua_aut, 'qua_aut', 'Quartic Authalic', 'PCyl., Sph.');
+pj_add(pj_fouc, 'fouc', 'Foucaut', 'PCyl., Sph.');
+pj_add(pj_mbt_s, 'mbt_s', 'McBryde-Thomas Flat-Polar Sine (No. 1)', 'PCyl., Sph.');
 
 function pj_kav5(P) {
   pj_sts(P, 1.50488, 1.35439, false);

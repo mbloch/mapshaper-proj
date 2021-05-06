@@ -1,6 +1,6 @@
 /* @requires pj_auth pj_qsfn */
 
-pj_add(pj_laea, 'laea', 'Lambert Azimuthal Equal Area', '\n\tAzi, Sph&Ell');
+pj_add(pj_laea, 'laea', 'Lambert Azimuthal Equal Area', 'Azi, Sph&Ell');
 
 function pj_laea(P) {
   var EPS10 = 1e-10,

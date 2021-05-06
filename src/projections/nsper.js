@@ -1,5 +1,5 @@
-pj_add(pj_nsper, 'nsper', 'Near-sided perspective', '\n\tAzi, Sph\n\th=');
-pj_add(pj_tpers, 'tpers', 'Tilted perspective', '\n\tAzi, Sph\n\ttilt= azi= h=');
+pj_add(pj_nsper, 'nsper', 'Near-sided perspective', 'Azi, Sph\nh=');
+pj_add(pj_tpers, 'tpers', 'Tilted perspective', 'Azi, Sph\ntilt= azi= h=');
 
 function pj_nsper(P) {
   pj_tpers_init(P, pj_param(P.params, "dh"));

@@ -1,9 +1,9 @@
 /* @requires pj_mlfn aasincos */
 
-pj_add(pj_gn_sinu, 'gn_sinu', 'General Sinusoidal Series', '\n\tPCyl, Sph.\n\tm= n=');
-pj_add(pj_sinu, 'sinu', 'Sinusoidal (Sanson-Flamsteed)', '\n\tPCyl, Sph&Ell');
-pj_add(pj_eck6, 'eck6', 'Eckert VI', '\n\tPCyl, Sph.\n\tm= n=');
-pj_add(pj_mbtfps, 'mbtfps', 'McBryde-Thomas Flat-Polar Sinusoidal', '\n\tPCyl, Sph.');
+pj_add(pj_gn_sinu, 'gn_sinu', 'General Sinusoidal Series', 'PCyl, Sph.\nm= n=');
+pj_add(pj_sinu, 'sinu', 'Sinusoidal (Sanson-Flamsteed)', 'PCyl, Sph&Ell');
+pj_add(pj_eck6, 'eck6', 'Eckert VI', 'PCyl, Sph.\nm= n=');
+pj_add(pj_mbtfps, 'mbtfps', 'McBryde-Thomas Flat-Polar Sinusoidal', 'PCyl, Sph.');
 
 function pj_gn_sinu(P) {
   if (pj_param(P.params, 'tn'), pj_param(P.params, 'tm')) {

@@ -1,4 +1,4 @@
-pj_add(pj_ortho, 'ortho', 'Orthographic', '\n\tAzi, Sph.');
+pj_add(pj_ortho, 'ortho', 'Orthographic', 'Azi, Sph.');
 
 function pj_ortho(P) {
   var EPS10 = 1.e-10,

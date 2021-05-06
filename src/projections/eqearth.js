@@ -25,7 +25,7 @@
  * Code released August 2018
  * Ported to JavaScript and adapted for mapshaper-proj by Matthew Bloch August 2018
  */
-pj_add(pj_eqearth, 'eqearth', 'Equal Earth', "\n\tPCyl., Sph.");
+pj_add(pj_eqearth, 'eqearth', 'Equal Earth', 'PCyl., Sph.');
 
 function pj_eqearth(P) {
   var A1 = 1.340264,

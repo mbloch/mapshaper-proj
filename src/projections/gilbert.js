@@ -1,7 +1,7 @@
 /* @requires aasincos */
 // from
 
-pj_add(pj_gilbert, 'gilbert', 'Gilbert Two World Perspective', '\n\tPCyl., Sph., NoInv.\n\tlat_1=');
+pj_add(pj_gilbert, 'gilbert', 'Gilbert Two World Perspective', 'PCyl., Sph., NoInv.\nlat_1=');
 
 function pj_gilbert(P) {
   var lat1 = pj_param(P.params, 'tlat_1') ? pj_param(P.params, 'rlat_1') : 0,

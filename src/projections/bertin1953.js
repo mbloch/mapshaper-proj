@@ -9,7 +9,7 @@
   Port to PROJ by Philippe Rivière, 21 September 2018
   Port to JavaScript by Matthew Bloch October 2018
 */
-pj_add(pj_bertin1953, 'bertin1953', 'Bertin 1953', "\n\tMisc Sph no inv.");
+pj_add(pj_bertin1953, 'bertin1953', 'Bertin 1953', 'Misc Sph no inv.');
 
 function pj_bertin1953(P) {
   var cos_delta_phi, sin_delta_phi, cos_delta_gamma, sin_delta_gamma;

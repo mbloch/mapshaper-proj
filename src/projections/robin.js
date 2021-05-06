@@ -1,4 +1,4 @@
-pj_add(pj_robin, 'robin', 'Robinson', "\n\tPCyl., Sph.");
+pj_add(pj_robin, 'robin', 'Robinson', 'PCyl., Sph.');
 
 function pj_robin(P) {
   var X = to_float([

@@ -1,4 +1,4 @@
-pj_add(pj_nell_h, 'nell_h', 'Nell-Hammer', '\n\tPCyl., Sph.');
+pj_add(pj_nell_h, 'nell_h', 'Nell-Hammer', 'PCyl., Sph.');
 
 function pj_nell_h(P) {
 var NITER = 9,

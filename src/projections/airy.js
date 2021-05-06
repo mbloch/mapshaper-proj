@@ -1,4 +1,4 @@
-pj_add(pj_airy, 'airy', 'Airy', '\n\tMisc Sph, no inv.\n\tno_cut lat_b=');
+pj_add(pj_airy, 'airy', 'Airy', 'Misc Sph, no inv.\nno_cut lat_b=');
 
 function pj_airy(P) {
   var EPS = 1e-10,

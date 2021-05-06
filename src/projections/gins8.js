@@ -1,4 +1,4 @@
-pj_add(pj_gins8, 'gins8', 'Ginsburg VIII (TsNIIGAiK)', '\n\tPCyl, Sph., no inv.');
+pj_add(pj_gins8, 'gins8', 'Ginsburg VIII (TsNIIGAiK)', 'PCyl, Sph., no inv.');
 
 function pj_gins8(P) {
   P.fwd = s_fwd;

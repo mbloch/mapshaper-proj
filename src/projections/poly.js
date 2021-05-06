@@ -1,6 +1,6 @@
 /* @requires pj_mlfn pj_msfn */
 
-pj_add(pj_poly, 'poly', 'Polyconic (American)', '\n\tConic, Sph&Ell');
+pj_add(pj_poly, 'poly', 'Polyconic (American)', 'Conic, Sph&Ell');
 
 function pj_poly(P) {
   var TOL = 1e-10,

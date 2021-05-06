@@ -1,4 +1,4 @@
-pj_add(pj_times, 'times', 'Times', "\n\tCyl, Sph");
+pj_add(pj_times, 'times', 'Times', 'Cyl, Sph');
 
 function pj_times(P) {
   P.es = 0;

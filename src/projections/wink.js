@@ -1,6 +1,6 @@
 
-pj_add(pj_wink1, 'wink1', 'Winkel I', '\n\tPCyl., Sph.\n\tlat_ts=');
-pj_add(pj_wink2, 'wink2', 'Winkel II', '\n\tPCyl., Sph., no inv.\n\tlat_1=');
+pj_add(pj_wink1, 'wink1', 'Winkel I', 'PCyl., Sph.\nlat_ts=');
+pj_add(pj_wink2, 'wink2', 'Winkel II', 'PCyl., Sph., no inv.\nlat_1=');
 
 function pj_wink1(P) {
   var cosphi1 = cos(pj_param(P.params, "rlat_ts"));

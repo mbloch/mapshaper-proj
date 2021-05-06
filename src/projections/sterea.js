@@ -1,6 +1,6 @@
 /* @requires pj_gauss */
 
-pj_add(pj_sterea, 'sterea', 'Oblique Stereographic Alternative', '\n\tAzimuthal, Sph&Ell');
+pj_add(pj_sterea, 'sterea', 'Oblique Stereographic Alternative', 'Azimuthal, Sph&Ell');
 
 function pj_sterea(P) {
   var en = pj_gauss_ini(P.e, P.phi0),

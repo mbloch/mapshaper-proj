@@ -1,7 +1,7 @@
-pj_add(pj_lonlat, 'lonlat', 'Lat/long (Geodetic)', '\n\t');
-pj_add(pj_lonlat, 'longlat', 'Lat/long (Geodetic alias)', '\n\t');
-pj_add(pj_lonlat, 'latlon', 'Lat/long (Geodetic alias)', '\n\t');
-pj_add(pj_lonlat, 'latlong', 'Lat/long (Geodetic alias)', '\n\t');
+pj_add(pj_lonlat, 'lonlat', 'Lat/long (Geodetic)', '');
+pj_add(pj_lonlat, 'longlat', 'Lat/long (Geodetic alias)', '');
+pj_add(pj_lonlat, 'latlon', 'Lat/long (Geodetic alias)', '');
+pj_add(pj_lonlat, 'latlong', 'Lat/long (Geodetic alias)', '');
 
 function pj_lonlat(P) {
   P.x0 = 0;

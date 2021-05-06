@@ -1,4 +1,4 @@
-pj_add(pj_krovak, 'krovak', 'Krovak', '\n\tPCyl., Ellps.');
+pj_add(pj_krovak, 'krovak', 'Krovak', 'PCyl., Ellps.');
 
 function pj_krovak(P) {
   var u0, n0, g;

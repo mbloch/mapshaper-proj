@@ -1,5 +1,5 @@
 /* @requires aasincos */
-pj_add(pj_mbt_fps, 'mbt_fps', 'McBryde-Thomas Flat-Pole Sine (No. 2)', '\n\tCyl., Sph.');
+pj_add(pj_mbt_fps, 'mbt_fps', 'McBryde-Thomas Flat-Pole Sine (No. 2)', 'Cyl., Sph.');
 
 function pj_mbt_fps(P) {
   var MAX_ITER = 10,

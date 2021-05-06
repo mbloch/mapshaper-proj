@@ -1,6 +1,6 @@
 /* @requires pj_zpoly1 */
 
-pj_add(pj_nzmg, 'nzmg', 'New Zealand Map Grid', '\n\tfixed Earth');
+pj_add(pj_nzmg, 'nzmg', 'New Zealand Map Grid', 'fixed Earth');
 
 function pj_nzmg(P) {
   var EPSLN = 1e-10;

@@ -1,4 +1,4 @@
-pj_add(pj_bonne, 'bonne', 'Bonne (Werner lat_1=90)', '\n\tConic Sph&Ell\n\tlat_1=');
+pj_add(pj_bonne, 'bonne', 'Bonne (Werner lat_1=90)', 'Conic Sph&Ell\nlat_1=');
 
 function pj_bonne(P) {
   var EPS10 = 1e-10;

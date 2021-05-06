@@ -1,13 +1,13 @@
 /* @requires aasincos */
 
-pj_add(pj_eck1, 'eck1', 'Eckert I', '\n\tPCyl Sph');
-pj_add(pj_eck2, 'eck2', 'Eckert II', '\n\tPCyl Sph');
-pj_add(pj_eck3, 'eck3', 'Eckert III', '\n\tPCyl Sph');
-pj_add(pj_wag6, 'wag6', 'Wagner VI', '\n\tPCyl Sph');
-pj_add(pj_kav7, 'kav7', 'Kavraisky VII', '\n\tPCyl Sph');
-pj_add(pj_putp1, 'putp1', 'Putnins P1', '\n\tPCyl Sph');
-pj_add(pj_eck4, 'eck4', 'Eckert IV', '\n\tPCyl Sph');
-pj_add(pj_eck5, 'eck5', 'Eckert V', '\n\tPCyl Sph');
+pj_add(pj_eck1, 'eck1', 'Eckert I', 'PCyl Sph');
+pj_add(pj_eck2, 'eck2', 'Eckert II', 'PCyl Sph');
+pj_add(pj_eck3, 'eck3', 'Eckert III', 'PCyl Sph');
+pj_add(pj_wag6, 'wag6', 'Wagner VI', 'PCyl Sph');
+pj_add(pj_kav7, 'kav7', 'Kavraisky VII', 'PCyl Sph');
+pj_add(pj_putp1, 'putp1', 'Putnins P1', 'PCyl Sph');
+pj_add(pj_eck4, 'eck4', 'Eckert IV', 'PCyl Sph');
+pj_add(pj_eck5, 'eck5', 'Eckert V', 'PCyl Sph');
 
 function pj_eck1(P) {
   var FC = 0.92131773192356127802,

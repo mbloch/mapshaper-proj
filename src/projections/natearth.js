@@ -1,5 +1,5 @@
-pj_add(pj_natearth, 'natearth', 'Natural Earth', '\n\tPCyl., Sph.');
-pj_add(pj_natearth2, 'natearth2', 'Natural Earth 2', '\n\tPCyl., Sph.');
+pj_add(pj_natearth, 'natearth', 'Natural Earth', 'PCyl., Sph.');
+pj_add(pj_natearth2, 'natearth2', 'Natural Earth 2', 'PCyl., Sph.');
 
 function pj_natearth(P) {
   var A0 = 0.8707,

@@ -1,10 +1,10 @@
 /* @requires aasincos */
 
-pj_add(pj_ob_tran, 'ob_tran', 'General Oblique Transformation', "\n\tMisc Sph" +
-  "\n\to_proj= plus parameters for projection" +
-  "\n\to_lat_p= o_lon_p= (new pole) or" +
-  "\n\to_alpha= o_lon_c= o_lat_c= or" +
-  "\n\to_lon_1= o_lat_1= o_lon_2= o_lat_2=");
+pj_add(pj_ob_tran, 'ob_tran', 'General Oblique Transformation', 'Misc Sph\n' +
+  'o_proj= plus parameters for projection\n' +
+  'o_lat_p= o_lon_p= (new pole) or\n' +
+  'o_alpha= o_lon_c= o_lat_c= or\n' +
+  'o_lon_1= o_lat_1= o_lon_2= o_lat_2=');
 
 function pj_ob_tran(P) {
   var name, defn, P2;
@@ -33,25 +33,25 @@ function pj_ob_tran(P) {
     P.fr_meter = RAD_TO_DEG;
   }
 
-  if (pj_param(P.params, "to_alpha")) {
-    lamc  = pj_param(P.params, "ro_lon_c");
-    phic  = pj_param(P.params, "ro_lat_c");
-    alpha = pj_param(P.params, "ro_alpha");
+  if (pj_param(P.params, 'to_alpha')) {
+    lamc  = pj_param(P.params, 'ro_lon_c');
+    phic  = pj_param(P.params, 'ro_lat_c');
+    alpha = pj_param(P.params, 'ro_alpha');
 
     if (fabs(fabs(phic) - M_HALFPI) <= TOL) e_error(-32);
     lamp = lamc + aatan2(-cos(alpha), -sin(alpha) * sin(phic));
     phip = aasin(cos(phic) * sin(alpha));
 
-  } else if (pj_param(P.params, "to_lat_p")) { /* specified new pole */
-    lamp = pj_param(P.params, "ro_lon_p");
-    phip = pj_param(P.params, "ro_lat_p");
+  } else if (pj_param(P.params, 'to_lat_p')) { /* specified new pole */
+    lamp = pj_param(P.params, 'ro_lon_p');
+    phip = pj_param(P.params, 'ro_lat_p');
 
-  } else { /* specified new "equator" points */
+  } else { /* specified new 'equator' points */
 
-    lam1 = pj_param(P.params, "ro_lon_1");
-    phi1 = pj_param(P.params, "ro_lat_1");
-    lam2 = pj_param(P.params, "ro_lon_2");
-    phi2 = pj_param(P.params, "ro_lat_2");
+    lam1 = pj_param(P.params, 'ro_lon_1');
+    phi1 = pj_param(P.params, 'ro_lat_1');
+    lam2 = pj_param(P.params, 'ro_lon_2');
+    phi2 = pj_param(P.params, 'ro_lat_2');
     if (fabs(phi1 - phi2) <= TOL ||
         (con = fabs(phi1)) <= TOL ||
         fabs(con - M_HALFPI) <= TOL ||

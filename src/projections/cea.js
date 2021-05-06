@@ -1,6 +1,6 @@
 /* @requires pj_qsfn pj_auth */
 
-pj_add(pj_cea, 'cea', 'Equal Area Cylindrical', '\n\tCyl, Sph&Ell\n\tlat_ts=');
+pj_add(pj_cea, 'cea', 'Equal Area Cylindrical', 'Cyl, Sph&Ell\nlat_ts=');
 
 function pj_cea(P) {
   var t = 0, qp, apa;

@@ -1,6 +1,6 @@
 /* @require pj_mlfn */
 
-pj_add(pj_tmerc, 'tmerc', "Transverse Mercator", "\n\tCyl, Sph&Ell");
+pj_add(pj_tmerc, 'tmerc', 'Transverse Mercator', 'Cyl, Sph&Ell');
 
 function pj_tmerc(P) {
   var EPS10 = 1e-10,

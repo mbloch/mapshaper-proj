@@ -1,4 +1,4 @@
-pj_add(pj_tcea, 'tcea', 'Transverse Cylindrical Equal Area', '\n\tCyl, Sph');
+pj_add(pj_tcea, 'tcea', 'Transverse Cylindrical Equal Area', 'Cyl, Sph');
 
 function pj_tcea(P) {
   P.es = 0;

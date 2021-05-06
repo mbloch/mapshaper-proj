@@ -1,4 +1,4 @@
-pj_add(pj_eqc, 'eqc', 'Equidistant Cylindrical (Plate Caree)', '\n\tCyl, Sph\n\tlat_ts=[, lat_0=0]');
+pj_add(pj_eqc, 'eqc', 'Equidistant Cylindrical (Plate Caree)', 'Cyl, Sph\nlat_ts=[, lat_0=0]');
 
 function pj_eqc(P) {
   var rc = cos(pj_param(P.params, "rlat_ts"));

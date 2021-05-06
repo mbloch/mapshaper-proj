@@ -1,4 +1,4 @@
-pj_add(pj_loxim, 'loxim', 'Loximuthal', '\n\tPCyl Sph');
+pj_add(pj_loxim, 'loxim', 'Loximuthal', 'PCyl Sph');
 
 function pj_loxim(P) {
   var EPS = 1e-8;

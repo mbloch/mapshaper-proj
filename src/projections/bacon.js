@@ -1,6 +1,6 @@
-pj_add(pj_apian, 'apian', 'Apian Globular I', '\n\tMisc Sph, no inv.');
-pj_add(pj_ortel, 'ortel', 'Ortelius Oval', '\n\tMisc Sph, no inv.');
-pj_add(pj_bacon, 'bacon', 'Bacon Globular', '\n\tMisc Sph, no inv.');
+pj_add(pj_apian, 'apian', 'Apian Globular I', 'Misc Sph, no inv.');
+pj_add(pj_ortel, 'ortel', 'Ortelius Oval', 'Misc Sph, no inv.');
+pj_add(pj_bacon, 'bacon', 'Bacon Globular', 'Misc Sph, no inv.');
 
 function pj_bacon(P) {
   pj_bacon_init(P, true, false);

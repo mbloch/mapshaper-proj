@@ -1,4 +1,4 @@
-pj_add(pj_boggs, 'boggs', 'Boggs Eumorphic', '\n\tPCyl., no inv., Sph.');
+pj_add(pj_boggs, 'boggs', 'Boggs Eumorphic', 'PCyl., no inv., Sph.');
 
 function pj_boggs(P) {
   var NITER = 20,

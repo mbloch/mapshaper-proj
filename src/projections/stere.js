@@ -1,7 +1,7 @@
 /* @require pj_tsfn */
 
-pj_add(pj_stere, 'stere', 'Stereographic', '\n\tAzi, Sph&Ell\n\tlat_ts=');
-pj_add(pj_ups, 'ups', 'Universal Polar Stereographic', '\n\tAzi, Sph&Ell\n\tsouth');
+pj_add(pj_stere, 'stere', 'Stereographic', 'Azi, Sph&Ell\nlat_ts=');
+pj_add(pj_ups, 'ups', 'Universal Polar Stereographic', 'Azi, Sph&Ell\nsouth');
 
 function pj_ups(P) {
   P.phi0 = pj_param(P.params, "bsouth") ? -M_HALFPI : M_HALFPI;

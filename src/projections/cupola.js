@@ -1,4 +1,4 @@
-pj_add(pj_cupola, 'cupola', 'Cupola', '\n\tMisc., Sph., NoInv.');
+pj_add(pj_cupola, 'cupola', 'Cupola', 'Misc., Sph., NoInv.');
 
 // Source: https://www.tandfonline.com/eprint/EE7Y8RK4GXA4ITWUTQPY/full?target=10.1080/23729333.2020.1862962
 // See also: http://www.at-a-lanta.nl/weia/cupola.html

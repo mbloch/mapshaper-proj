@@ -1,10 +1,10 @@
-pj_add(pj_get_sconic('EULER'), 'euler', 'Euler', '\n\tConic, Sph\n\tlat_1= and lat_2=');
-pj_add(pj_get_sconic('MURD1'), 'murd1', 'Murdoch I', '\n\tConic, Sph\n\tlat_1= and lat_2=');
-pj_add(pj_get_sconic('MURD2'), 'murd2', 'Murdoch II', '\n\tConic, Sph\n\tlat_1= and lat_2=');
-pj_add(pj_get_sconic('MURD3'), 'murd3', 'Murdoch III', '\n\tConic, Sph\n\tlat_1= and lat_2=');
-pj_add(pj_get_sconic('PCONIC'), 'pconic', 'Perspective Conic', '\n\tConic, Sph\n\tlat_1= and lat_2=');
-pj_add(pj_get_sconic('TISSOT'), 'tissot', 'Tissot', '\n\tConic, Sph\n\tlat_1= and lat_2=');
-pj_add(pj_get_sconic('VITK1'), 'vitk1', 'Vitkovsky I', '\n\tConic, Sph\n\tlat_1= and lat_2=');
+pj_add(pj_get_sconic('EULER'), 'euler', 'Euler', 'Conic, Sph\nlat_1= and lat_2=');
+pj_add(pj_get_sconic('MURD1'), 'murd1', 'Murdoch I', 'Conic, Sph\nlat_1= and lat_2=');
+pj_add(pj_get_sconic('MURD2'), 'murd2', 'Murdoch II', 'Conic, Sph\nlat_1= and lat_2=');
+pj_add(pj_get_sconic('MURD3'), 'murd3', 'Murdoch III', 'Conic, Sph\nlat_1= and lat_2=');
+pj_add(pj_get_sconic('PCONIC'), 'pconic', 'Perspective Conic', 'Conic, Sph\nlat_1= and lat_2=');
+pj_add(pj_get_sconic('TISSOT'), 'tissot', 'Tissot', 'Conic, Sph\nlat_1= and lat_2=');
+pj_add(pj_get_sconic('VITK1'), 'vitk1', 'Vitkovsky I', 'Conic, Sph\nlat_1= and lat_2=');
 
 function pj_get_sconic(type) {
   return function(P) {

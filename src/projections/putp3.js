@@ -1,7 +1,7 @@
 /* @requires aasincos */
 
-pj_add(pj_putp3, 'putp3', 'Putnins P3', '\n\tPCyl., Sph.');
-pj_add(pj_putp3p, 'putp3p', 'Putnins P3\'', '\n\tPCyl., Sph.');
+pj_add(pj_putp3, 'putp3', 'Putnins P3', 'PCyl., Sph.');
+pj_add(pj_putp3p, 'putp3p', 'Putnins P3\'', 'PCyl., Sph.');
 
 function pj_putp3p(P) {
   pj_putp3(P, true);

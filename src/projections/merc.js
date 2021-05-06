@@ -1,15 +1,15 @@
 /* @require pj_phi2, pj_tsfn */
 
 
-pj_add(pj_merc, "merc", "Mercator", "\n\tCyl, Sph&Ell\n\tlat_ts=");
+pj_add(pj_merc, 'merc', 'Mercator', 'Cyl, Sph&Ell\nlat_ts=');
 
 function pj_merc(P) {
   var EPS10 = 1e-10;
   var phits = 0;
-  var is_phits = pj_param(P.params, "tlat_ts");
+  var is_phits = pj_param(P.params, 'tlat_ts');
 
   if (is_phits) {
-    phits = pj_param(P.params, "rlat_ts");
+    phits = pj_param(P.params, 'rlat_ts');
     if (phits >= M_HALFPI) {
       e_error(-24);
     }

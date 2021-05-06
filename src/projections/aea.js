@@ -1,7 +1,7 @@
 /* @require pj_qsfn pj_msfn */
 
-pj_add(pj_aea, 'aea', 'Albers Equal Area', '\n\tConic Sph&Ell\n\tlat_1= lat_2=');
-pj_add(pj_leac, 'leac', 'Lambert Equal Area Conic', '\n\tConic, Sph&Ell\n\tlat_1= south');
+pj_add(pj_aea, 'aea', 'Albers Equal Area', 'Conic Sph&Ell\nlat_1= lat_2=');
+pj_add(pj_leac, 'leac', 'Lambert Equal Area Conic', 'Conic, Sph&Ell\nlat_1= south');
 
 function pj_aea(P) {
   var phi1 = pj_param(P.params, "rlat_1");

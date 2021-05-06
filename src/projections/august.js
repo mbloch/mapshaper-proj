@@ -1,4 +1,4 @@
-pj_add(pj_august, 'august', 'August Epicycloidal', '\n\tMisc Sph, no inv.');
+pj_add(pj_august, 'august', 'August Epicycloidal', 'Misc Sph, no inv.');
 
 function pj_august(P) {
   P.fwd = s_fwd;

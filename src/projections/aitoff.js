@@ -1,5 +1,5 @@
-pj_add(pj_wintri, 'wintri', 'Winkel Tripel', '\n\tMisc Sph\n\tlat_1');
-pj_add(pj_aitoff, 'aitoff', 'Aitoff', '\n\tMisc Sph');
+pj_add(pj_wintri, 'wintri', 'Winkel Tripel', 'Misc Sph\nlat_1');
+pj_add(pj_aitoff, 'aitoff', 'Aitoff', 'Misc Sph');
 
 function pj_wintri(P) {
   var Q = P.opaque = {mode: 1};

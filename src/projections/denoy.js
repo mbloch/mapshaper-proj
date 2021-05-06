@@ -1,4 +1,4 @@
-pj_add(pj_denoy, 'denoy', 'Denoyer Semi-Elliptical', '\n\tPCyl, Sph., no inv.');
+pj_add(pj_denoy, 'denoy', 'Denoyer Semi-Elliptical', 'PCyl, Sph., no inv.');
 
 function pj_denoy(P) {
   P.fwd = s_fwd;

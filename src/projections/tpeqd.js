@@ -1,5 +1,5 @@
 /* @requires aasincos adjlon */
-pj_add(pj_tpeqd, 'tpeqd', 'Two Point Equidistant', '\n\tMisc Sph\n\tlat_1= lon_1= lat_2= lon_2=');
+pj_add(pj_tpeqd, 'tpeqd', 'Two Point Equidistant', 'Misc Sph\nlat_1= lon_1= lat_2= lon_2=');
 
 function pj_tpeqd(P) {
   var cp1, sp1, cp2, sp2, ccs, cs, sc, r2z0, z02, dlam2;

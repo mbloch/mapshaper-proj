@@ -1,6 +1,6 @@
 /* @requires aasincos */
 
-pj_add(pj_hammer, 'hammer', 'Hammer & Eckert-Greifendorff', '\n\tMisc Sph, \n\tW= M=');
+pj_add(pj_hammer, 'hammer', 'Hammer & Eckert-Greifendorff', 'Misc Sph,\nW= M=');
 
 function pj_hammer(P) {
   var w, m, rm;

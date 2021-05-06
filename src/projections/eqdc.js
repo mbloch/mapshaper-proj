@@ -1,6 +1,6 @@
 /* @requires pj_msfn pj_mlfn */
 
-pj_add(pj_eqdc, 'eqdc', 'Equidistant Conic', '\n\tConic, Sph&Ell\n\tlat_1= lat_2=');
+pj_add(pj_eqdc, 'eqdc', 'Equidistant Conic', 'Conic, Sph&Ell\nlat_1= lat_2=');
 
 function pj_eqdc(P) {
   var phi1, phi2, n, rho, rho0, c, en, ellips, cosphi, sinphi, secant;

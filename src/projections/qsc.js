@@ -1,4 +1,4 @@
-pj_add(pj_qsc, 'qsc', 'Quadrilateralized Spherical Cube', '\n\tAzi, Sph.');
+pj_add(pj_qsc, 'qsc', 'Quadrilateralized Spherical Cube', 'Azi, Sph.');
 
 function pj_qsc(P) {
   var EPS10 = 1.e-10;
