@@ -1,3 +1,6 @@
+v0.0.32
+* Bug fix
+
 v0.0.31
 * Apply default 11.023 degree central meridian to cupola.
 
@@ -8,7 +11,7 @@ v0.0.29
 * Added forward spherical formula for the Cupola projection.
 
 v0.0.27
-* Fixed bug related to reading UTM South .prj files
+* Fixed bug related to reading UTM South .prj files.
 
 v0.0.26
 * Remove source code and other unneeded files from npm distribution.
