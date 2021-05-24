@@ -1,3 +1,6 @@
+v0.0.33
+* Added Hill Eucyclic projection.
+
 v0.0.32
 * Bug fix
 
