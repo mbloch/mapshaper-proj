@@ -1,8 +1,68 @@
-/* @require pj_mlfn */
+/* @require pj_mlfn, etmerc */
 
 pj_add(pj_tmerc, 'tmerc', 'Transverse Mercator', 'Cyl, Sph&Ell');
+pj_add(pj_utm, 'utm', 'Universal Transverse Mercator (UTM)', 'Cyl, Sph\nzone= south');
+
+function pj_utm_zone(P) {
+
+}
+
+function pj_utm(P) {
+  var zone;
+  if (!P.es) e_error(-34);
+  P.y0 = pj_param(P.params, "bsouth") ? 10000000 : 0;
+  P.x0 = 500000;
+  if (pj_param(P.params, "tzone")) {
+    if ((zone = pj_param(P.params, "izone")) > 0 && zone <= 60)
+      --zone;
+    else
+      e_error(-35);
+  } else { /* nearest central meridian input */
+    zone = floor((adjlon(P.lam0) + M_PI) * 30 / M_PI);
+    if (zone < 0)
+      zone = 0;
+    else if (zone >= 60)
+      zone = 59;
+  }
+  P.lam0 = (zone + 0.5) * M_PI / 30 - M_PI;
+  P.k0 = 0.9996;
+  P.phi0 = 0;
+  pj_etmerc(P);
+}
 
 function pj_tmerc(P) {
+  // TODO: support +algo option
+  if (pj_param(P.params, "bapprox")) {
+    pj_tmerc_approx(P);
+  } else {
+    pj_tmerc_auto(P);
+  }
+}
+
+function pj_tmerc_auto(P) {
+  if (P.es === 0) {
+    return pj_tmerc_approx(P);
+  }
+  pj_etmerc(P);
+  var etfwd = P.fwd;
+  var etinv = P.inv;
+  pj_tmerc_approx(P);
+  var fwd = P.fwd;
+  var inv = P.inv;
+
+  P.fwd = function(lp, xy) {
+    if (fabs(lp.lam) > 3 * DEG_TO_RAD) etfwd(lp, xy);
+    else fwd(lp, xy);
+  };
+
+  P.inv = function(xy, lp) {
+    // See https://github.com/OSGeo/PROJ/blob/master/src/projections/tmerc.cpp
+    if (fabs(xy.x) > 0.053 - 0.022 * xy.y * xy.y) etinv(xy, lp);
+    else inv(xy, lp);
+  };
+}
+
+function pj_tmerc_approx(P) {
   var EPS10 = 1e-10,
       FC1 = 1,
       FC2 = 0.5,

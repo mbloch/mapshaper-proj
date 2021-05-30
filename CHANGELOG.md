@@ -1,3 +1,6 @@
+v0.0.34
+* Changed tmerc to use etmerc for points >3deg from lon_0, unless the +approx flag is used.
+
 v0.0.33
 * Added Hill Eucyclic projection.
 

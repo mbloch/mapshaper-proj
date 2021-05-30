@@ -1,33 +1,4 @@
 pj_add(pj_etmerc, 'etmerc', 'Extended Transverse Mercator', 'Cyl, Sph\nlat_ts=(0)\nlat_0=(0)');
-pj_add(pj_utm, 'utm', 'Universal Transverse Mercator (UTM)', 'Cyl, Sph\nzone= south');
-
-
-function pj_utm_zone(P) {
-
-}
-
-function pj_utm(P) {
-  var zone;
-  if (!P.es) e_error(-34);
-  P.y0 = pj_param(P.params, "bsouth") ? 10000000 : 0;
-  P.x0 = 500000;
-  if (pj_param(P.params, "tzone")) {
-    if ((zone = pj_param(P.params, "izone")) > 0 && zone <= 60)
-      --zone;
-    else
-      e_error(-35);
-  } else { /* nearest central meridian input */
-    zone = floor((adjlon(P.lam0) + M_PI) * 30 / M_PI);
-    if (zone < 0)
-      zone = 0;
-    else if (zone >= 60)
-      zone = 59;
-  }
-  P.lam0 = (zone + 0.5) * M_PI / 30 - M_PI;
-  P.k0 = 0.9996;
-  P.phi0 = 0;
-  pj_etmerc(P);
-}
 
 function pj_etmerc(P) {
   var cgb = [],

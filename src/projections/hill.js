@@ -1,4 +1,4 @@
-pj_add(pj_hill, 'hill', 'Hill Eucyclic', 'PCyl., Sph., NoInv.');
+pj_add(pj_hill, 'hill', 'Hill Eucyclic', 'PCyl., Sph.');
 
 // Adapted from: https://github.com/d3/d3-geo-projection/blob/master/src/hill.js
 // License: https://github.com/d3/d3-geo-projection/blob/master/LICENSE
