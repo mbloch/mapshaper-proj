@@ -1,3 +1,6 @@
+v0.0.35
+* Fixed a WKT parsing bug.
+
 v0.0.34
 * Changed tmerc to use etmerc for points >3deg from lon_0, unless the +approx flag is used.
 

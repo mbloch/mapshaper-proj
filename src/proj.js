@@ -49,6 +49,7 @@ api.internal = {
   RAD_TO_DEG: RAD_TO_DEG,
   wkt_parse: wkt_parse,
   wkt_unpack: wkt_unpack,
+  convert_wkt_quotes: convert_wkt_quotes,
   wkt_to_proj4: wkt_to_proj4,
   wkt_from_proj4: wkt_from_proj4,
   wkt_make_projcs: wkt_make_projcs,

@@ -12,8 +12,9 @@ function wkt_parse(str) {
 // WKT format: http://docs.opengeospatial.org/is/12-063r5/12-063r5.html#11
 function wkt_unpack(str) {
   var obj;
-  // Convert WKT escaped quote to JSON escaped quote
-  str = str.replace(/""/g, '\\"');
+  // Convert WKT escaped quotes to JSON escaped quotes
+  // str = str.replace(/""/g, '\\"'); // BUGGY
+  str = convert_wkt_quotes(str);
 
   // Convert WKT entities to JSON arrays
   str = str.replace(/([A-Z0-9]+)\[/g, '["$1",');
@@ -33,6 +34,23 @@ function wkt_unpack(str) {
     wkt_error('unparsable WKT format');
   }
   return obj;
+}
+
+// Convert WKT escaped quotes to JSON escaped quotes ("" -> \")
+function convert_wkt_quotes(str) {
+  var c = 0;
+  return str.replace(/"+/g, function(s) {
+    var even = c % 2 == 0;
+    c += s.length;
+    // ordinary, unescaped quotes
+    if (s == '"' || s == '""' && even) return s;
+    // WKT-escaped quotes
+    if (even) {
+      return '"' + s.substring(1).replace(/""/g, '\\"');
+    } else {
+      return s.replace(/""/g, '\\"');
+    }
+  });
 }
 
 // Rearrange a subarray of a parsed WKT file for easier traversal
