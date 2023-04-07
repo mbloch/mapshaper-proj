@@ -1,3 +1,6 @@
+v0.0.36
+* Bug fix
+
 v0.0.35
 * Fixed a WKT parsing bug.
 

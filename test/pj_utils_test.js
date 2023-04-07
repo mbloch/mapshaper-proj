@@ -21,6 +21,11 @@ describe('pj_utils.js', function () {
         })
       }
     }
+    test('+proj=lcc +lat_0=25 +lon_0=-95 +lat_1=25 +lat_2=25 +x_0=0 +y_0=0 +R=6371200',
+        '+proj=lcc +lat_0=25 +lon_0=-95 +lat_1=25 +lat_2=25 +x_0=0 +y_0=0 +R=6371200');
+    // +R takes precendence over ellps
+    test('+proj=lcc +lat_0=25 +lon_0=-95 +lat_1=25 +lat_2=25 +x_0=0 +y_0=0 +ellps=clrk66 +R=6371200',
+        '+proj=lcc +lat_0=25 +lon_0=-95 +lat_1=25 +lat_2=25 +x_0=0 +y_0=0 +R=6371200');
     test('+proj=utm +zone=18 +datum=NAD83', '+proj=utm +zone=18 +datum=NAD83');
     test('+proj=robin +a=6371000 +no_defs', '+proj=robin +a=6371000 +es=0');
     test('+proj=robin +a=6371000 +b=6371000', '+proj=robin +a=6371000 +b=6371000');
