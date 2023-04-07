@@ -4,26 +4,38 @@ var opts = require('./src/cli/parse_args.js')()
   .option('f', {
     type: 'flag'
   })
+  .option('m', {
+    type: 'flag' // minimal build
+  })
   .parse(process.argv.slice(2));
 
 var fs = require('fs');
 var _ = require('underscore');
 var path = require('path');
+var ifile = opts.m ? 'src/proj-minimal.js' : 'src/proj.js';
 var deps, ofile;
 
 if (opts._.length > 0) {
   deps = getRequestedDeps(opts._[0].split(','));
+}
+
+if (opts.m) {
+  ofile = "mproj-minimal.js";
+} else if (deps) {
   ofile = "mproj-custom.js";
 } else {
-  deps = getAllDeps();
   ofile = "mproj.js";
+}
+
+if (!deps) {
+  deps = getAllDeps();
 }
 
 require("catty")({follow: !!opts.f})
   .addLibrary("src")
   .addLibrary("node_modules/geographiclib/src")
   .addDeps(deps)
-  .cat("src/proj.js", "dist/" + ofile);
+  .cat(ifile, "dist/" + ofile);
 
 function getRequestedDeps(projs) {
   var index = {};
@@ -55,9 +67,10 @@ function getAllDeps() {
 }
 
 function findProjNames(fileName, index) {
-  var argsRx = /pj_add\(([^(]+)/g;
+  var argsRx = /pj_add\(([^;]+)/g;
   var trimRx = /['"\s]/g;
-  var js = fs.readFileSync(path.join('src/projections', fileName + '.js'), 'utf8');
+  var filePath = path.join('src/projections', fileName + '.js');
+  var js = fs.readFileSync(filePath, 'utf8');
   var args, m;
   while (m = argsRx.exec(js)) {
     args = m[1].split(',');
