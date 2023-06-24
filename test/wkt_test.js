@@ -127,8 +127,6 @@ var data = [
   ['wgs84_ogc.prj', [1, 2], [1, 2]]
 ];
 
-// data = [data[4]]
-
 describe('wkt.js', function () {
   describe('wkt parsing + mproj transform', function() {
     data.forEach(function(arr) {
@@ -136,19 +134,21 @@ describe('wkt.js', function () {
           lp = arr[1],
           xy = arr[2];
       var wkt = fs.readFileSync('test/prj/' + file, 'utf8');
-      var proj4 = wkt_to_proj4(wkt);
 
       it('[fwd] ' + file, function() {
+        var proj4 = wkt_to_proj4(wkt);
         var tol = arr[3] || 1e-7;
         var output = mproj(proj4, lp);
         helpers.closeToPoint(output, xy, tol);
       })
       it('[inv] ' + file, function() {
+        var proj4 = wkt_to_proj4(wkt);
         var tol = arr[4] || 1e-6;
         var output = mproj(proj4, mproj.WGS84, xy);
         helpers.closeToPoint(output, lp, tol);
       })
       it('[fwd] ' + file + ' proj4 -> wkt -> proj4', function() {
+        var proj4 = wkt_to_proj4(wkt);
         // additional roundtrip to test wkt generation
         var tol = arr[3] || 1e-7;
         var wkt_2 = wkt_from_proj4(proj4);

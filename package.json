@@ -1,6 +1,6 @@
 {
 	"name": "mproj",
-	"version": "0.0.36",
+	"version": "0.0.37",
 	"description": "A JavaScript port of the Proj.4 cartographic projections library",
 	"keywords": [
 		"projections",
@@ -21,7 +21,7 @@
 		"dev": "node build -f",
 		"pretest": "node build",
 		"prepublish": "npm test",
-		"postpublish": "./release"
+		"postpublish": "node ../mapshaper-extra/release.js mapshaper-proj"
 	},
 	"main": "./dist/mproj.js",
 	"files": [

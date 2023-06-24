@@ -6,6 +6,12 @@ var assert = require('assert'),
 
 describe('WKT parsing issues', function () {
 
+  it('Error parsing GCS_TWD97[2020]', function() {
+    var str = fs.readFileSync('test/prj/issues/Town_Majia_Sanhe.prj', 'utf8');
+    var obj = wkt_parse(str);
+    assert.equal(typeof obj.GEOGCS, 'object');
+  });
+
   it('Parsing empty string', function() {
     var str = fs.readFileSync('test/prj/issues/Anmarkningar.prj', 'utf8');
     var obj = api.internal.wkt_unpack(str);
