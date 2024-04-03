@@ -1,3 +1,6 @@
+v0.0.38
+* Added geos projection
+
 v0.0.37
 * Fixed a WKT parsing bug.
 

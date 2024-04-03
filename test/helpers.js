@@ -51,6 +51,22 @@ exports.test_cs2cs = function(str) {
   return test;
 }
 
+exports.proj_fwd = function(proj4, p) {
+  var P = api.pj_init(proj4);
+  return api.pj_fwd_deg({lam: p[0], phi: p[1]}, P);
+};
+
+exports.proj_inv = function(proj4, p) {
+  var P = api.pj_init(proj4);
+  return api.pj_inv_deg({x: p[0], y: p[1]}, P);
+};
+
+exports.proj_roundtrip = function(proj4, p) {
+  var xy = exports.proj_fwd(proj4, p);
+  var ll = exports.proj_inv(proj4, [xy.x, xy.y]);
+  var p2 = [ll.lam, ll.phi];
+  exports.closeToPoint(p, p2, 0.000001);
+};
 
 exports.fwd_test = function(args, lpArr, expectArr, tolerance) {
   tolerance = tolerance || 1e-7;

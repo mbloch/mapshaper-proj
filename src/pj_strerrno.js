@@ -48,5 +48,7 @@ var pj_err_list = [
   "unknown prime meridian conversion id",   /* -46 */
   "illegal axis orientation combination",   /* -47 */
   "point not within available datum shift grids", /* -48 */
-  "invalid sweep axis, choose x or y"
+  "invalid sweep axis, choose x or y",
+  "invalid value for h", // -50
+  "point outside of projection domain" // -51 taken from Proj v9
 ];
