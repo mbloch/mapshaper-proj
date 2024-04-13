@@ -1,7 +1,7 @@
 /* @require pj_phi2, pj_tsfn */
 
-
 pj_add(pj_merc, 'merc', 'Mercator', 'Cyl, Sph&Ell\nlat_ts=');
+pj_add(pj_webmerc, 'webmerc', 'Web Mercator / Pseudo Mercator', 'Cyl, Ell');
 
 function pj_merc(P) {
   var EPS10 = 1e-10;
@@ -55,3 +55,23 @@ function pj_merc(P) {
     lp.lam = xy.x / P.k0;
   }
 }
+
+function pj_webmerc(P) {
+  P.k0 = 1;
+  P.inv = s_inv;
+  P.fwd = s_fwd;
+
+  function s_fwd(lp, xy) {
+    if (fabs(fabs(lp.phi) - M_HALFPI) <= EPS10) {
+      f_error();
+    }
+    xy.x = P.k0 * lp.lam;
+    xy.y = P.k0 * log(tan(M_FORTPI + 0.5 * lp.phi));
+  }
+
+  function s_inv(xy, lp) {
+    lp.phi = M_HALFPI - 2 * atan(exp(-xy.y / P.k0));
+    lp.lam = xy.x / P.k0;
+  }
+}
+

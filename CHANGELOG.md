@@ -1,3 +1,6 @@
+v0.0.39
+* Added +proj=webmerc
+
 v0.0.38
 * Added geos projection
 
