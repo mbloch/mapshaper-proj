@@ -1,3 +1,6 @@
+v0.0.40
+* Added +proj=nicol (Nicolosi Globular)
+
 v0.0.39
 * Added +proj=webmerc
 
