@@ -54,6 +54,8 @@ api.internal = {
   wkt_from_proj4: wkt_from_proj4,
   wkt2_to_proj4: wkt2_to_proj4,
   wkt2_from_proj4: wkt2_from_proj4,
+  projjson_to_proj4: projjson_to_proj4,
+  projjson_from_proj4: projjson_from_proj4,
   wkt2_parse: wkt2_parse,
   wkt2_normalize: wkt2_normalize,
   wkt_make_projcs: wkt_make_projcs,
