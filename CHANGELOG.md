@@ -1,3 +1,6 @@
+v0.1.1
+* Added support for PROJJSON (JSON formatted WKT2)
+
 v0.1.0
 * Preliminary WKT2 support
 * Started using Rollup
