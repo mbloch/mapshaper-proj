@@ -12,7 +12,9 @@ var opts = require('./src/cli/parse_args.js')()
 var fs = require('fs');
 var _ = require('underscore');
 var path = require('path');
-var ifile = opts.m ? 'src/proj-minimal.js' : 'src/proj.js';
+var rollup = require('rollup');
+var rollupWatch = require('rollup').watch;
+var getRollupConfig = require('./rollup.config.js');
 var deps, ofile;
 
 if (opts._.length > 0) {
@@ -31,11 +33,51 @@ if (!deps) {
   deps = getAllDeps();
 }
 
-require("catty")({follow: !!opts.f})
-  .addLibrary("src")
-  .addLibrary("node_modules/geographiclib/src")
-  .addDeps(deps)
-  .cat(ifile, "dist/" + ofile);
+runBuild().catch(function(err) {
+  console.error(err.message || err);
+  process.exit(1);
+});
+
+async function runBuild() {
+  var cfg = getRollupConfig({
+    minimal: !!opts.m,
+    deps: deps,
+    outBase: ofile.replace(/\.js$/, '')
+  });
+
+  if (opts.f) {
+    startWatch(cfg);
+  } else {
+    await writeBuild(cfg);
+  }
+}
+
+function startWatch(cfg) {
+  var watcher = rollupWatch(cfg);
+  watcher.on('event', function(event) {
+    if (event.code == 'ERROR') {
+      console.error(event.error && event.error.message || event.error);
+      return;
+    }
+    if (event.code == 'BUNDLE_END') {
+      console.error('Wrote ' + path.relative(process.cwd(), event.output[0]));
+      return;
+    }
+    if (event.code == 'END') {
+      console.error('Watching for changes...');
+    }
+  });
+}
+
+async function writeBuild(cfg) {
+  for (var i = 0; i < cfg.length; i++) {
+    var item = cfg[i];
+    var bundle = await rollup.rollup(item);
+    await bundle.write(item.output);
+    await bundle.close();
+    console.error('Wrote ' + path.relative(process.cwd(), item.output.file));
+  }
+}
 
 function getRequestedDeps(projs) {
   var index = {};
@@ -55,7 +97,7 @@ function getRequestedDeps(projs) {
     console.error("Missing:", missing.join(','));
     process.exit(1);
   }
-  return _.uniq(deps).join(',');
+  return _.uniq(deps);
 }
 
 function getAllDeps() {

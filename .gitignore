@@ -5,4 +5,5 @@ node_modules
 .jshintrc
 release*
 dist/*.js
+dist/*.mjs
 package-lock.json

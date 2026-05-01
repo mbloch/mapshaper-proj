@@ -1,3 +1,7 @@
+v0.1.0
+* Preliminary WKT2 support
+* Started using Rollup
+
 v0.0.40
 * Added +proj=nicol (Nicolosi Globular)
 

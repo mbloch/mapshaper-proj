@@ -12,6 +12,9 @@ wkt_vandg
 wkt_simple_projections
 wkt_stringify
 wkt_parse
+wkt2_make
+wkt2_stringify
+wkt2
 pj_init
 */
 

@@ -61,8 +61,19 @@ The x and y coordinates of unprojectable points are set to `Infinity`. Other err
 
 ## Building
 
-mapshaper-proj uses the (old-fashioned) technique of concatenating source files and wrapping them in a function to create a  module with a shared scope. This method allows for global variables that are invisible outside of the program, making porting from the original C much simpler than if we were to make each source file a separate module.
+mapshaper-proj now uses Rollup to build from the legacy shared-scope source graph. This preserves the original C-ported structure while producing both CommonJS and ESM outputs.
 
-Running `build` creates a build containing all supported projections in the `dist/` directory.
+Running `node build` creates a build containing all supported projections in the `dist/` directory.
 
-Running `build merc,lcc,aea` creates a build containing only the listed projections. You can customize the comma-separated list to include only the projections that you want. Run `mproj -l` to see a list of all supported projections.
+Running `node build merc,lcc,aea` creates a build containing only the listed projections. You can customize the comma-separated list to include only the projections that you want. Run `mproj -l` to see a list of all supported projections.
+
+Running `node build -m` creates the minimal build.
+
+Running `node build -f` watches files and rebuilds on change.
+
+Build artifacts:
+
+* `dist/mproj.js` (CommonJS)
+* `dist/mproj.mjs` (ESM)
+* `dist/mproj-minimal.js` and `dist/mproj-minimal.mjs`
+* `dist/mproj-custom.js` and `dist/mproj-custom.mjs` (for custom projection lists)

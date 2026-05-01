@@ -1,0 +1,1 @@
+VERTCRS["EGM96 height",VDATUM["EGM96 geoid"],CS[vertical,1],AXIS["gravity-related height (H)",up,LENGTHUNIT["metre",1]],USAGE[SCOPE["Geodesy."],AREA["World."],BBOX[-90,-180,90,180]],ID["EPSG",5773]]
