@@ -72,6 +72,21 @@ function runMatrix1() {
       file = path.join(dir, alt);
     }
     var wkt = fs.readFileSync(file, 'utf8');
+    if (entry.proj4_expected) {
+      try {
+        var got2 = api.internal.wkt2_to_proj4(wkt);
+        if (normalizeProj4(got2) === normalizeProj4(entry.proj4_expected)) {
+          record('m1', 'pass');
+        } else {
+          record('m1', 'fail', key +
+            '\n    got:      ' + got2 +
+            '\n    expected: ' + entry.proj4_expected);
+        }
+      } catch (e2) {
+        record('m1', 'fail', key + '   ERROR: ' + e2.message);
+      }
+      return;
+    }
     try {
       var got = api.internal.wkt2_to_proj4(wkt);
       record('m1', 'fail', key + ' expected error but got ' + got);

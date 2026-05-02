@@ -128,9 +128,9 @@
   "unsupported": {
     "5555_compound": {
       "proj4_epsg_io": null,
-      "proj4_expected": null,
-      "expected_error": "COMPOUNDCRS not supported",
-      "notes": "COMPOUNDCRS = PROJCRS + VERTCRS. Tests error path. Could optionally unwrap to the horizontal-only PROJCRS."
+      "proj4_expected": "+proj=utm +zone=32 +ellps=GRS80 +no_defs",
+      "expected_error": null,
+      "notes": "COMPOUNDCRS = PROJCRS + VERTCRS. Converter now unwraps and uses the horizontal component."
     },
     "5773_vertical": {
       "proj4_epsg_io": null,
