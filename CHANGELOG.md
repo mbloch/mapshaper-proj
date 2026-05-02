@@ -1,3 +1,6 @@
+v0.1.2
+* Added support for WKT2 COMPOUNDCRS (by extracting only the horizontal component).
+
 v0.1.1
 * Added support for PROJJSON (JSON formatted WKT2)
 
