@@ -33,4 +33,27 @@ describe('pj_utils.js', function () {
     test('+init=epsg:5070', '+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +units=m +datum=NAD83');
     test('+init=epsg:3991', '+proj=lcc +lat_1=18.43333333333333 +lat_2=18.03333333333333 +lat_0=17.83333333333333 +lon_0=-66.43333333333334 +x_0=152400.3048006096 +y_0=0 +units=us-ft +ellps=clrk66 +towgs84=11,72,-101,0,0,0,0');
   })
+
+  describe('get_normalized_proj_defn()', function () {
+
+    function norm(str) {
+      return api.internal.get_normalized_proj_defn(api.pj_init(str));
+    }
+
+    it('canonicalizes WGS84 ellipsoid to WGS84 datum', function() {
+      assert.equal(norm('+proj=longlat +ellps=WGS84 +pm=0 +no_defs'), '+proj=longlat +datum=WGS84');
+      assert.equal(norm('+proj=longlat +datum=WGS84'), '+proj=longlat +datum=WGS84');
+    });
+
+    it('canonicalizes projected WGS84 ellipsoid definitions', function() {
+      var a = norm('+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +datum=WGS84 +units=m');
+      var b = norm('+proj=aea +lon_0=-96 +lat_2=45.5 +pm=0 +lat_0=37.5 +ellps=WGS84 +units=m +lat_1=29.5 +no_defs');
+      assert.equal(a, '+proj=aea +lat_0=37.5 +lat_1=29.5 +lat_2=45.5 +lon_0=-96 +units=m +datum=WGS84');
+      assert.equal(b, a);
+    });
+
+    it('does not convert shifted datums to WGS84', function() {
+      assert.equal(norm('+proj=longlat +ellps=WGS84 +towgs84=1,2,3'), '+proj=longlat +ellps=WGS84 +towgs84=1,2,3');
+    });
+  })
 });
