@@ -36,4 +36,11 @@ describe('robin.js', function () {
 
   helpers.fwd_test(sargs, fwd_in, s_fwd_expect);
   helpers.inv_test(sargs, inv_in, s_inv_expect);
+
+  it('rejects inverse longitudes outside the projection domain', function() {
+    var P = api.pj_init(sargs);
+    var lp = api.pj_inv({x: 4 * 6400000, y: 0.5 * 6400000}, P);
+    assert.equal(lp.lam, Infinity);
+    assert.equal(lp.phi, Infinity);
+  });
 });

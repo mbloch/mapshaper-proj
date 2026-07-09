@@ -18,6 +18,7 @@ function pj_natearth(P) {
   C3 = (9 * B3),
   C4 = (11 * B4),
   EPS = 1e-11,
+  MAX_ITER = 100,
   MAX_Y = (0.8707 * 0.52 * M_PI);
 
   P.es = 0;
@@ -34,7 +35,7 @@ function pj_natearth(P) {
 
   function s_inv(xy, lp) {
     var x = xy.x, y = xy.y;
-    var yc, tol, y2, y4, f, fder;
+    var yc, tol, y2, y4, f, fder, i;
     if (y > MAX_Y) {
       y = MAX_Y;
     } else if (y < -MAX_Y) {
@@ -42,7 +43,7 @@ function pj_natearth(P) {
     }
 
     yc = y;
-      for (;;) { /* Newton-Raphson */
+    for (i = MAX_ITER; i; --i) { /* Newton-Raphson */
       y2 = yc * yc;
       y4 = y2 * y2;
       f = (yc * (B0 + y2 * (B1 + y4 * (B2 + B3 * y2 + B4 * y4)))) - y;
@@ -51,6 +52,10 @@ function pj_natearth(P) {
       if (fabs(tol) < EPS) {
           break;
       }
+    }
+    if (!i) {
+      i_error();
+      return;
     }
     lp.phi = yc;
     y2 = yc * yc;
@@ -74,6 +79,7 @@ function pj_natearth2(P) {
       C2 = (11 * B2),
       C3 = (13 * B3),
       EPS = 1e-11,
+      MAX_ITER = 100,
       MAX_Y = (0.84719 * 0.535117535153096 * M_PI);
 
   P.es = 0;
@@ -91,14 +97,14 @@ function pj_natearth2(P) {
 
   function s_inv(xy, lp) {
     var x = xy.x, y = xy.y;
-    var yc, tol, y2, y4, y6, f, fder;
+    var yc, tol, y2, y4, y6, f, fder, i;
     if (y > MAX_Y) {
       y = MAX_Y;
     } else if (y < -MAX_Y) {
       y = -MAX_Y;
     }
     yc = y;
-    for (;;) { /* Newton-Raphson */
+    for (i = MAX_ITER; i; --i) { /* Newton-Raphson */
       y2 = yc * yc;
       y4 = y2 * y2;
       f = (yc * (B0 + y4 * y4 * (B1 + B2 * y2 + B3 * y4))) - y;
@@ -107,6 +113,10 @@ function pj_natearth2(P) {
       if (fabs(tol) < EPS) {
         break;
       }
+    }
+    if (!i) {
+      i_error();
+      return;
     }
     lp.phi = yc;
     y2 = yc * yc;

@@ -38,7 +38,8 @@ function pj_aitoff(P) {
         MAXROUND = 20,
         EPSILON = 1e-12,
         round = 0,
-        iter, D, C, f1, f2, f1p, f1l, f2p, f2l, dp, dl, sl, sp, cp, cl, x, y;
+        iter, D, C, denom, determinant, f1, f2, f1p, f1l, f2p, f2l, dp, dl,
+        sl, sp, cp, cl, x, y;
 
     if ((fabs(xy.x) < EPSILON) && (fabs(xy.y) < EPSILON )) {
       lp.phi = 0;
@@ -55,7 +56,12 @@ function pj_aitoff(P) {
         sp = sin(lp.phi); cp = cos(lp.phi);
         D = cp * cl;
         C = 1 - D * D;
-        D = acos(D) / pow(C, 1.5);
+        denom = pow(C, 1.5);
+        if (denom === 0) {
+          i_error();
+          return;
+        }
+        D = acos(D) / denom;
         f1 = 2 * D * C * cp * sl;
         f2 = D * C * sp;
         f1p = 2 * (sl * cl * sp * cp / C - D * sp * sl);
@@ -71,10 +77,14 @@ function pj_aitoff(P) {
           f2l *= 0.5;
         }
         f1 -= xy.x; f2 -= xy.y;
-        dl = (f2 * f1p - f1 * f2p) / (dp = f1p * f2l - f2p * f1l);
-        dp = (f1 * f2l - f2 * f1l) / dp;
-        while (dl > M_PI) dl -= M_PI; /* set to interval [-M_PI, M_PI]  */
-        while (dl < -M_PI) dl += M_PI; /* set to interval [-M_PI, M_PI]  */
+        determinant = f1p * f2l - f2p * f1l;
+        if (determinant === 0) {
+          i_error();
+          return;
+        }
+        dl = (f2 * f1p - f1 * f2p) / determinant;
+        dp = (f1 * f2l - f2 * f1l) / determinant;
+        dl %= M_PI; /* set to interval [-M_PI, M_PI] */
         lp.phi -= dp; lp.lam -= dl;
       } while ((fabs(dp) > EPSILON || fabs(dl) > EPSILON) && (iter++ < MAXITER));
       if (lp.phi > M_HALFPI) lp.phi -= 2*(lp.phi-M_HALFPI); /* correct if symmetrical solution for Aitoff */

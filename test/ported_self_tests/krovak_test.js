@@ -38,6 +38,13 @@ describe('krovak.js', function () {
 
     helpers.fwd_test(eargs, fwd_in, e_fwd_expect);
     helpers.inv_test(eargs, inv_in, e_inv_expect);
+
+    it('handles the projection origin', function() {
+      var P = api.pj_init(eargs);
+      var lp = api.pj_inv({x: 0, y: 0}, P);
+      assert.ok(isFinite(lp.lam));
+      assert.ok(isFinite(lp.phi));
+    });
   })
 
 });

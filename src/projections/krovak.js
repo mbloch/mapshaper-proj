@@ -4,6 +4,7 @@ function pj_krovak(P) {
   var u0, n0, g;
   var alpha, k, n, rho0, ad, czech;
   var EPS = 1e-15;
+  var MAX_ITER = 100;
   var S45 = 0.785398163397448; /* 45 deg */
   var S90 = 1.570796326794896; /* 90 deg */
   var UQ = 1.04216856380474;   /* DU(2, 59, 42, 42.69689) */
@@ -62,7 +63,7 @@ function pj_krovak(P) {
 
   function e_inv(xy, lp) {
     var u, deltav, s, d, eps, rho, fi1, xy0;
-    var ok;
+    var i;
     xy0 = xy.x;
     xy.x = xy.y;
     xy.y = xy0;
@@ -72,20 +73,27 @@ function pj_krovak(P) {
     rho = sqrt(xy.x * xy.x + xy.y * xy.y);
     eps = atan2(xy.y, xy.x);
     d = eps / sin(S0);
-    s = 2 * (atan(  pow(rho0 / rho, 1 / n) * tan(S0 / 2 + S45)) - S45);
+    if (rho === 0) {
+      s = M_HALFPI;
+    } else {
+      s = 2 * (atan(pow(rho0 / rho, 1 / n) * tan(S0 / 2 + S45)) - S45);
+    }
     u = asin(cos(ad) * sin(s) - sin(ad) * cos(s) * cos(d));
     deltav = asin(cos(s) * sin(d) / cos(u));
     lp.lam = P.lam0 - deltav / alpha;
 
     /* ITERATION FOR lp.phi */
     fi1 = u;
-    ok = 0;
-    do {
+    for (i = MAX_ITER; i; --i) {
       lp.phi = 2 * (atan(pow( k, -1 / alpha) * pow( tan(u / 2 + S45), 1 / alpha) *
         pow( (1 + P.e * sin(fi1)) / (1 - P.e * sin(fi1)) , P.e / 2))  - S45);
-      if (fabs(fi1 - lp.phi) < EPS) ok=1;
+      if (fabs(fi1 - lp.phi) < EPS) break;
       fi1 = lp.phi;
-   } while (ok===0);
-   lp.lam -= P.lam0;
+    }
+    if (!i) {
+      i_error();
+      return;
+    }
+    lp.lam -= P.lam0;
   }
 }

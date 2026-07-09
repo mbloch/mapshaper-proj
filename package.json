@@ -11,7 +11,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/mbloch/mapshaper-proj"
+		"url": "git+https://github.com/mbloch/mapshaper-proj.git"
 	},
 	"engines": {
 		"node": ">=0.12.0"
@@ -49,7 +49,7 @@
 		"underscore": "~1.7"
 	},
 	"bin": {
-		"mproj": "./bin/mproj",
-		"mcs2cs": "./bin/mcs2cs"
+		"mproj": "bin/mproj",
+		"mcs2cs": "bin/mcs2cs"
 	}
 }

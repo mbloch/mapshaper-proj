@@ -37,6 +37,14 @@ describe('aitoff.js', function () {
     helpers.fwd_test(sargs, fwd_in, s_fwd_expect);
     // helpers.inv_test(sargs, inv_in, s_inv_expect);
 
+    it('handles a singular inverse starting point', function() {
+      var P = api.pj_init(sargs);
+      var xy = {x: 2 * Math.PI * 6400000, y: 0};
+      var lp = api.pj_inv(xy, P);
+      assert.equal(lp.lam, Infinity);
+      assert.equal(lp.phi, Infinity);
+    });
+
   })
 
   describe('Winkel Tripel', function () {

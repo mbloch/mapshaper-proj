@@ -50,18 +50,24 @@ function pj_eqearth(P) {
   function s_inv(xy, lp) {
     var EPS = 1e-9,
         NITER = 12,
-        paramLat = xy.y,
+        MAX_Y = 1.3173627591574,
+        y = Math.max(-MAX_Y, Math.min(MAX_Y, xy.y)),
+        paramLat = y,
         paramLatSq, paramLatPow6, fy, fpy, dlat, i;
 
     for (i = 0; i < NITER; ++i) {
       paramLatSq = paramLat * paramLat;
       paramLatPow6 = paramLatSq * paramLatSq * paramLatSq;
-      fy = paramLat * (A1 + A2 * paramLatSq + paramLatPow6 * (A3 + A4 * paramLatSq)) - xy.y;
+      fy = paramLat * (A1 + A2 * paramLatSq + paramLatPow6 * (A3 + A4 * paramLatSq)) - y;
       fpy = A1 + 3 * A2 * paramLatSq + paramLatPow6 * (7 * A3 + 9 * A4 * paramLatSq);
       paramLat -= dlat = fy / fpy;
       if (Math.abs(dlat) < EPS) {
           break;
       }
+    }
+    if (i === NITER) {
+      i_error();
+      return;
     }
     paramLatSq = paramLat * paramLat;
     paramLatPow6 = paramLatSq * paramLatSq * paramLatSq;

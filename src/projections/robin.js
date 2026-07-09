@@ -51,7 +51,8 @@ function pj_robin(P) {
       RC1 = 0.08726646259971647884,
       NODES = 18,
       ONEEPS = 1.000001,
-      EPS = 1e-8;
+      EPS = 1e-8,
+      MAX_ITER = 100;
 
   P.es = 0;
   P.fwd = s_fwd;
@@ -69,7 +70,7 @@ function pj_robin(P) {
   }
 
   function s_inv(xy, lp) {
-    var t, t1, T, i;
+    var t, t1, T, i, iterations;
     lp.lam = xy.x / FXC;
     lp.phi = fabs(xy.y / FYC);
     if (lp.phi >= 1) { /* simple pathologic cases */
@@ -94,13 +95,20 @@ function pj_robin(P) {
       t = 5 * (lp.phi - T[0])/(Y[i+1][0] - T[0]);
       /* make into root */
       T[0] -= lp.phi;
-      for (;;) { /* Newton-Raphson reduction */
+      for (iterations = MAX_ITER; iterations; --iterations) { /* Newton-Raphson reduction */
         t -= t1 = V(T,t) / DV(T,t);
         if (fabs(t1) < EPS) break;
+      }
+      if (!iterations) {
+        i_error();
+        return;
       }
       lp.phi = (5 * i + t) * DEG_TO_RAD;
       if (xy.y < 0) lp.phi = -lp.phi;
       lp.lam /= V(X[i], t);
+      if (fabs(lp.lam) > M_PI) {
+        i_error();
+      }
     }
   }
 
