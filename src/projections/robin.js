@@ -51,7 +51,8 @@ function pj_robin(P) {
       RC1 = 0.08726646259971647884,
       NODES = 18,
       ONEEPS = 1.000001,
-      EPS = 1e-8,
+      EPS = 1e-10,
+      LAM_EPS = 1e-8,
       MAX_ITER = 100;
 
   P.es = 0;
@@ -60,9 +61,9 @@ function pj_robin(P) {
 
   function s_fwd(lp, xy) {
     var i, dphi;
-    i = floor((dphi = fabs(lp.phi)) * C1);
+    i = floor((dphi = fabs(lp.phi)) * C1 + 1e-15);
     if (i < 0) f_error();
-    if (i >= NODES) i = NODES - 1;
+    if (i >= NODES) i = NODES;
     dphi = RAD_TO_DEG * (dphi - RC1 * i);
     xy.x = V(X[i], dphi) * FXC * lp.lam;
     xy.y = V(Y[i], dphi) * FYC;
@@ -107,7 +108,11 @@ function pj_robin(P) {
       if (xy.y < 0) lp.phi = -lp.phi;
       lp.lam /= V(X[i], t);
       if (fabs(lp.lam) > M_PI) {
-        i_error();
+        if (fabs(lp.lam) <= M_PI + LAM_EPS) {
+          lp.lam = lp.lam < 0 ? -M_PI : M_PI;
+        } else {
+          i_error();
+        }
       }
     }
   }
