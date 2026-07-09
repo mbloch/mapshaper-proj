@@ -1,3 +1,7 @@
+v0.1.4
+* Fixes for Robinson formula.
+* Added non-convergence guards to several inverse functions.
+
 v0.1.3
 * Added internal function get_normalized_proj_defn() to return a proj4 string with defaults removed in a consistent format that can be string-compared for equivalence.
 
