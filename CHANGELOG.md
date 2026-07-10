@@ -1,3 +1,6 @@
+v0.1.5
+* Added interrupted projections: igh, igh_o, imoll, imoll_o.
+
 v0.1.4
 * Fixes for Robinson formula.
 * Added non-convergence guards to several inverse functions.
