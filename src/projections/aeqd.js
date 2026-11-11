@@ -126,21 +126,17 @@ function pj_aeqd(P) {
     switch (mode) {
       case EQUIT:
       case OBLIQ:
-        if (mode == EQUIT) {
-          xy.y = cosphi * coslam;
-        } else {
-          xy.y = sinph0 * sinphi + cosph0 * cosphi * coslam;
-        }
-        if (fabs(fabs(xy.y) - 1) < TOL)
-            if (xy.y < 0) f_error();
-            else xy.x = xy.y = 0;
-        else {
-          xy.y = acos(xy.y);
-          xy.y /= sin(xy.y);
-          xy.x = xy.y * cosphi * sin(lp.lam);
-          xy.y *= (mode == EQUIT) ? sinphi :
-              cosph0 * sinphi - sinph0 * cosphi * coslam;
-        }
+        // c is the angular distance to (phi, lam). Deriving sin(c) with hypot
+        // and c with atan2 keeps the forward accurate near the antipode and
+        // near the center, where acos() of a value close to 1 loses digits.
+        var sinlam = sin(lp.lam);
+        var cosc = sinph0 * sinphi + cosph0 * cosphi * coslam;
+        var t = cosph0 * sinphi - sinph0 * cosphi * coslam;
+        var sinc = hypot(cosphi * sinlam, t);
+        if (cosc < TOL - 1) f_error(); // the point opposite the center
+        var k = sinc === 0 ? 1 : atan2(sinc, cosc) / sinc; // c / sin(c)
+        xy.x = k * cosphi * sinlam;
+        xy.y = k * t;
         break;
       case N_POLE:
         lp.phi = -lp.phi;
@@ -160,7 +156,7 @@ function pj_aeqd(P) {
     if ((c_rh = hypot(x, y)) > M_PI) {
         if (c_rh - EPS10 > M_PI) i_error();
         c_rh = M_PI;
-    } else if (c_rh < EPS10) {
+    } else if (c_rh === 0) {
       lp.phi = P.phi0;
       lp.lam = 0;
       return;
@@ -168,16 +164,13 @@ function pj_aeqd(P) {
     if (mode == OBLIQ || mode == EQUIT) {
       sinc = sin(c_rh);
       cosc = cos(c_rh);
-      if (mode == EQUIT) {
-        lp.phi = aasin(y * sinc / c_rh);
-        x *= sinc;
-        y = cosc * c_rh;
-      } else {
-        lp.phi = aasin(cosc * sinph0 + y * sinc * cosph0 / c_rh);
-        y = (cosc - sinph0 * sin(lp.phi)) * c_rh;
-        x *= sinc * cosph0;
-      }
-      lp.lam = y == 0 ? 0 : atan2(x, y);
+      // c_rh * sin(phi), c_rh * cos(phi) * cos(lam) and c_rh * cos(phi) * sin(lam):
+      // atan2() keeps the latitude accurate near the poles, where asin() did not
+      var n = c_rh * cosc * sinph0 + y * sinc * cosph0;
+      y = c_rh * cosc * cosph0 - y * sinc * sinph0;
+      x *= sinc;
+      lp.phi = atan2(n, hypot(x, y));
+      lp.lam = atan2(x, y);
     } else if (mode == N_POLE) {
       lp.phi = M_HALFPI - c_rh;
       lp.lam = atan2(x, -y);

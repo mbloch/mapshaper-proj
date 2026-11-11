@@ -134,17 +134,10 @@ function pj_tmerc_approx(P) {
     if (fabs(fabs(b) - 1) <= EPS10) f_error();
 
     xy.x = ml0 * log ((1 + b) / (1 - b));
-    xy.y = cosphi * cos(lp.lam) / sqrt(1 - b * b);
-
-    b = fabs ( xy.y );
-    if (b >= 1) {
-      if ((b - 1) > EPS10) {
-        f_error();
-      } else {
-        xy.y = 0;
-      }
-    } else
-      xy.y = acos(xy.y);
+    // Same angle as acos(cosphi * cos(lam) / sqrt(1 - b * b)), since
+    // 1 - b * b = sinphi^2 + (cosphi * cos(lam))^2, but without the loss of
+    // precision of acos() near +/-1, i.e. close to the equator
+    xy.y = atan2(fabs(sin(lp.phi)), cosphi * cos(lp.lam));
 
     if (lp.phi < 0)
       xy.y = -xy.y;
@@ -181,8 +174,11 @@ function pj_tmerc_approx(P) {
   function s_inv(xy, lp) {
     var h = exp(xy.x / esp);
     var g = 0.5 * (h - 1 / h);
-    h = cos (P.phi0 + xy.y / esp);
-    lp.phi = asin(sqrt((1 - h * h) / (1 + g * g)));
+    var D = P.phi0 + xy.y / esp;
+    h = cos (D);
+    // Same angle as asin(sqrt((1 - h * h) / (1 + g * g))), but without the
+    // loss of precision of 1 - h * h near the equator
+    lp.phi = atan2(fabs(sin(D)), sqrt(g * g + h * h));
     /* Make sure that phi is on the correct hemisphere when false northing is used */
     if (xy.y < 0 && -lp.phi + P.phi0 < 0) lp.phi = -lp.phi;
     lp.lam = (g || h) ? atan2(g, h) : 0;

@@ -28,14 +28,21 @@ function pj_hammer(P) {
   }
 
   function s_inv(xy, lp) {
-    var z = sqrt(1 - 0.25*w*w*xy.x*xy.x - 0.25*xy.y*xy.y);
-    if (fabs(2*z*z-1) < EPS) {
+    // Undo the M scaling of the forward: u = d * cos(phi) * sin(W * lam)
+    // and v = d * sin(phi), with d = sqrt(2 / (1 + cos(phi) * cos(W * lam)))
+    var u = xy.x / m, v = xy.y / rm;
+    var z = sqrt(1 - 0.25 * u * u - 0.25 * v * v);
+    // z * u = cos(phi) * sin(W * lam), z * v = sin(phi) and
+    // c = 2 * z * z - 1 = cos(phi) * cos(W * lam)
+    var c = 2 * z * z - 1;
+    if (isNaN(z)) { // outside the ellipse
       lp.lam = HUGE_VAL;
       lp.phi = HUGE_VAL;
-      pj_errno = -14;
+      i_error();
     } else {
-      lp.lam = aatan2(w * xy.x * z,2 * z * z - 1)/w;
-      lp.phi = aasin(z * xy.y);
+      lp.lam = aatan2(z * u, c) / w;
+      // asin(z * v), but accurate near the poles
+      lp.phi = atan2(z * v, sqrt(z * u * z * u + c * c));
     }
   }
 }

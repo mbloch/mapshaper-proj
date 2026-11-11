@@ -54,7 +54,7 @@ function pj_ortho(P) {
         sinc = 1;
     }
     cosc = sqrt(1 - sinc * sinc); /* in this range OK */
-    if (fabs(rh) <= EPS10) {
+    if (rh === 0) {
         lp.phi = P.phi0;
         lp.lam = 0.0;
     } else {
@@ -68,19 +68,14 @@ function pj_ortho(P) {
             break;
         case EQUIT:
         case OBLIQ:
-          if (Q.mode == EQUIT) {
-            lp.phi = xy.y * sinc / rh;
-            xy.x *= sinc;
-            xy.y = cosc * rh;
-          } else {
-            lp.phi = cosc * Q.sinph0 + xy.y * sinc * Q.cosph0 /rh;
-            xy.y = (cosc - Q.sinph0 * lp.phi) * rh;
-            xy.x *= sinc * Q.cosph0;
-          }
-          if (fabs(lp.phi) >= 1)
-              lp.phi = lp.phi < 0 ? -M_HALFPI : M_HALFPI;
-          else
-              lp.phi = asin(lp.phi);
+          // rh * sin(phi), rh * cos(phi) * cos(lam) and rh * cos(phi) * sin(lam):
+          // atan2() keeps the latitude accurate near the poles, where asin() did not
+          var s0 = Q.mode == EQUIT ? 0 : Q.sinph0;
+          var c0 = Q.mode == EQUIT ? 1 : Q.cosph0;
+          var n = rh * cosc * s0 + xy.y * sinc * c0;
+          xy.y = rh * cosc * c0 - xy.y * sinc * s0;
+          xy.x *= sinc;
+          lp.phi = atan2(n, hypot(xy.x, xy.y));
           break;
         }
         lp.lam = (xy.y == 0 && (Q.mode == OBLIQ || Q.mode == EQUIT)) ?
