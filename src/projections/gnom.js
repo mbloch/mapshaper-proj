@@ -7,7 +7,7 @@ function pj_gnom(P) {
       S_POLE = 1,
       EQUIT = 2,
       OBLIQ = 3;
-  var sinphi0, cosph0, mode;
+  var sinph0, cosph0, mode;
   if (fabs(fabs(P.phi0) - M_HALFPI) < EPS10) {
       mode = P.phi0 < 0 ? S_POLE : N_POLE;
   } else if (fabs(P.phi0) < EPS10) {
