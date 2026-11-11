@@ -50,7 +50,10 @@ function pj_eqearth(P) {
   function s_inv(xy, lp) {
     var EPS = 1e-9,
         NITER = 12,
-        MAX_Y = 1.3173627591574,
+        // 90 deg latitude on a sphere with radius 1; the value with 13 decimals
+        // was 1.3e-14 too small, so that latitudes from about 89.999993 deg up
+        // to the pole all came back as 89.9999934 deg
+        MAX_Y = 1.3173627591574134,
         y = Math.max(-MAX_Y, Math.min(MAX_Y, xy.y)),
         paramLat = y,
         paramLatSq, paramLatPow6, fy, fpy, dlat, i;
@@ -73,6 +76,7 @@ function pj_eqearth(P) {
     paramLatPow6 = paramLatSq * paramLatSq * paramLatSq;
     lp.lam = M * xy.x * (A1 + 3 * A2 * paramLatSq + paramLatPow6 * (7 * A3 + 9 * A4 * paramLatSq)) /
             Math.cos(paramLat);
-    lp.phi = Math.asin(Math.sin(paramLat) / M);
+    // sin(paramLat) / M may round to slightly more than 1 at the poles
+    lp.phi = Math.asin(Math.max(-1, Math.min(1, Math.sin(paramLat) / M)));
   }
 }

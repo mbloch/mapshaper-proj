@@ -198,17 +198,18 @@ function pj_laea(P) {
         sinz = sin(lp.phi);
         cosz = cos(lp.phi);
     }
+    var s0, c0, n;
     switch (mode) {
       case EQUIT:
-        lp.phi = fabs(rh) <= EPS10 ? 0 : asin(xy.y * sinz / rh);
-        xy.x *= sinz;
-        xy.y = cosz * rh;
-        break;
       case OBLIQ:
-        lp.phi = fabs(rh) <= EPS10 ? P.phi0 :
-           asin(cosz * sinb1 + xy.y * sinz * cosb1 / rh);
-        xy.x *= sinz * cosb1;
-        xy.y = (cosz - sin(lp.phi) * sinb1) * rh;
+        // rh * sin(phi), rh * cos(phi) * cos(lam) and rh * cos(phi) * sin(lam):
+        // atan2() keeps the latitude accurate near the poles, where asin() did not
+        s0 = mode == EQUIT ? 0 : sinb1;
+        c0 = mode == EQUIT ? 1 : cosb1;
+        n = rh * cosz * s0 + xy.y * sinz * c0;
+        xy.y = rh * cosz * c0 - xy.y * sinz * s0;
+        xy.x *= sinz;
+        lp.phi = rh === 0 ? P.phi0 : atan2(n, hypot(xy.x, xy.y));
         break;
       case N_POLE:
         xy.y = -xy.y;
@@ -218,7 +219,6 @@ function pj_laea(P) {
         lp.phi -= M_HALFPI;
         break;
     }
-    lp.lam = (xy.y == 0 && (mode == EQUIT || mode == OBLIQ)) ?
-        0 : atan2(xy.x, xy.y);
+    lp.lam = atan2(xy.x, xy.y);
   }
 }

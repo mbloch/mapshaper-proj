@@ -67,30 +67,25 @@ function pj_gnom(P) {
     var rh, cosz, sinz;
     rh = hypot(x, y);
     sinz = sin(lp.phi = atan(rh));
-    cosz = sqrt(1 - sinz * sinz);
+    // cos() rather than sqrt(1 - sinz * sinz), which loses the digits close to
+    // 90 degrees from the centre and defeats the atan2() below
+    cosz = cos(lp.phi);
 
-    if (fabs(rh) <= EPS10) {
+    if (rh === 0) {
         lp.phi = P.phi0;
         lp.lam = 0;
     } else {
         switch (mode) {
             case OBLIQ:
-                lp.phi = cosz * sinph0 + y * sinz * cosph0 / rh;
-                if (fabs(lp.phi) >= 1)
-                    lp.phi = lp.phi > 0 ? M_HALFPI : -M_HALFPI;
-                else
-                    lp.phi = asin(lp.phi);
-                y = (cosz - sinph0 * sin(lp.phi)) * rh;
-                x *= sinz * cosph0;
-                break;
             case EQUIT:
-                lp.phi = y * sinz / rh;
-                if (fabs(lp.phi) >= 1)
-                    lp.phi = lp.phi > 0 ? M_HALFPI : -M_HALFPI;
-                else
-                    lp.phi = asin(lp.phi);
-                y = cosz * rh;
+                // rh * sin(phi), rh * cos(phi) * cos(lam) and rh * cos(phi) * sin(lam):
+                // atan2() keeps the latitude accurate near the poles, where asin() did not
+                var s0 = mode == EQUIT ? 0 : sinph0;
+                var c0 = mode == EQUIT ? 1 : cosph0;
+                var n = rh * cosz * s0 + y * sinz * c0;
+                y = rh * cosz * c0 - y * sinz * s0;
                 x *= sinz;
+                lp.phi = atan2(n, hypot(x, y));
                 break;
             case S_POLE:
                 lp.phi -= M_HALFPI;

@@ -126,7 +126,28 @@ function pj_eck4(P) {
   P.inv = s_inv;
 
   function s_fwd(lp, xy) {
-    var p, V, s, c, i;
+    var p, V, s, c, i, sh, w, t, st, d, sh2, dt;
+    if (fabs(lp.phi) > M_HALFPI - 0.1) {
+      // Close to the poles the Newton iteration below converges only
+      // linearly. With theta = pi/2 - t and chi the colatitude, solve
+      // t - sin(2t)/2 + 2 * (1 - cos(t)) = 2 * C_p * sin(chi / 2)^2
+      sh = sin(0.5 * (M_HALFPI - fabs(lp.phi)));
+      w = 2 * C_p * sh * sh;
+      t = sqrt(w); // >= the root, as the left side is >= t^2
+      for (i = 0; i < 30; ++i) {
+        st = sin(t);
+        d = 2 * st * (1 + st);
+        if (d === 0) break;
+        sh2 = sin(0.5 * t);
+        dt = (0.5 * pj_s_minus_sin_s(2 * t) + 4 * sh2 * sh2 - w) / d;
+        t -= dt;
+        if (fabs(dt) <= 1e-12 * t) break; // quadratic convergence
+      }
+      // cos(theta) = sin(t), sin(theta) = cos(t)
+      xy.x = C_x * lp.lam * (1 + sin(t));
+      xy.y = (lp.phi < 0 ? -1 : 1) * C_y * cos(t);
+      return;
+    }
     p = C_p * sin(lp.phi);
     V = lp.phi * lp.phi;
     lp.phi *= 0.895168 + V * ( 0.0218849 + V * 0.00826809 );
@@ -148,7 +169,17 @@ function pj_eck4(P) {
   }
 
   function s_inv(xy, lp) {
-    var c;
+    var c, t, sh, w;
+    if (fabs(xy.y) > 0.5 * C_y && fabs(xy.y) <= C_y) {
+      // Close to the poles: theta = pi/2 - t, with the colatitude chi from
+      // 2 * C_p * sin(chi / 2)^2 = t - sin(2t)/2 + 2 * (1 - cos(t))
+      t = 2 * asin(sqrt(0.5 * (C_y - fabs(xy.y)) * RC_y));
+      sh = sin(0.5 * t);
+      w = 0.5 * pj_s_minus_sin_s(2 * t) + 4 * sh * sh;
+      lp.lam = xy.x / (C_x * (1 + sin(t)));
+      lp.phi = (xy.y < 0 ? -1 : 1) * (M_HALFPI - 2 * asin(sqrt(0.5 * w * RC_p)));
+      return;
+    }
     lp.phi = aasin(xy.y / C_y);
     lp.lam = xy.x / (C_x * (1 + (c = cos(lp.phi))));
     lp.phi = aasin((lp.phi + sin(lp.phi) * (c + 2)) / C_p);
